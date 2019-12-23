@@ -1,13 +1,14 @@
 import React from 'react';
+import classes from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ title, icon }) => {
 	return (
-		<div className='navbar bg-primary'>
+		<div className={classes.nav}>
 			<h1>
-				<i className={icon} /> {title}
+				{title}
 			</h1>
-			<ul>
+			<ul className={classes.nav__list}>
 				<li>
 					<Link to='/'>Home</Link>
 				</li>

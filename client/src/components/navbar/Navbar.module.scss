@@ -1,0 +1,19 @@
+@import '../../styles/core.scss';
+.nav {
+  background-color: $color-secondary-dark;
+	display: flex;
+	justify-content: space-around;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-top: 25px;
+  &__list {
+    color: $color-tertiary-dark;
+		display: flex;
+		flex: 0 0 60%;
+		justify-content: center; 
+		@include sm {
+			display: none;
+		}
+	}
+}
