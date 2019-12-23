@@ -1,0 +1,13 @@
+@import '../../../styles//core.scss';
+
+.container {
+  display: flex;
+  min-width: 300px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid $color-tertiary-light;
+  border-radius: 6px;
+  margin: 20px;
+  padding: 20px;
+}
