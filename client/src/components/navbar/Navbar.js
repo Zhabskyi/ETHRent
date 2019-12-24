@@ -9,6 +9,7 @@ const Navbar = ({ title, icon }) => {
 				{title}
 			</h1>
 			<ul className={classes.nav__list}>
+        <li>Add Item</li>
 				<li>
 					<Link to='/'>Home</Link>
 				</li>

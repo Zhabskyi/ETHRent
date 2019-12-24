@@ -43,3 +43,17 @@ $xl-screen: 1600px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin button-active {
+  cursor: pointer;
+}
+
+@mixin button-inactive--opacity {
+  @include fade;
+  opacity: 0.7;
+}
+
+@mixin button-active--opacity {
+  @include button-active;
+  opacity: 1;
+}

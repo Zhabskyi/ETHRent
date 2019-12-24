@@ -1,0 +1,104 @@
+@import '../../../styles/core.scss';
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form {
+  background: $color-primary-dark;
+  max-width: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+.error {
+  text-align: center;
+  color: $danger-color;
+}
+
+.error::before {
+  display: inline;
+  content: "⚠ ";
+}
+
+input, select {
+  display: block;
+  box-sizing: border-box;
+  width: 70%;
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  font-size: 14px;
+}
+
+label {
+  line-height: 2;
+  text-align: center;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  color: white;
+  font-size: $font-size-large;
+  font-weight: 300;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background: #ec5990;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 10px;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: #bf1650;
+}
+
+button[type="submit"]:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+button[type="button"] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+
+// button {
+//   display: block;
+//   appearance: none;
+//   margin-top: 40px;
+//   border: 1px solid #333;
+//   margin-bottom: 20px;
+//   text-transform: uppercase;
+//   padding: 10px 20px;
+//   border-radius: 4px;
+// }

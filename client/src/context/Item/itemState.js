@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import ItemContext from "./ItemContext";
 import itemReducer from "./itemReducer";
-import { ADD_ITEM, DELETE_ITEM } from "../actionTypes";
+import { ADD_ITEM, DELETE_ITEM, ITEM_ERROR } from "../actionTypes";
 
 const ItemState = props => {
   const initialState = {
@@ -33,19 +33,62 @@ const ItemState = props => {
         photo:
           "https://images.unsplash.com/photo-1551631880-e807a4453bc1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
       }
-    ]
+    ],
+    isNewItem: false,
+    loading: false
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
 
   //Add Item
+  const addItem = async item => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      // const res = await axios.post('/api/items', item, config);
+
+      dispatch({
+        type: ADD_ITEM,
+        payload: item
+      });
+    } catch (err) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
 
   //Delete Item
+  const deleteItem = async id => {
+    try {
+      //await axios.delete(`/api/contacts/${id}`);
+
+      dispatch({
+        type: DELETE_ITEM,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
 
   return (
     <ItemContext.Provider 
     value={{
-      items: state.items
+      items: state.items,
+      isNewItem: state.isNewItem,
+      loading: state.loading,
+      addItem,
+      deleteItem
     }}>
       {props.children}
     </ItemContext.Provider>
