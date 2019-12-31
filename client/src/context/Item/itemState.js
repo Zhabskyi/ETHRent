@@ -1,55 +1,45 @@
 import React, { useReducer } from "react";
+import axios from "../../utils/axios-instance";
 import ItemContext from "./ItemContext";
 import itemReducer from "./itemReducer";
-import { ADD_ITEM, DELETE_ITEM, ITEM_ERROR } from "../actionTypes";
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEM_ERROR } from "../actionTypes";
 
 const ItemState = props => {
   const initialState = {
-    items: [
-      {
-        id: 1,
-        title: "SnowBlower",
-        description: "hight eficiency machine to help you clean snow",
-        dailyRate: 0.2,
-        deposit: 3,
-        photo:
-          "https://images.unsplash.com/photo-1576029765637-2931132ba2d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
-      },
-      {
-        id: 2,
-        title: "Hammer",
-        description: "Havy-duty hammer to help you work done",
-        dailyRate: 0.1,
-        deposit: 2,
-        photo:
-          "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-      },
-      {
-        id: 3,
-        title: "Drill",
-        description: "Power drill can make a hole in anything",
-        dailyRate: 0.4,
-        deposit: 5,
-        photo:
-          "https://images.unsplash.com/photo-1551631880-e807a4453bc1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
-      }
-    ],
+    items: null,
     isNewItem: false,
-    loading: false
+    loading: true
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
+
+  // Get Items
+  const getItems = async () => {
+    try {
+      const res = await axios.get("/items");
+
+      dispatch({
+        type: GET_ITEMS,
+        payload: Object.values(res.data)
+      });
+    } catch (err) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
 
   //Add Item
   const addItem = async item => {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
 
     try {
-      // const res = await axios.post('/api/items', item, config);
+       const res = await axios.post('/items', item, config);
 
       dispatch({
         type: ADD_ITEM,
@@ -80,19 +70,20 @@ const ItemState = props => {
     }
   };
 
-
   return (
-    <ItemContext.Provider 
-    value={{
-      items: state.items,
-      isNewItem: state.isNewItem,
-      loading: state.loading,
-      addItem,
-      deleteItem
-    }}>
+    <ItemContext.Provider
+      value={{
+        items: state.items,
+        isNewItem: state.isNewItem,
+        loading: state.loading,
+        getItems,
+        addItem,
+        deleteItem
+      }}
+    >
       {props.children}
     </ItemContext.Provider>
-  )
+  );
 };
 
 export default ItemState;

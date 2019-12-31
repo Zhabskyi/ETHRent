@@ -14,11 +14,7 @@ const Form = () => {
     title: "",
     description: "",
     dayRate: 0,
-    deposit: 0,
-    address: "",
-    city: "",
-    province: "",
-    postalCode: ""
+    deposit: 0
   };
   return (
     <div className={classes.container}>
@@ -58,7 +54,6 @@ const Form = () => {
           intialValues={intialValues}
           classes={classes}
         />
-        <FormAddress errors={errors} register={register} />
 
         <input type='submit' />
       </form>

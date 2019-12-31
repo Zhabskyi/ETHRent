@@ -5,9 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 
 import ItemState from "./context/Item/itemState";
+import     AuthState from "./context/auth/AuthState";
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
+import Register from './pages/register/Register';
 import About from "./pages/about/About";
 
 class App extends Component {
@@ -59,6 +61,7 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
+      <AuthState>
       <ItemState>
         <Router>
           <Fragment>
@@ -67,11 +70,13 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/about' component={About} />
+                <Route exact path='/register' component={Register} />
               </Switch>
             </div>
           </Fragment>
         </Router>
       </ItemState>
+      </AuthState>
     );
   }
 }

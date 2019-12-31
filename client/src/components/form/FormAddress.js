@@ -26,7 +26,7 @@ export default function FormAddress({ register, errors }) {
 
       <div>
         <label>Province</label>
-        <select name='Province' ref={register({ required: true })}>
+        <select name='province' ref={register({ required: true })}>
           <option value='Alberta'>Alberta</option>
           <option value='British Columbia'>British Columbia</option>
           <option value='Manitoba'>Manitoba</option>
@@ -43,9 +43,9 @@ export default function FormAddress({ register, errors }) {
       </div>
 
       <div>
-        <label htmlFor='postalcode'>Postal Code</label>
+        <label htmlFor='postal_code'>Postal Code</label>
         <input
-          name='postalcode'
+          name='postal_code'
           placeholder='Postal Code'
           ref={register({ required: true, maxLength: 7, minLength: 6 })}
         />
