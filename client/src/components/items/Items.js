@@ -14,11 +14,12 @@ const Items = () => {
     // eslint-disable-next-line
   }, []);
 
+
+
   return (
     <>
       {items !== null && !loading ? (
         <>
-        {/* {console.log(items)} */}
         {items.map(item => <Item key={item.id} item={item} />)}
         </>
       ) : (

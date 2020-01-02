@@ -11,7 +11,7 @@ const Form = () => {
   const authContext = useContext(AuthContext);
   const { addItem } = itemContex;
 
-  const { isAuthenticated, user } = authContext;
+  const { user } = authContext;
 
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => {
