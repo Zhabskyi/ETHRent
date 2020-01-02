@@ -10,6 +10,7 @@ contract Marketplace {
     uint rentalDeposit;
     uint rentalFee;
     address payable owner;
+    address custodian;
     bool rented;
   }
   event ProductCreated(
@@ -26,6 +27,7 @@ contract Marketplace {
     uint rentalDeposit,
     uint rentalFee,
     address payable owner,
+    address custodian,
     bool rented
   );
   constructor() public {
@@ -41,7 +43,7 @@ contract Marketplace {
     // Increment product count
     productCount ++;
     // Create the product
-    products[productCount] = Product(productCount, _name, _rentalDeposit, _rentalFee, msg.sender, false);
+    products[productCount] = Product(productCount, _name, _rentalDeposit, _rentalFee, msg.sender, msg.sender, false);
     // Trigger an event
     emit ProductCreated(productCount, _name, _rentalDeposit, _rentalFee, msg.sender, false);
   }
@@ -54,20 +56,20 @@ contract Marketplace {
     require(_product.id > 0 && _product.id <= productCount);
     // Require that there is enough Ether in the transaction
     require(msg.value >= (_product.rentalDeposit + _product.rentalFee));
-    // Require that the product has not been purchased already
+    // Require that the product has not been rented already
     require(!_product.rented);
-    // Require that the buyer is not the seller
+    // Require that the borrower is not the owner
     require(_owner != msg.sender);
-    // Transfer ownership to the buyer
-    _product.owner = msg.sender;
+    // Transfer responsibility to the borrower
+    _product.custodian = msg.sender;
     // Mark as purchased
     _product.rented = true;
     // Update the product
     products[_id] = _product;
-    // Pay the seller by sending them Ether
+    // Pay the owner by sending them Ether
     address(_owner).transfer(msg.value);
     // Trigger an event
-    emit ProductRented(productCount, _product.name, _product.rentalDeposit, _product.rentalFee, msg.sender, true);
+    emit ProductRented(productCount, _product.name, _product.rentalDeposit, _product.rentalFee, _product.owner, msg.sender, true);
   }
 
 }
