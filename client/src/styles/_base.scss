@@ -1,0 +1,92 @@
+@import "./variables";
+
+* {
+  box-sizing: border-box;
+  &:active, &:hover, &:focus {
+    outline: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+html {
+  font-size: $font-size-base;
+  font-family: "Source Sans Pro", sans-serif;
+  color: $base-font-color;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.1px;
+}
+body,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+@media screen and (max-width: 1023px) {
+  h1 {
+    font-size: 60px;
+  }
+}
+
+h2 {
+  font-size: 4.125rem;
+}
+
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 3.1rem;
+  }
+}
+
+h3 {
+  font-size: 2.75rem;
+}
+
+h4 {
+  font-size: 2.25rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+}
+
+ul,
+ol {
+  padding-left: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+select {
+  background-color: white;
+}
+
+p {
+  display: block;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
