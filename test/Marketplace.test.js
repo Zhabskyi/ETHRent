@@ -110,8 +110,8 @@ describe('products', async () => {
 
     // Check logs
     const event = result.logs[0].args
-    // console.log('rentalCost', event.rentalCost)
-    // console.log('rentalDays', event.rentalDays)
+    console.log('rentalCost', event.rentalCost)
+    console.log('rentalDays', event.rentalDays)
     assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
     assert.equal(event.name, 'Table Saw', 'name is correct')
     assert.equal(event.custodian, owner, 'custodian is correct')

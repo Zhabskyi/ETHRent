@@ -123,8 +123,8 @@ contract Marketplace {
     uint endTime;
     endTime = now;
     uint rentalDays;
-    // rentalDays = (endTime - _product.rentalStart) / 86400;
-    rentalDays = 2; // Hard code rentalDays for testing
+    rentalDays = ((endTime - _product.rentalStart) % 86400);
+    // rentalDays = 2; // Hard code rentalDays for testing
     uint rentalCost;
     rentalCost = rentalDays * _product.rentalFee;
     // Transfer responsibility back to owner
@@ -137,7 +137,7 @@ contract Marketplace {
     address(_owner).transfer(rentalCost);
     // Return remaining deposit to the borrower
     address(_borrower).transfer(_product.rentalDeposit - rentalCost);
-
+    // Trigger an event
     emit ProductReturned(
       productCount,
       _product.name,
