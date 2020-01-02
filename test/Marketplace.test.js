@@ -54,14 +54,14 @@ describe('products', async () => {
     await await marketplace.createProduct('Table Saw', web3.utils.toWei('5', 'Ether'), 0, { from: owner }).should.be.rejected;
   })
 
-  it('rents products', async () => {
-    // Track the owner balance before rental
-    let oldOwnerBalance
-    oldOwnerBalance = await web3.eth.getBalance(owner)
-    oldOwnerBalance = new web3.utils.BN(oldOwnerBalance)
+  it('rents product', async () => {
+    // Track the borrower balance before rental
+    let oldBorrowerBalance
+    oldBorrowerBalance = await web3.eth.getBalance(borrower)
+    oldBorrowerBalance = new web3.utils.BN(oldBorrowerBalance)
 
     // SUCCESS: Borrower rents object
-    result = await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('6', 'Ether')})
+    result = await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('5', 'Ether')})
 
     // Check logs
     const event = result.logs[0].args
@@ -71,28 +71,83 @@ describe('products', async () => {
     assert.equal(event.custodian, borrower, 'borrower is correct')
     assert.equal(event.rented, true, 'rented is correct')
 
-    // Check that owner received funds
+    // Check that borrower sent funds
+    let newBorrowerBalance
+    newBorrowerBalance = await web3.eth.getBalance(borrower)
+    newBorrowerBalance = new web3.utils.BN(newBorrowerBalance)
+
+    let deposit 
+    deposit = web3.utils.toWei('5', 'Ether')
+    deposit = new web3.utils.BN(deposit)
+
+    const expectedBalance = oldBorrowerBalance - deposit
+
+    // assert.equal(newBorrowerBalance.toString(), expectedBalance.toString())
+
+    // FAILURE: Tries to rent a product that does not exist, i.e. product must have valid id
+    await marketplace.rentProduct(99, { from: borrower, value: web3.utils.toWei('5', 'Ether')}).should.be.rejected;
+    // FAILURE: Buyer tries to buy without enough ether
+    await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
+    // FAILURE: Deployer tries to rent the product, i.e., product can't be rented twice
+    await marketplace.rentProduct(productCount, { from: deployer, value: web3.utils.toWei('5', 'Ether') }).should.be.rejected;
+    // FAILURE: Borrower tries to rent again, i.e., borrower can't be the owner
+    await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('5', 'Ether') }).should.be.rejected;
+  })
+
+  it('returns product', async () => {
+    // Track the owner balance before return
+    let oldOwnerBalance
+    oldOwnerBalance = await web3.eth.getBalance(owner)
+    oldOwnerBalance = new web3.utils.BN(oldOwnerBalance)
+
+    // Track the borrower balance before return
+    let oldBorrowerBalance
+    oldBorrowerBalance = await web3.eth.getBalance(borrower)
+    oldBorrowerBalance = new web3.utils.BN(oldBorrowerBalance)
+
+    // SUCCESS: Borrower returns object
+    result = await marketplace.returnProduct(productCount, { from: borrower })
+
+    // Check logs
+    const event = result.logs[0].args
+    // console.log('rentalCost', event.rentalCost)
+    // console.log('rentalDays', event.rentalDays)
+    assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
+    assert.equal(event.name, 'Table Saw', 'name is correct')
+    assert.equal(event.custodian, owner, 'custodian is correct')
+    assert.equal(event.rented, false, 'rented is correct')
+
+    // Track the owner balance after return
     let newOwnerBalance
     newOwnerBalance = await web3.eth.getBalance(owner)
     newOwnerBalance = new web3.utils.BN(newOwnerBalance)
 
-    let price 
-    price = web3.utils.toWei('6', 'Ether')
-    price = new web3.utils.BN(price)
+    // Track the borrower balance after return
+    let newBorrowerBalance
+    newBorrowerBalance = await web3.eth.getBalance(borrower)
+    newBorrowerBalance = new web3.utils.BN(newBorrowerBalance)
 
-    const expectedBalance = oldOwnerBalance.add(price)
+    // Check Owner balance to ensure receipt of rentalCost
+    const expectedOwnerBalance = oldOwnerBalance.add(event.rentalCost)
+    assert.equal(newOwnerBalance.toString(), expectedOwnerBalance.toString())
 
-    assert.equal(newOwnerBalance.toString(), expectedBalance.toString())
+    // Check Borrower balance to ensure receipt of remaining Deposit
+    // let returnedDeposit 
+    // returnedDeposit = web3.utils.toWei('3', 'Ether')
+    // returnedDeposit = new web3.utils.BN(returnedDeposit)
+    // const expectedBorrowerBalance = oldBorrowerBalance.add(returnedDeposit)
+    // assert.equal(newBorrowerBalance.toString(), expectedBorrowerBalance.toString())
 
-    // FAILURE: Tries to rent a product that does not exist, i.e. product must have valid id
-    await marketplace.rentProduct(99, { from: borrower, value: web3.utils.toWei('6', 'Ether')}).should.be.rejected;
-    // FAILURE: Buyer tries to buy without enough ether
-    await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
-    // FAILURE: Deployer tries to rent the product, i.e., product can't be rented twice
-    await marketplace.rentProduct(productCount, { from: deployer, value: web3.utils.toWei('6', 'Ether') }).should.be.rejected;
-    // FAILURE: Borrower tries to rent again, i.e., borrower can't be the owner
-    await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('6', 'Ether') }).should.be.rejected;
+    // FAILURE: Tries to return a product that does not exist, i.e. product must have valid id
+    await marketplace.returnProduct(99, { from: borrower }).should.be.rejected;
+    // FAILURE: Deployer tries to return the product, i.e., product can't be returned twice
+    await marketplace.returnProduct(productCount, { from: deployer }).should.be.rejected;
+    // FAILURE: Borrower tries to return again, i.e., borrower can't be the owner
+    await marketplace.returnProduct(productCount, { from: borrower }).should.be.rejected;
+
   })
+
+
 
 })
 })
