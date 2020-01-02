@@ -32,7 +32,8 @@ const Form = props => {
     address: "",
     city: "",
     province: "",
-    postalCode: ""
+    postalCode: "",
+    phoneNumber: ""
   };
   
   return (

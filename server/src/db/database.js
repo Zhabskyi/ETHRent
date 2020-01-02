@@ -20,21 +20,33 @@ const addUser = function(db, user) {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *
   `,
-      [user.first_name, user.last_name, user.email, user.password, user.city, user.province, user.postal_code, user.phone_number]
+      [
+        user.first_name,
+        user.last_name,
+        user.email,
+        user.password,
+        user.city,
+        user.province,
+        user.postal_code,
+        user.phone_number
+      ]
     )
     .then(res => res.rows)
     .catch(err => console.log(err));
 };
 
-const getUserById = function (db, userId) {
-  return db.query(`
+const getUserById = function(db, userId) {
+  return db
+    .query(
+      `
     SELECT * FROM users
     WHERE id = $1
-  `, [userId]
-  )
-  .then(res => res.rows[0])
-  .catch(err => console.log(err));
-}
+  `,
+      [userId]
+    )
+    .then(res => res.rows[0])
+    .catch(err => console.log(err));
+};
 
 module.exports = {
   addUser,

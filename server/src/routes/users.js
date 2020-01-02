@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const jwt = require("jsonwebtoken");
+const config = require("config");
 const database = require("../db/database.js");
-
 
 module.exports = db => {
   router.get("/users", (req, res) => {
@@ -17,24 +16,24 @@ module.exports = db => {
   });
 
   router.post("/users", async (req, res) => {
-    const user = req.body;
+    const newUser = req.body;
 
     try {
-      let newUser = await database.getUserByEmail(db, user.email);
+      let user = await database.getUserByEmail(db, newUser.email);
 
-      if (newUser.length !== 0) {
+      if (user.length !== 0) {
         return res.status(400).json({ msg: "User already exists" });
       }
 
       const salt = await bcrypt.genSalt(12);
 
-      user.password = await bcrypt.hash(user.password, salt);
+      newUser.password = await bcrypt.hash(newUser.password, salt);
 
-      newUser = await database.addUser(db, user);
+      user = await database.addUser(db, newUser);
 
       const payload = {
-        newUser: {
-          id: newUser[0].id
+        user: {
+          id: user[0].id
         }
       };
 

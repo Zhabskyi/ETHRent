@@ -53,6 +53,18 @@ export default function FormAddress({ register, errors }) {
       {errors.postalcode && (
         <p className={classes.error}>Postal code should be 6 characters</p>
       )}
+
+      <div>
+        <label htmlFor='phone_number'>Phone number</label>
+        <input
+          name='phone_number'
+          placeholder='Phone number'
+          ref={register({ required: true })}
+        />
+      </div>
+      {errors.postalcode && (
+        <p className={classes.error}>Phone number required!</p>
+      )}
     </>
   );
 }

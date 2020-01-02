@@ -14,7 +14,7 @@ module.exports = db => {
     try {
       const user = await database.getUserById(db, req.user.id);
       res.json(user);
-    } catch {
+    } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
