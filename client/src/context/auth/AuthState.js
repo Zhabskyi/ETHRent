@@ -3,15 +3,20 @@ import axios from "../../utils/axios-instance";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
 import setAuthToken from "../../utils/setAuthToken";
-import { USER_LOADED, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS } from "../actionTypes";
+import {
+  USER_LOADED,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_SUCCESS,
+  AUTH_ERROR
+} from "../actionTypes";
 
 const AuthState = props => {
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
-    user: null,
-    error: null
+    user: null
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -28,7 +33,7 @@ const AuthState = props => {
         payload: res.data
       });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: AUTH_ERROR });
     }
   };
 
@@ -41,7 +46,6 @@ const AuthState = props => {
         type: REGISTER_SUCCESS,
         payload: res.data
       });
-
 
       loadUser();
     } catch (err) {

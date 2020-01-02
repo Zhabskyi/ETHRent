@@ -2,7 +2,8 @@ import {
   USER_LOADED,
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  AUTH_ERROR
 } from "../actionTypes";
 
 export default (state, action) => {
@@ -23,6 +24,7 @@ export default (state, action) => {
         isAuthenticated: true,
         loading: false
       };
+    case AUTH_ERROR:
     case LOGOUT:
       localStorage.removeItem("token");
       return {
@@ -30,8 +32,7 @@ export default (state, action) => {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
-        error: action.payload
+        user: null
       };
     default:
       return state;

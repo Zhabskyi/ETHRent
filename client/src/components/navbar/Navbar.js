@@ -1,22 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({ title }) => {
+  const authContext = useContext(AuthContext);
+
+  const { isAuthenticated, logout, user, loadUser, token } = authContext;
+
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
+
+  const linksUser = (
+    <>
+      <li>
+        {user && user.first_name} {user && user.last_name}
+      </li>
+      <li>
+        <button onClick={logout}>Logout</button>
+      </li>
+    </>
+  );
+
+  const linksUnregistered = (
+    <>
+      <li>
+        <Link to='/register'>Register</Link>
+      </li>
+      <li>
+        <Link to='/login'>Login</Link>
+      </li>
+    </>
+  );
+
   return (
     <div className={classes.nav}>
-      <h1>{title}</h1>
+      <h1>
+        <Link to='/'>{title}</Link>
+      </h1>
       <ul className={classes.nav__list}>
         <li>Add Item</li>
-        <li>
-          <Link to='/login'>Login</Link>
-        </li>
-        <li>
-          <Link to='/register'>Register</Link>
-        </li>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
+        {isAuthenticated ? linksUser : linksUnregistered}
         <li>
           <Link to='/about'>About</Link>
         </li>
