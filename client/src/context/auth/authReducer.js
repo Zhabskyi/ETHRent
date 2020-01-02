@@ -3,7 +3,7 @@ import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
   LOGOUT
-} from '../actionTypes';
+} from "../actionTypes";
 
 export default (state, action) => {
   switch (action.type) {
@@ -14,9 +14,9 @@ export default (state, action) => {
         loading: false,
         user: action.payload
       };
-      case REGISTER_SUCCESS:
+    case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         ...action.payload,
@@ -24,7 +24,7 @@ export default (state, action) => {
         loading: false
       };
     case LOGOUT:
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,

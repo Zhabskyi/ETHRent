@@ -9,6 +9,7 @@ import AuthState from "./context/auth/AuthState";
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
+import PrivateRoute from "./components/routing/PrivateRoute";
 import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
 import About from "./pages/about/About";
@@ -66,7 +67,7 @@ class App extends Component {
               <Navbar title={"ETHRent"} />
               <div className='container'>
                 <Switch>
-                  <Route exact path='/' component={Home} />
+                  <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
