@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 
 import ItemState from "./context/Item/itemState";
-import     AuthState from "./context/auth/AuthState";
+import AuthState from "./context/auth/AuthState";
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
-import Register from './pages/register/Register';
+import Register from "./components/form/FormRegister";
+import Login from "./components/form/FormLogin";
 import About from "./pages/about/About";
 
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
       const deployedNetwork = SimpleStorageContract.networks[networkId];
       const instance = new web3.eth.Contract(
         SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
+        deployedNetwork && deployedNetwork.address
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -37,7 +38,7 @@ class App extends Component {
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
+        `Failed to load web3, accounts, or contract. Check console for details.`
       );
       console.error(error);
     }
@@ -45,13 +46,10 @@ class App extends Component {
 
   runExample = async () => {
     // const { accounts, contract } = this.state;
-
     // // Stores a given value, 5 by default.
     // await contract.methods.set(5).send({ from: accounts[0] });
-
     // // Get the value from the contract to prove it worked.
     // const response = await contract.methods.get().call();
-
     // // Update state with the result.
     // this.setState({ storageValue: response });
   };
@@ -62,20 +60,21 @@ class App extends Component {
     }
     return (
       <AuthState>
-      <ItemState>
-        <Router>
-          <Fragment>
-            <Navbar title={"ETHRent"} />
-            <div className='container'>
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/register' component={Register} />
-              </Switch>
-            </div>
-          </Fragment>
-        </Router>
-      </ItemState>
+        <ItemState>
+          <Router>
+            <Fragment>
+              <Navbar title={"ETHRent"} />
+              <div className='container'>
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/login' component={Login} />
+                </Switch>
+              </div>
+            </Fragment>
+          </Router>
+        </ItemState>
       </AuthState>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import useForm from "react-hook-form";
 
 import AuthContext from "../../context/auth/authContext";
@@ -6,15 +6,23 @@ import AuthContext from "../../context/auth/authContext";
 import classes from "./Form.module.scss";
 import FormAddress from "./FormAddress";
 
-const Form = () => {
+const Form = props => {
   const authContext = useContext(AuthContext);
   const { registerUser, isAuthenticated } = authContext;
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [isAuthenticated, props.history]);
+
   const { register, handleSubmit, errors, watch } = useForm();
+
   const onSubmit = data => {
     registerUser(data);
     alert(JSON.stringify(data));
   };
+
   const intialValues = {
     firstName: "",
     lastName: "",
@@ -26,6 +34,7 @@ const Form = () => {
     province: "",
     postalCode: ""
   };
+  
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>

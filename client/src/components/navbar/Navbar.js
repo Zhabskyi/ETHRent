@@ -9,6 +9,9 @@ const Navbar = ({ title, icon }) => {
       <ul className={classes.nav__list}>
         <li>Add Item</li>
         <li>
+          <Link to='/login'>Login</Link>
+        </li>
+        <li>
           <Link to='/register'>Register</Link>
         </li>
         <li>

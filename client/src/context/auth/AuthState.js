@@ -1,15 +1,13 @@
-import React, { useReducer } from 'react';
-import axios from '../../utils/axios-instance';
-import AuthContext from './authContext';
-import authReducer from './authReducer';
-import setAuthToken from '../../utils/setAuthToken';
-import {
-
-} from '../actionTypes';
+import React, { useReducer } from "react";
+import axios from "../../utils/axios-instance";
+import AuthContext from "./authContext";
+import authReducer from "./authReducer";
+import setAuthToken from "../../utils/setAuthToken";
+import { USER_LOADED, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS } from "../actionTypes";
 
 const AuthState = props => {
   const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
     user: null,
@@ -18,20 +16,57 @@ const AuthState = props => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-
-
-  // Register User
-  const registerUser = async data => {
+  // Load User
+  const loadUser = async () => {
+    setAuthToken(localStorage.token);
 
     try {
-      const res = await axios.post('/users', data);
+      const res = await axios.get("/auth");
 
-      console.log("Succsses!!!")
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
     } catch (err) {
-      console.log("Error" + err)
+      console.log(err);
     }
   };
 
+  // Register User
+  const registerUser = async data => {
+    try {
+      const res = await axios.post("/users", data);
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+
+
+      loadUser();
+    } catch (err) {
+      console.log("Error" + err);
+    }
+  };
+
+  // Login User
+  const login = async formData => {
+    try {
+      const res = await axios.post("/auth", formData);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+
+      loadUser();
+    } catch (err) {
+      console.log("Error, login fail" + err);
+    }
+  };
+
+  // Logout
+  const logout = () => dispatch({ type: LOGOUT });
 
   return (
     <AuthContext.Provider
@@ -40,7 +75,9 @@ const AuthState = props => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
-        registerUser
+        registerUser,
+        login,
+        logout
       }}
     >
       {props.children}
