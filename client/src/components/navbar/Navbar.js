@@ -2,11 +2,14 @@ import React, { useContext, useEffect } from "react";
 import classes from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import ItemContext from "../../context/Item/ItemContext";
 
 const Navbar = ({ title }) => {
   const authContext = useContext(AuthContext);
+  const itemContext = useContext(ItemContext);
 
-  const { isAuthenticated, logout, user, loadUser, token } = authContext;
+  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { addItem } = itemContext;
 
   useEffect(() => {
     loadUser();
@@ -17,6 +20,9 @@ const Navbar = ({ title }) => {
     <>
       <li>
         {user && user.first_name} {user && user.last_name}
+      </li>
+      <li>
+        <Link to='/add-item'>Add Item</Link>
       </li>
       <li>
         <button onClick={logout}>Logout</button>
@@ -41,7 +47,6 @@ const Navbar = ({ title }) => {
         <Link to='/'>{title}</Link>
       </h1>
       <ul className={classes.nav__list}>
-        <li>Add Item</li>
         {isAuthenticated ? linksUser : linksUnregistered}
         <li>
           <Link to='/about'>About</Link>

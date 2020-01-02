@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
+import AddItem from "./components/form/FormAddItem";
 import About from "./pages/about/About";
 
 class App extends Component {
@@ -71,6 +72,7 @@ class App extends Component {
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
+                  <Route exact path='/add-item' component={AddItem} />
                 </Switch>
               </div>
             </Fragment>

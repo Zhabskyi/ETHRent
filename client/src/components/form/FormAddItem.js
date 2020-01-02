@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import useForm from "react-hook-form";
 
 import classes from "./Form.module.scss";
-import FormAddress from "./FormAddress";
 import FormCost from "./FormCost";
+import ItemContex from "../../context/Item/ItemContext";
+import AuthContext from "../../context/auth/authContext";
 
 const Form = () => {
+  const itemContex = useContext(ItemContex);
+  const authContext = useContext(AuthContext);
+  const { addItem } = itemContex;
+
+  const { isAuthenticated, user } = authContext;
+
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => {
-    alert(JSON.stringify(data));
+    const newData = { ...data, user_id: user.id };
+    addItem(newData);
+    alert(JSON.stringify(newData));
   };
   const intialValues = {
     title: "",
     description: "",
-    dayRate: 0,
+    daily_rate: 0,
     deposit: 0
   };
   return (
@@ -39,6 +48,7 @@ const Form = () => {
           <input
             defaultValue={intialValues.description}
             name='description'
+            placeholder='Description'
             ref={register({ required: true, minLength: 10 })}
           />
         </div>

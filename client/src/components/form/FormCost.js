@@ -4,11 +4,11 @@ export default function FormAddress({ register, errors, intialValues, classes })
   return (
     <>
       <div>
-        <label htmlFor='dayRate'>Day Rate</label>
+        <label htmlFor='daily_rate'>Day Rate</label>
         <input
           defaultValue={intialValues.dayRate}
-          name='dayRate'
-          placeholder='Day Rate'
+          name='daily_rate'
+          placeholder='0'
           ref={register({ required: true })}
         />
       </div>

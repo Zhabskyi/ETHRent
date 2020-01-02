@@ -32,18 +32,13 @@ const ItemState = props => {
 
   //Add Item
   const addItem = async item => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
 
     try {
-       const res = await axios.post('/items', item, config);
+       const res = await axios.post('/items', item );
 
       dispatch({
         type: ADD_ITEM,
-        payload: item
+        payload: res.item
       });
     } catch (err) {
       dispatch({

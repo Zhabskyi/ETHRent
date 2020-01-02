@@ -48,8 +48,31 @@ const getUserById = function(db, userId) {
     .catch(err => console.log(err));
 };
 
+const addItem = function(db, item) {
+  return db
+    .query(
+      `
+    INSERT INTO items (
+     title, description, daily_rate, deposit, photo, user_id)
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *
+  `,
+      [
+        item.title,
+        item.description,
+        item.daily_rate,
+        item.deposit,
+        "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        item.user_id
+      ]
+    )
+    .then(res => res.rows)
+    .catch(err => console.log(err));
+};
+
 module.exports = {
   addUser,
   getUserByEmail,
-  getUserById
+  getUserById,
+  addItem
 };
