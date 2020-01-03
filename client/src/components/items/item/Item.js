@@ -4,7 +4,7 @@ import classes from "./Item.module.scss";
 import Button from "../../button/Button";
 
 const Item = ({ item }) => {
-  const { id, title, description, daily_rate, deposit, photo } = item;
+  const {title, daily_rate, deposit, photo } = item;
   return (
     <div className={classes.container}>
       <p className={classes.title}>{title}</p>

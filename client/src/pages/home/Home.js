@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import classes from "./Home.module.scss";
 import Items from "../../components/items/Items";
 import AuthContext from "../../context/auth/authContext";
-import Button from "../../components/button/Button";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <>
       <div className={classes.manage}>
-        {isAuthenticated ? <Button confirm>Manage your items</Button> : null}
+        {isAuthenticated ? <Link to='/my-items'>Manage my items</Link> : null}
       </div>
       <div className={classes.container}>
         <Items />

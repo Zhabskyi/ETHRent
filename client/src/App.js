@@ -10,6 +10,7 @@ import AuthState from "./context/auth/AuthState";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import PrivateItems from "./components/items/PrivateItems";
 import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
 import AddItem from "./components/form/FormAddItem";
@@ -73,6 +74,7 @@ class App extends Component {
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/add-item' component={AddItem} />
+                  <PrivateRoute exact path='/my-items' component={PrivateItems} />
                 </Switch>
               </div>
             </Fragment>

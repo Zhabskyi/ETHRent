@@ -70,6 +70,16 @@ const addItem = function(db, item) {
     .catch(err => console.log(err));
 };
 
+const getItemByUserId = function (db, userId) {
+  return db.query(`
+    SELECT * FROM items
+    WHERE user_id = $1
+  `, [userId]
+  )
+  .then(res => res.rows[0])
+  .catch(err => console.log(err));
+}
+
 module.exports = {
   addUser,
   getUserByEmail,

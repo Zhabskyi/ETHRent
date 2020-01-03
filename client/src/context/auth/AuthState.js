@@ -27,7 +27,7 @@ const AuthState = props => {
 
     try {
       const res = await axios.get("/auth");
-      
+
 
       dispatch({
         type: USER_LOADED,
@@ -35,7 +35,7 @@ const AuthState = props => {
       });
     } catch (err) {
       console.log(err)
-      //dispatch({ type: AUTH_ERROR });
+      dispatch({ type: AUTH_ERROR });
     }
   };
 
