@@ -19,7 +19,7 @@ const Items = () => {
     }
 
     // eslint-disable-next-line
-  }, [user, items]);
+  }, [user]);
 
   return (
     <>

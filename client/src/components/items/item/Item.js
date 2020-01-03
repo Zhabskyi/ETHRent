@@ -1,19 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "./Item.module.scss";
 
 import Button from "../../button/Button";
 import AuthContext from "../../../context/auth/authContext";
+import ItemContext from "../../../context/Item/ItemContext";
 
 const Item = ({ item }) => {
   const authContext = useContext(AuthContext);
+  const itemContext = useContext(ItemContext);
 
-  const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { user_id, title, daily_rate, deposit, photo } = item;
+  const { user } = authContext;
+  const { deleteItem } = itemContext;
+  const { id, user_id, title, daily_rate, deposit, photo } = item;
+
+  const deleteHandeler = () => {
+    deleteItem(id);
+  };
+
 
   const registered = (
     <>
       <Button details>Details</Button>
-      <Button danger>Delete</Button>
+      <Button onClick={deleteHandeler} danger>
+        Delete
+      </Button>
       <Button confirm>Edit</Button>
     </>
   );

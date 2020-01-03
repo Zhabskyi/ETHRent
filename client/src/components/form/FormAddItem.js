@@ -6,7 +6,7 @@ import FormCost from "./FormCost";
 import ItemContex from "../../context/Item/ItemContext";
 import AuthContext from "../../context/auth/authContext";
 
-const Form = () => {
+const Form = props => {
   const itemContex = useContext(ItemContex);
   const authContext = useContext(AuthContext);
   const { addItem } = itemContex;
@@ -17,7 +17,7 @@ const Form = () => {
   const onSubmit = data => {
     const newData = { ...data, user_id: user.id };
     addItem(newData);
-    alert(JSON.stringify(newData));
+    props.history.push("/");
   };
   const intialValues = {
     title: "",

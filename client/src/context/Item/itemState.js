@@ -59,15 +59,16 @@ const ItemState = props => {
     } catch (err) {
       dispatch({
         type: ITEM_ERROR,
-        payload: err.response.msg
+        payload: err.response
       });
     }
   };
 
   //Delete Item
   const deleteItem = async id => {
+    
     try {
-      //await axios.delete(`/api/contacts/${id}`);
+      await axios.delete(`/items/delete/${id}`);
 
       dispatch({
         type: DELETE_ITEM,

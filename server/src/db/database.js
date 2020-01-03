@@ -80,9 +80,17 @@ const getItemByUserId = function (db, userId) {
   .catch(err => console.log(err));
 }
 
+const deleteItemById = function (db, itemId) {
+  return db.query(`
+    DELETE FROM items WHERE items.id = $1;
+  `, [itemId])
+  .catch(err => console.log(err));
+}
+
 module.exports = {
   addUser,
   getUserByEmail,
   getUserById,
-  addItem
+  addItem,
+  deleteItemById
 };
