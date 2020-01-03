@@ -1,4 +1,10 @@
-import { ADD_ITEM, DELETE_ITEM, ITEM_ERROR, GET_ITEMS, GET_MY_ITEMS } from "../actionTypes";
+import {
+  ADD_ITEM,
+  DELETE_ITEM,
+  ITEM_ERROR,
+  GET_ITEMS,
+  GET_MY_ITEMS
+} from "../actionTypes";
 
 export default (state, action) => {
   switch (action.type) {

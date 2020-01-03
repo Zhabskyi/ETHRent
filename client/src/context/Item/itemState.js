@@ -15,10 +15,12 @@ const ItemState = props => {
   const initialState = {
     items: null,
     myItems: null,
-    loading: true
+    loading: true,
+    showModal: false
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
+  
 
   // Get Items
   const getItems = async () => {

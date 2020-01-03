@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Item.module.scss";
 
 import Button from "../../button/Button";
+import Modal from "../../modal/Modal";
 import AuthContext from "../../../context/auth/authContext";
 import ItemContext from "../../../context/Item/ItemContext";
 
@@ -13,14 +14,21 @@ const Item = ({ item }) => {
   const { deleteItem } = itemContext;
   const { id, user_id, title, daily_rate, deposit, photo } = item;
 
+  const [showModal, setState] = useState(false);
+
   const deleteHandeler = () => {
     deleteItem(id);
   };
 
+  const toggleDetails = () => {
+    setState(!showModal);
+  };
 
   const registered = (
     <>
-      <Button details>Details</Button>
+      <Button onClick={toggleDetails} details>
+        Details
+      </Button>
       <Button onClick={deleteHandeler} danger>
         Delete
       </Button>
@@ -30,24 +38,31 @@ const Item = ({ item }) => {
 
   const unregistered = (
     <>
-      <Button details>Details</Button>
+      <Button onClick={toggleDetails} details>
+        Details
+      </Button>
     </>
   );
   return (
-    <div className={classes.container}>
-      <p className={classes.title}>{title}</p>
-      <div className={classes.photo}>
-        <img src={photo} alt='item' />
+    <>
+      <div className={classes.container}>
+        <p className={classes.title}>{title}</p>
+        <div className={classes.photo}>
+          <img src={photo} alt='item' />
+        </div>
+        <p>Daily Rate: {daily_rate}</p>
+        <div>
+          {user !== null
+            ? user.id === user_id
+              ? registered
+              : unregistered
+            : unregistered}
+        </div>
       </div>
-      <p>Daily Rate: {daily_rate}</p>
-      <div>
-        {user !== null
-          ? user.id === user_id
-            ? registered
-            : unregistered
-          : unregistered}
-      </div>
-    </div>
+      <Modal show={showModal} onClose={toggleDetails}>
+        Hello
+      </Modal>
+    </>
   );
 };
 
