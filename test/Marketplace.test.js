@@ -164,7 +164,25 @@ describe('products', async () => {
     await marketplace.deleteProduct(99, { from: owner }).should.be.rejected;
     // FAILURE: Borrower tries to delete a product, i.e. not the owner
     await marketplace.deleteProduct(productCount, { from: borrower }).should.be.rejected;
+    // FAILURE: Owner tries to delete a product that is currently rented
+    // await marketplace.rentProduct(productCount, { from: borrower });
+    // await marketplace.deleteProduct(productCount, { from: owner }).should.be.rejected;
   })
 
 })
+
+describe('destroy', async () => {
+  let result, productCount
+
+  before(async () => {
+    result = await marketplace.createProduct('Table Saw', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
+    productCount = await marketplace.productCount()
+  })
+
+  it('destroys contract', async () => {
+    // FAILURE: Someone other than Deployer tries to destroy contract
+    await marketplace.destroy({ from: borrower }).should.be.rejected;
+  })
+})
+
 })

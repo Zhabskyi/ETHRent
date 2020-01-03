@@ -2,6 +2,7 @@ pragma solidity >=0.4.21 <0.7.0;
 
 contract Marketplace {
   string public name;
+  address deployer;
   uint public productCount = 0;
   mapping(uint => Product) public products;
   struct Product {
@@ -53,6 +54,7 @@ contract Marketplace {
 
   constructor() public {
     name = "ETHRent Dapp";
+    deployer = msg.sender;
   }
 
   function createProduct(string memory _name, uint _rentalDeposit, uint _rentalFee) public {
@@ -162,6 +164,8 @@ contract Marketplace {
     require(_product.id > 0 && _product.id <= productCount);
     // Make sure only the product owner can delete a product
     require(_product.owner == msg.sender);
+    // Make sure the owner is currently the custodian of the product
+    require(_product.custodian == _product.owner);
     // Mark as rented (i.e. unavailable to rent)
     _product.rented = true;
     // Update the product
@@ -173,6 +177,13 @@ contract Marketplace {
       _product.owner,
       _product.custodian,
       _product.rented);
+  }
+
+  function destroy() public {
+    // Make sure the function is being called by the contract deployer
+    require(msg.sender == deployer);
+    // Remove the contract from the blockchain, return any ether to the deployer
+    selfdestruct(msg.sender);
   }
 
 }
