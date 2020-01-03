@@ -81,12 +81,14 @@ describe('products', async () => {
     deposit = new web3.utils.BN(deposit)
 
     const expectedBalance = oldBorrowerBalance - deposit
-
+    // console.log('newBB', web3.utils.fromWei(newBorrowerBalance.toString(), 'ether'))
+    // console.log('expected', web3.utils.fromWei(expectedBalance.toString(), 'ether'))
+    assert.notEqual(newBorrowerBalance.toString(), oldBorrowerBalance.toString())
     // assert.equal(newBorrowerBalance.toString(), expectedBalance.toString())
 
     // FAILURE: Tries to rent a product that does not exist, i.e. product must have valid id
     await marketplace.rentProduct(99, { from: borrower, value: web3.utils.toWei('5', 'Ether')}).should.be.rejected;
-    // FAILURE: Buyer tries to buy without enough ether
+    // FAILURE: Borrower tries to rent without enough ether
     await marketplace.rentProduct(productCount, { from: borrower, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
     // FAILURE: Deployer tries to rent the product, i.e., product can't be rented twice
     await marketplace.rentProduct(productCount, { from: deployer, value: web3.utils.toWei('5', 'Ether') }).should.be.rejected;
@@ -147,7 +149,22 @@ describe('products', async () => {
 
   })
 
+  it('deletes product', async () => {
+    // SUCCESS: Borrower returns object
+    result = await marketplace.deleteProduct(productCount, { from: owner })
 
+    // Check logs
+    const event = result.logs[0].args
+    assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
+    assert.equal(event.name, 'Table Saw', 'name is correct')
+    assert.equal(event.custodian, owner, 'custodian is correct')
+    assert.equal(event.rented, true, 'rented is correct')
+
+    // FAILURE: Tries to delete a product that does not exist, i.e. product must have valid id
+    await marketplace.deleteProduct(99, { from: owner }).should.be.rejected;
+    // FAILURE: Borrower tries to delete a product, i.e. not the owner
+    await marketplace.deleteProduct(productCount, { from: borrower }).should.be.rejected;
+  })
 
 })
 })

@@ -27,7 +27,7 @@ contract Marketplace {
     string name,
     uint rentalDeposit,
     uint rentalFee,
-    address payable owner,
+    address owner,
     address custodian,
     uint rentalStart,
     bool rented
@@ -41,6 +41,13 @@ contract Marketplace {
     address payable borrower,
     address custodian,
     uint rentalDays,
+    bool rented
+  );
+  event ProductDeleted(
+    uint id,
+    string name,
+    address owner,
+    address custodian,
     bool rented
   );
 
@@ -92,8 +99,6 @@ contract Marketplace {
     _product.rented = true;
     // Update the product
     products[_id] = _product;
-    // Pay the owner by sending them Ether
-    // address(_owner).transfer(msg.value);
     // Trigger an event
     emit ProductRented(
       productCount,
@@ -147,6 +152,26 @@ contract Marketplace {
       _borrower,
       _product.custodian,
       rentalDays,
+      _product.rented);
+  }
+
+  function deleteProduct(uint _id) public {
+    // Fetch the product
+    Product memory _product = products[_id];
+    // Make sure the product has a valid id
+    require(_product.id > 0 && _product.id <= productCount);
+    // Make sure only the product owner can delete a product
+    require(_product.owner == msg.sender);
+    // Mark as rented (i.e. unavailable to rent)
+    _product.rented = true;
+    // Update the product
+    products[_id] = _product;
+    // Trigger an event
+    emit ProductDeleted(
+      productCount,
+      _product.name,
+      _product.owner,
+      _product.custodian,
       _product.rented);
   }
 
