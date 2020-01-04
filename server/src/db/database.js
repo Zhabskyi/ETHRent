@@ -16,8 +16,8 @@ const addUser = function(db, user) {
     .query(
       `
     INSERT INTO users (
-      first_name, last_name, email, password, city, province, postal_code, phone_number)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      first_name, last_name, email, password, address, city, province, postal_code, phone_number, map)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *
   `,
       [

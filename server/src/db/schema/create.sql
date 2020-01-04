@@ -9,9 +9,11 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   city VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
   province VARCHAR(255) NOT NULL,
   postal_code VARCHAR(7) NOT NULL,
-  phone_number VARCHAR(16) NOT NULL
+  phone_number VARCHAR(16) NOT NULL,
+  map VARCHAR(255)
 );
 
 

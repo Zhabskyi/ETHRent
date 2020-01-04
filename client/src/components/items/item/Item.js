@@ -68,10 +68,7 @@ const Item = ({ item }) => {
           <p>Daily Rate: {daily_rate}</p>
           <p>Deposit: {deposit}</p>
           <div >
-            <img
-              src={map}
-              alt='map'
-            />
+            <img src={map} alt='map' />
           </div>
         </div>
       </Modal>
