@@ -25,10 +25,12 @@ const addUser = function(db, user) {
         user.last_name,
         user.email,
         user.password,
+        user.address,
         user.city,
         user.province,
         user.postal_code,
-        user.phone_number
+        user.phone_number,
+        user.map
       ]
     )
     .then(res => res.rows)

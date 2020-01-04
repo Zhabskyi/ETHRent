@@ -33,10 +33,9 @@ module.exports = db => {
       const salt = await bcrypt.genSalt(12);
 
       newUser.password = await bcrypt.hash(newUser.password, salt);
-      console.log(newUser)
-
+      
       user = await database.addUser(db, newUser);
-
+      
       const payload = {
         user: {
           id: user[0].id
