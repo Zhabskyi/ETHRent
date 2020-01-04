@@ -22,8 +22,8 @@ const Form = props => {
   const intialValues = {
     title: "",
     description: "",
-    daily_rate: 0,
-    deposit: 0
+    daily_rate: null,
+    deposit: null
   };
   return (
     <div className={classes.container}>

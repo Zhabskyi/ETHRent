@@ -17,7 +17,7 @@ const Item = ({ item }) => {
   const [showModal, setState] = useState(false);
 
   const deleteHandeler = () => {
-    deleteItem(id);
+    deleteItem(id, user_id);
   };
 
   const toggleDetails = () => {

@@ -17,7 +17,8 @@ export default (state, action) => {
     case GET_MY_ITEMS:
       return {
         ...state,
-        myItems: action.payload
+        myItems: action.payload,
+        loading: false
       };
     case ADD_ITEM:
       return {

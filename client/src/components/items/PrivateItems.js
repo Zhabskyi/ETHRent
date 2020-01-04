@@ -13,13 +13,15 @@ const Items = () => {
   const { items, myItems, getMyItems, getItems, loading } = itemContext;
 
   useEffect(() => {
-    getItems();
+    if(items === null) {
+      getItems()
+    }
     if (user && items) {
       getMyItems(user.id);
     }
-
     // eslint-disable-next-line
-  }, [user]);
+  }, [user, items]);
+
 
   return (
     <>

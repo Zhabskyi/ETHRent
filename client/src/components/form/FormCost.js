@@ -6,7 +6,7 @@ export default function FormAddress({ register, errors, intialValues, classes })
       <div>
         <label htmlFor='daily_rate'>Day Rate</label>
         <input
-          defaultValue={intialValues.dayRate}
+          defaultValue={intialValues.daily_rate}
           name='daily_rate'
           placeholder='0'
           ref={register({ required: true })}
