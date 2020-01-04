@@ -66,6 +66,11 @@ const ItemState = props => {
     }
   };
 
+  //Edit Item
+  const editItem = async () => {
+
+  }
+
   //Delete Item
   const deleteItem = async (id, user_id) => {
     
@@ -97,6 +102,7 @@ const ItemState = props => {
         getItems,
         getMyItems,
         addItem,
+        editItem,
         deleteItem
       }}
     >

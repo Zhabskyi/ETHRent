@@ -31,7 +31,7 @@ const Form = props => {
         <div>
           <label htmlFor='title'>Title</label>
           <input
-            defaultValue={intialValues.title}
+            defaultValue={props.title || intialValues.title}
             name='title'
             placeholder='Title'
             ref={register({ required: true, minLength: 3 })}
@@ -46,7 +46,7 @@ const Form = props => {
         <div>
           <label htmlFor='description'>Description</label>
           <input
-            defaultValue={intialValues.description}
+            defaultValue={props.description || intialValues.description}
             name='description'
             placeholder='Description'
             ref={register({ required: true, minLength: 10 })}
@@ -59,6 +59,7 @@ const Form = props => {
         )}
 
         <FormCost
+          props={props}
           errors={errors}
           register={register}
           intialValues={intialValues}

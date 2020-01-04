@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function FormAddress({ register, errors, intialValues, classes }) {
+const FormConst = ({ props, register, errors, intialValues, classes }) => {
   return (
     <>
       <div>
         <label htmlFor='daily_rate'>Day Rate</label>
         <input
-          defaultValue={intialValues.daily_rate}
+          defaultValue={props.daily_rate || intialValues.daily_rate}
           name='daily_rate'
           placeholder='0'
           ref={register({ required: true })}
@@ -16,7 +16,7 @@ export default function FormAddress({ register, errors, intialValues, classes })
       <div>
         <label htmlFor='deposit'>Deposit</label>
         <input
-          defaultValue={intialValues.deposit}
+          defaultValue={props.deposit || intialValues.deposit}
           name='deposit'
           placeholder='0'
           ref={register({
@@ -33,3 +33,5 @@ export default function FormAddress({ register, errors, intialValues, classes })
     </>
   );
 }
+
+export default FormConst;
