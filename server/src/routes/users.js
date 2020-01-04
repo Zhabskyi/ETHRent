@@ -15,8 +15,11 @@ module.exports = db => {
     });
   });
 
+  //User registration
   router.post("/users", async (req, res) => {
-    const newUser = req.body;
+    const newUser = {...req.body, map: `https://maps.googleapis.com/maps/api/staticmap?fillcolor:black&center=${req.body.city},+${req.body.province}+${req.body.postal_code.substring(0,3)}+${req.body.postal_code.substring(3)}&zoom=16&size=400x400&key=${process.env.REACT_APP_API_GOOGLE_API}`}
+
+    console.log(newUser)
 
     try {
       let user = await database.getUserByEmail(db, newUser.email);

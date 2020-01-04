@@ -27,18 +27,18 @@ export default function FormAddress({ register, errors }) {
       <div>
         <label>Province</label>
         <select name='province' ref={register({ required: true })}>
-          <option value='Alberta'>Alberta</option>
-          <option value='British Columbia'>British Columbia</option>
-          <option value='Manitoba'>Manitoba</option>
-          <option value='New Brunswick'>New Brunswick</option>
-          <option value='Newfoundland and Labrador'>
+          <option value='AB'>Alberta</option>
+          <option value='BC'>British Columbia</option>
+          <option value='MB'>Manitoba</option>
+          <option value='NB'>New Brunswick</option>
+          <option value='NL'>
             Newfoundland and Labrador
           </option>
-          <option value='Nova Scotia'>Nova Scotia</option>
-          <option value='Ontario'>Ontario</option>
-          <option value='Prince Edward Island'>Prince Edward Island</option>
-          <option value='Quebec'>Quebec</option>
-          <option value='Saskatchewan'>Saskatchewan</option>
+          <option value='NS'>Nova Scotia</option>
+          <option value='ON'>Ontario</option>
+          <option value='PE'>Prince Edward Island</option>
+          <option value='QC'>Quebec</option>
+          <option value='SK'>Saskatchewan</option>
         </select>
       </div>
 
@@ -47,7 +47,7 @@ export default function FormAddress({ register, errors }) {
         <input
           name='postal_code'
           placeholder='Postal Code'
-          ref={register({ required: true, maxLength: 7, minLength: 6 })}
+          ref={register({ required: true, maxLength: 6, minLength: 6 })}
         />
       </div>
       {errors.postalcode && (

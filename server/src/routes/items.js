@@ -10,7 +10,9 @@ module.exports = db => {
   });
 
   router.post("/items", async (req, res) => {
+
     try {
+
       let item = await database.addItem(db, req.body);
     } catch (err) {
       console.error(err.message);

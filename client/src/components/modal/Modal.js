@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from "./Modal.module.scss";
+import classNames from "classnames";
 
 import Backdrop from "../backdrop/Backdrop";
 
 const Modal = props => {
+
   if (!props.show) {
     return null;
   }

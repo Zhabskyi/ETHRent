@@ -10,7 +10,7 @@ const Item = ({ item }) => {
   const authContext = useContext(AuthContext);
   const itemContext = useContext(ItemContext);
 
-  const { user } = authContext;
+  const { user, map } = authContext;
   const { deleteItem } = itemContext;
   const { id, user_id, title, daily_rate, deposit, photo } = item;
 
@@ -60,7 +60,20 @@ const Item = ({ item }) => {
         </div>
       </div>
       <Modal show={showModal} onClose={toggleDetails}>
-        Hello
+        <div>
+          <p className={classes.title}>{title}</p>
+          <div className={classes.photo}>
+            <img src={photo} alt='item' />
+          </div>
+          <p>Daily Rate: {daily_rate}</p>
+          <p>Deposit: {deposit}</p>
+          <div >
+            <img
+              src={map}
+              alt='map'
+            />
+          </div>
+        </div>
       </Modal>
     </>
   );
