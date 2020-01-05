@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from "react";
+import { withRouter } from 'react-router-dom';
 import classes from "./Items.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
 import AuthContext from "../../context/auth/authContext";
 import Item from "./item/Item";
 import Spinner from "../spinner/Spinner";
 
-const Items = () => {
+const PrivateItems = () => {
   const itemContext = useContext(ItemContext);
   const authContext = useContext(AuthContext);
 
@@ -38,4 +39,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default withRouter(PrivateItems);

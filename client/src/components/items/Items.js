@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { withRouter } from 'react-router-dom';
 import classes from "./Items.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
 import Item from "./item/Item";
@@ -29,4 +30,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default withRouter(Items);

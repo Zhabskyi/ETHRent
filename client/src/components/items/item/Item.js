@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { withRouter } from "react-router-dom";
 import classes from "./Item.module.scss";
 
 import Button from "../../button/Button";
@@ -7,13 +8,21 @@ import FormAddItem from "../../form/FormAddItem";
 import AuthContext from "../../../context/auth/authContext";
 import ItemContext from "../../../context/Item/ItemContext";
 
-const Item = ({ item }) => {
+const Item = props => {
   const authContext = useContext(AuthContext);
   const itemContext = useContext(ItemContext);
 
   const { user } = authContext;
-  const { deleteItem, editItem } = itemContext;
-  const { id, user_id, title, description, daily_rate, deposit, photo } = item;
+  const { deleteItem } = itemContext;
+  const {
+    id,
+    user_id,
+    title,
+    description,
+    daily_rate,
+    deposit,
+    photo
+  } = props.item;
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
@@ -22,17 +31,12 @@ const Item = ({ item }) => {
     deleteItem(id, user_id);
   };
 
-  const editHandler = () => {
-    setForm(!showItemModal);
-    editItem(id, user_id, title, description, daily_rate, deposit);
-  };
-
   const toggleItemDetails = () => {
     setItem(!showItemModal);
   };
 
-  const closeFormDetails = () => {
-    setForm(false);
+  const toggleFormDetails = () => {
+    setForm(!showFormModal);
   };
 
   const registered = (
@@ -43,7 +47,7 @@ const Item = ({ item }) => {
       <Button onClick={deleteHandler} danger>
         Delete
       </Button>
-      <Button onClick={editHandler} confirm>
+      <Button onClick={toggleFormDetails} confirm>
         Edit
       </Button>
     </>
@@ -82,12 +86,16 @@ const Item = ({ item }) => {
           <p>Daily Rate: {daily_rate}</p>
           <p>Deposit: {deposit}</p>
           <div>
-            <img src={user.map} alt='map' />
+            {/* new 2020 feature with ?. operator */}
+            <img src={user?.map} alt='map' />
           </div>
         </div>
       </Modal>
-      <Modal show={showFormModal} onClose={closeFormDetails}>
+      <Modal show={showFormModal} onClose={toggleFormDetails}>
         <FormAddItem
+          toggleFormDetails={toggleFormDetails}
+          id={id}
+          user_id={user_id}
           title={title}
           description={description}
           daily_rate={daily_rate}
@@ -98,4 +106,4 @@ const Item = ({ item }) => {
   );
 };
 
-export default Item;
+export default withRouter(Item);

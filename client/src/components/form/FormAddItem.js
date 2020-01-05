@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { withRouter } from "react-router-dom";
 import useForm from "react-hook-form";
 
 import classes from "./Form.module.scss";
@@ -6,25 +7,40 @@ import FormCost from "./FormCost";
 import ItemContex from "../../context/Item/ItemContext";
 import AuthContext from "../../context/auth/authContext";
 
-const Form = props => {
+const FormAddItem = props => {
   const itemContex = useContext(ItemContex);
   const authContext = useContext(AuthContext);
-  const { addItem } = itemContex;
+  const { addItem, editItem } = itemContex;
 
   const { user } = authContext;
 
   const { register, handleSubmit, errors } = useForm();
+
+
   const onSubmit = data => {
     const newData = { ...data, user_id: user.id };
-    addItem(newData);
-    props.history.push("/");
+    if (!props.id) {
+      addItem(newData);
+    } else {
+      editItem(props.id, newData);
+      props.toggleFormDetails();
+      redirectToHome();
+    }
+
   };
+
+  const redirectToHome = () => {
+    const { history } = props;
+    if (history) history.push("/my-items");
+  };
+
   const intialValues = {
     title: "",
     description: "",
     daily_rate: null,
     deposit: null
   };
+
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -72,4 +88,4 @@ const Form = props => {
   );
 };
 
-export default Form;
+export default withRouter(FormAddItem);

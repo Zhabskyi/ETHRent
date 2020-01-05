@@ -72,27 +72,47 @@ const addItem = function(db, item) {
     .catch(err => console.log(err));
 };
 
-const getItemByUserId = function (db, userId) {
-  return db.query(`
-    SELECT * FROM items
-    WHERE user_id = $1
-  `, [userId]
-  )
-  .then(res => res.rows[0])
-  .catch(err => console.log(err));
-}
+const updateItem = function(db, item, id) {
+  return db
+    .query(
+      `
+    UPDATE items
+    SET title = $2,
+        description = $3,
+        daily_rate = $4,
+        deposit = $5,
+        photo = $6
+    WHERE id = $1;
+  `,
+      [
+        id,
+        item.title,
+        item.description,
+        item.daily_rate,
+        item.deposit,
+        "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      ]
+    )
+    .then(res => res.rows)
+    .catch(err => console.log(err));
+};
 
-const deleteItemById = function (db, itemId) {
-  return db.query(`
+const deleteItemById = function(db, itemId) {
+  return db
+    .query(
+      `
     DELETE FROM items WHERE items.id = $1;
-  `, [itemId])
-  .catch(err => console.log(err));
-}
+  `,
+      [itemId]
+    )
+    .catch(err => console.log(err));
+};
 
 module.exports = {
   addUser,
   getUserByEmail,
   getUserById,
   addItem,
+  updateItem,
   deleteItemById
 };

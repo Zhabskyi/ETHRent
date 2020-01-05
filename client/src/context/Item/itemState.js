@@ -6,6 +6,7 @@ import itemReducer from "./itemReducer";
 import {
   GET_ITEMS,
   ADD_ITEM,
+  EDIT_ITEM,
   DELETE_ITEM,
   ITEM_ERROR,
   GET_MY_ITEMS
@@ -20,7 +21,6 @@ const ItemState = props => {
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
-  
 
   // Get Items
   const getItems = async () => {
@@ -31,7 +31,6 @@ const ItemState = props => {
         type: GET_ITEMS,
         payload: Object.values(res.data)
       });
-
     } catch (err) {
       dispatch({
         type: ITEM_ERROR,
@@ -67,13 +66,24 @@ const ItemState = props => {
   };
 
   //Edit Item
-  const editItem = async () => {
+  const editItem = async (id, item) => {
+    try {
+      const res = await axios.put(`/items/${id}`, item);
 
-  }
+      dispatch({
+        type: EDIT_ITEM,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: err.response
+      });
+    }
+  };
 
   //Delete Item
   const deleteItem = async (id, user_id) => {
-    
     try {
       const res = await axios.delete(`/items/delete/${id}`);
 
@@ -82,8 +92,8 @@ const ItemState = props => {
         payload: id
       });
 
-     if (res.status === 200) {
-       getMyItems(user_id);
+      if (res.status === 200) {
+        getMyItems(user_id);
       }
     } catch (err) {
       dispatch({
