@@ -20,6 +20,7 @@ const FormAddItem = props => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
+    props.createProduct(data.title, data.deposit, data.daily_rate);
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);
@@ -36,7 +37,7 @@ const FormAddItem = props => {
 
   const redirectToHome = () => {
     const { history } = props;
-    if (history) history.push("/my-items");
+    if (history) history.push("/");
   };
 
   const handleSelectedFile = e => {

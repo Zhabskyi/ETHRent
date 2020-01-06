@@ -4,7 +4,7 @@ import classes from "./Home.module.scss";
 import Items from "../../components/items/Items";
 import AuthContext from "../../context/auth/authContext";
 
-const Home = () => {
+const Home = props => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated } = authContext;
 
@@ -19,7 +19,7 @@ const Home = () => {
         {isAuthenticated ? <Link to='/my-items'>Manage my items</Link> : null}
       </div>
       <div className={classes.container}>
-        <Items />
+        <Items createProduct={props.createProduct}/>
       </div>
     </>
   );

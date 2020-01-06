@@ -93,6 +93,7 @@ const Item = props => {
       </Modal>
       <Modal show={showFormModal} onClose={toggleFormDetails}>
         <FormAddItem
+          createProduct={props.createProduct}
           toggleFormDetails={toggleFormDetails}
           id={id}
           user_id={user_id}
