@@ -5,7 +5,7 @@ import ItemContext from "../../context/Item/ItemContext";
 import Item from "./item/Item";
 import Spinner from "../spinner/Spinner";
 
-const Items = props => {
+const Items = () => {
   const itemContext = useContext(ItemContext);
 
   const { items, getItems, loading } = itemContext;
@@ -20,12 +20,7 @@ const Items = props => {
       {items !== null && !loading ? (
         <>
           {items.map(item => (
-            <Item
-              key={item.id}
-              item={item}
-              createProduct={props.createProduct}
-              rentProduct={props.rentProduct}
-            />
+            <Item key={item.id} item={item} />
           ))}
         </>
       ) : (

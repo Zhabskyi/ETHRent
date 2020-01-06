@@ -6,21 +6,24 @@ import classes from "./Form.module.scss";
 import FormCost from "./FormCost";
 import ItemContex from "../../context/Item/ItemContext";
 import AuthContext from "../../context/auth/authContext";
+import BlockchainContext from "../../context/blockchain/blockchainContext";
 
 const FormAddItem = props => {
   const itemContex = useContext(ItemContex);
   const authContext = useContext(AuthContext);
+  const blockchainContext = useContext(BlockchainContext);
 
   //Local state
   const [file, setFile] = useState(null);
 
   const { addItem, editItem } = itemContex;
   const { user } = authContext;
+  const { createProduct } = blockchainContext;
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
-    props.createProduct(data.title, data.deposit, data.daily_rate);
+    createProduct(data.title, data.deposit, data.daily_rate);
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);

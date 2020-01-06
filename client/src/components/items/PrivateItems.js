@@ -6,7 +6,7 @@ import AuthContext from "../../context/auth/authContext";
 import Item from "./item/Item";
 import Spinner from "../spinner/Spinner";
 
-const PrivateItems = props => {
+const PrivateItems = () => {
   const itemContext = useContext(ItemContext);
   const authContext = useContext(AuthContext);
 
@@ -29,7 +29,7 @@ const PrivateItems = props => {
       {myItems !== null && !loading ? (
         <>
           {myItems.map(item => (
-            <Item key={item.id} item={item} createProduct={props.createProduct}/>
+            <Item key={item.id} item={item}/>
           ))}
         </>
       ) : (
