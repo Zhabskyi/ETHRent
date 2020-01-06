@@ -1,0 +1,57 @@
+$overflowed-z-index: 5;
+$font-size-base: 16px;
+
+$base-font-color: rgb(80, 80, 80);
+$burger-size: 20px;
+$global-nav-height: 44px;
+$page-content-width: 960px;
+
+$link-color: rgb(102, 255, 127);$devices-width:  (
+  'lg': 1600px,
+  'md': 1024px,
+  'sm': 768px
+);
+$navbar-height: 60px;
+$navbar-height-mobile: 70px;
+$footer-height: 41px;
+$font-size-base: 16px;
+$font-size-large: 18px;
+$font-size-mobile: 15px;
+$font-size-xl: 28px;
+$font-size-xl-mobile: 25px;
+$widget-box-shadow: 0px 0px 25px;
+$widget-border-radius: 8px;
+$page-padding: 8px;
+$overflowed-elements-z-index: 5;
+$portal-z-index: 99;
+$section-padding-default: 147px;
+$section-padding-mobile: 35px;
+
+$main-section-background-color:rgb(49, 58, 90);
+
+// COLORS
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: rgba(238, 238, 238, 0.9);
+
+$color-grey-dark: #777;
+$color-grey-dark-2: #999;
+$color-grey-dark-3: #333;
+
+$white: #fff;
+$black: #000;
+$bluebell: #979fd0;
+
+$danger-color: #f50000;
+$error-color: #ffc343;
+$confirm-color: #5643fa;
+$details-color: #ffb900;

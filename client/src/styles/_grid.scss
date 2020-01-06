@@ -1,0 +1,186 @@
+@import './mixins.scss';
+
+$devices-width:  'xl', 'lg', 'md', 'sm';
+$col-counts: 12;
+$min-col-size: 100% / $col-counts;
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	word-break: break-word;
+}
+
+.row {
+	&_center {
+		justify-content: center; 
+	}
+	&__start {
+		justify-content: flex-start; 
+	}
+	&_end {
+		justify-content: flex-end;
+	}
+	&_column-reverse {
+		flex-direction: column-reverse;
+	}
+	&_column {
+		flex-direction: column;
+	}
+	&_row-reverse {
+		flex-direction: row-reverse;
+	}
+	&_align-stretch {
+		align-items: stretch;
+	}
+	&_align-start {
+		align-items: flex-start; 
+	}
+	&_align-center {
+		align-items: center; 
+	}
+	&_align-end {
+		align-items: flex-end; 
+	}
+}
+
+
+[class*="col-"] {
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0.312rem;
+  position: relative;
+  min-height: 1px;
+}
+
+@for $i from 1 through $col-counts { 
+  $size: $min-col-size * $i;
+
+  .col-#{$i} {
+    flex-basis: $size;
+    width: $size;
+    max-width: $size;
+  }
+  .col-auto {
+      flex-basis: auto;
+      width: auto;
+      max-width: none;
+  }
+  .offset-#{$i} {
+    margin-left: $min-col-size * $i
+  }
+}
+
+@for $i from 1 through 12 { 
+  $size: $min-col-size * $i;
+  .col-sm-#{$i} {
+    @include sm {
+      flex-basis: $size;
+      width: $size;
+      max-width: $size;
+    }
+  }
+  .col-md-#{$i} {
+    @include md {
+      flex-basis: $size;
+      width: $size;
+      max-width: $size;
+    }
+  }
+  .col-lg-#{$i} {
+    @include lg {
+      flex-basis: $size;
+      width: $size;
+      max-width: $size;
+    }
+  }
+
+  .col-xl-#{$i} {
+    @include xl {
+      flex-basis: $size;
+      width: $size;
+      max-width: $size;
+    }
+  }
+
+}
+
+
+@for $i from 0 through 11 { 
+	$size: $min-col-size * $i;
+
+	.offset-sm-#{$i} {
+		@include sm {
+			margin-left: $size
+		}
+	}
+  .offset-md-#{$i} {
+		@include md {
+			margin-left: $size
+		}
+	}
+  .offset-lg-#{$i} {
+		@include lg {
+			margin-left: $size
+		}
+	}
+	.offset-xl-#{$i} {
+		@include xl {
+			margin-left: $size
+		}
+	}
+
+}
+
+
+.padding-bottom-none {
+	padding-bottom: 0; 
+}
+
+.padding-top-none {
+	padding-top: 0; 
+}
+
+.padding-left-none {
+	padding-left: 0; 
+}
+
+.padding-right-none {
+	padding-right: 0; 
+}
+
+.text-center {
+	text-align: center; 
+}
+
+.text-left {
+	text-align: left; 
+}
+
+.text-right {
+	text-align: right; 
+}
+
+.text-bold {
+	font-weight: bold; 
+}
+
+@media (max-width: 767px) {
+  .text-sm-center {
+		text-align: center; 
+	}
+  .text-sm-left {
+		text-align: left; 
+	}
+  .text-sm-right {
+		text-align: right; 
+	}
+  .text-sm-bold {
+		font-weight: bold; 
+	}
+}

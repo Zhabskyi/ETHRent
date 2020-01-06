@@ -1,0 +1,13 @@
+@import '../../styles//core.scss';
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.manage {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}

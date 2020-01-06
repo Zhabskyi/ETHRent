@@ -1,0 +1,59 @@
+@mixin flex-center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+$sm-screen: 576px;
+$md-screen: 768px;
+$lg-screen: 1024px;
+$xl-screen: 1600px;
+
+@mixin sm {
+  @media (max-width: #{$md-screen - 0.1px}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$lg-screen - 0.1px}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$xl-screen - 0.1px}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$xl-screen - 0.1px}) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin button-active {
+  cursor: pointer;
+}
+
+@mixin button-inactive--opacity {
+  @include fade;
+  opacity: 0.7;
+}
+
+@mixin button-active--opacity {
+  @include button-active;
+  opacity: 1;
+}
