@@ -15,7 +15,9 @@ if (process.env.REACT_APP_API_BASE_URL && process.env.NODE_ENV !== "test") {
     }
   });
 } else {
-  instance = axios;
+  instance = axios.create({
+    baseURL: process.env.REACT_APP_API_BASE_URL
+  });
 }
 
 export default instance;

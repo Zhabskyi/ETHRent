@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
-import axios from "../../utils/axios-instance";
+// import axios from "../../utils/axios-instance";
+import axios from "axios";
 import ItemContext from "./ItemContext";
 import itemReducer from "./itemReducer";
 
@@ -25,7 +26,7 @@ const ItemState = props => {
   // Get Items
   const getItems = async () => {
     try {
-      const res = await axios.get("/items");
+      const res = await axios.get("http://localhost:8001/api/items");
 
       dispatch({
         type: GET_ITEMS,
@@ -52,7 +53,7 @@ const ItemState = props => {
   const addItem =  async (item) => {
 
     try {
-      const res =  await axios.post("/items", item);
+      const res =  await axios.post("http://localhost:8001/api/items", item);
       // const userID = Number(res.data.user_id);
       // const data = {...res.data, user_id: userID}
       console.log(res.data)
@@ -73,7 +74,7 @@ const ItemState = props => {
   //Edit Item
   const editItem = async (id, item) => {
     try {
-      const res = await axios.put(`/items/${id}`, item);
+      const res = await axios.put(`http://localhost:8001/api/items/${id}`, item);
       console.log(res)
 
       dispatch({
@@ -91,7 +92,7 @@ const ItemState = props => {
   //Delete Item
   const deleteItem = async (id, user_id) => {
     try {
-      const res = await axios.delete(`/items/delete/${id}`);
+      const res = await axios.delete(`http://localhost:8001/api/items/delete/${id}`);
 
       dispatch({
         type: DELETE_ITEM,
