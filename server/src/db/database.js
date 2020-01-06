@@ -7,7 +7,7 @@ const getUserByEmail = function(db, email) {
   `,
       [email]
     )
-    .then(res => res.rows)
+    .then(res => res.rows[0])
     .catch(err => console.log(err));
 };
 
@@ -33,7 +33,7 @@ const addUser = function(db, user) {
         user.map
       ]
     )
-    .then(res => res.rows)
+    .then(res => res.rows[0])
     .catch(err => console.log(err));
 };
 
@@ -55,7 +55,7 @@ const addItem = function(db, item) {
     .query(
       `
     INSERT INTO items (
-     title, description, daily_rate, deposit, photo, user_id)
+     title, description, daily_rate, deposit, user_id, photo)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
   `,
@@ -64,11 +64,11 @@ const addItem = function(db, item) {
         item.description,
         item.daily_rate,
         item.deposit,
-        "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-        item.user_id
+        item.user_id,
+        item.photo
       ]
     )
-    .then(res => res.rows)
+    .then(res => res.rows[0])
     .catch(err => console.log(err));
 };
 
@@ -93,7 +93,7 @@ const updateItem = function(db, item, id) {
         "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
       ]
     )
-    .then(res => res.rows)
+    .then(res => res.rows[0])
     .catch(err => console.log(err));
 };
 

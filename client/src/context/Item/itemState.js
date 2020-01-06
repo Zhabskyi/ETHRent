@@ -49,14 +49,19 @@ const ItemState = props => {
   };
 
   //Add Item
-  const addItem = async item => {
+  const addItem =  async (item) => {
+
     try {
-      const res = await axios.post("/items", item);
+      const res =  await axios.post("/items/upload", item);
+      // const userID = Number(res.data.user_id);
+      // const data = {...res.data, user_id: userID}
+      console.log(res.data)
 
       dispatch({
         type: ADD_ITEM,
-        payload: res.item
+        payload: res.data
       });
+      getMyItems(res.data.user_id);
     } catch (err) {
       dispatch({
         type: ITEM_ERROR,

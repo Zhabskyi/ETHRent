@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import useForm from "react-hook-form";
 
@@ -10,23 +10,27 @@ import AuthContext from "../../context/auth/authContext";
 const FormAddItem = props => {
   const itemContex = useContext(ItemContex);
   const authContext = useContext(AuthContext);
+
+  const [file, setFile] = useState(null);
   const { addItem, editItem } = itemContex;
 
   const { user } = authContext;
 
   const { register, handleSubmit, errors } = useForm();
 
-
   const onSubmit = data => {
-    const newData = { ...data, user_id: user.id };
+    let newData = new FormData();
+    Object.keys(data).forEach(key => newData.append(key, data[key]));
+    newData.append("user_id", user.id);
+    newData.append("file", file);
+
     if (!props.id) {
       addItem(newData);
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
-      redirectToHome();
     }
-
+    redirectToHome();
   };
 
   const redirectToHome = () => {
@@ -34,16 +38,22 @@ const FormAddItem = props => {
     if (history) history.push("/my-items");
   };
 
+  const handleSelectedFile = e => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
   const intialValues = {
     title: "",
     description: "",
     daily_rate: null,
-    deposit: null
+    deposit: null,
+    file: null
   };
 
   return (
     <div className={classes.container}>
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form} encType="multipart/form-data">
         <div>
           <label htmlFor='title'>Title</label>
           <input
@@ -72,6 +82,22 @@ const FormAddItem = props => {
           <p className={classes.error}>
             Title should be more then 10 characters
           </p>
+        )}
+
+        <div>
+          <label htmlFor='file'>Upload file</label>
+          <input
+            type='file'
+            accept='image/png, image/jpeg'
+            defaultValue={intialValues.file}
+            name='files'
+            onChange={handleSelectedFile}
+            placeholder=''
+            ref={register({ required: true })}
+          />
+        </div>
+        {errors.file && (
+          <p className={classes.error}>Upload picture requered</p>
         )}
 
         <FormCost
