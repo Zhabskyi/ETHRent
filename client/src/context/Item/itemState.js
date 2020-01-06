@@ -52,7 +52,7 @@ const ItemState = props => {
   const addItem =  async (item) => {
 
     try {
-      const res =  await axios.post("/items/upload", item);
+      const res =  await axios.post("/items", item);
       // const userID = Number(res.data.user_id);
       // const data = {...res.data, user_id: userID}
       console.log(res.data)
@@ -74,6 +74,7 @@ const ItemState = props => {
   const editItem = async (id, item) => {
     try {
       const res = await axios.put(`/items/${id}`, item);
+      console.log(res)
 
       dispatch({
         type: EDIT_ITEM,

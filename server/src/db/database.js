@@ -7,7 +7,7 @@ const getUserByEmail = function(db, email) {
   `,
       [email]
     )
-    .then(res => res.rows[0])
+    .then(res => res.rows)
     .catch(err => console.log(err));
 };
 
@@ -33,7 +33,7 @@ const addUser = function(db, user) {
         user.map
       ]
     )
-    .then(res => res.rows[0])
+    .then(res => res.rows)
     .catch(err => console.log(err));
 };
 
@@ -82,7 +82,8 @@ const updateItem = function(db, item, id) {
         daily_rate = $4,
         deposit = $5,
         photo = $6
-    WHERE id = $1;
+    WHERE id = $1
+    RETURNING *;
   `,
       [
         id,
@@ -90,7 +91,7 @@ const updateItem = function(db, item, id) {
         item.description,
         item.daily_rate,
         item.deposit,
-        "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+        item.photo
       ]
     )
     .then(res => res.rows[0])

@@ -29,6 +29,7 @@ const FormAddItem = props => {
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
+      console.log("HERE", props.id)
     }
     redirectToHome();
   };
