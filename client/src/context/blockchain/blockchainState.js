@@ -67,7 +67,7 @@ const BlockchainState = props => {
   const createProduct = (name, deposit, daily_rate) => {
     startLoading();
     state.marketplace.methods
-      .createProduct(name, deposit, daily_rate)
+      .createProduct(name, description, deposit, daily_rate)
       .send({ from: state.account })
       .once("receipt", receipt => {
         console.log("RECEIP recived!");
