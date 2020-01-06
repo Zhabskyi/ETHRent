@@ -8,6 +8,7 @@ contract Marketplace {
   struct Product {
     uint id;
     string name;
+    string description;
     uint rentalDeposit;
     uint rentalFee;
     address payable owner;
@@ -18,6 +19,7 @@ contract Marketplace {
   event ProductCreated(
     uint id,
     string name,
+    string description,
     uint rentalDeposit,
     uint rentalFee,
     address payable owner,
@@ -55,6 +57,7 @@ contract Marketplace {
   event ProductEdited(
     uint id,
     string name,
+    string description,
     uint rentalDeposit,
     uint rentalFee,
     address payable owner,
@@ -66,9 +69,11 @@ contract Marketplace {
     deployer = msg.sender;
   }
 
-  function createProduct(string memory _name, uint _rentalDeposit, uint _rentalFee) public {
+  function createProduct(string memory _name, string memory _description, uint _rentalDeposit, uint _rentalFee) public {
     // Require a valid name
     require(bytes(_name).length > 0);
+    // Require a valid description
+    require(bytes(_description).length > 0);
     // Require a valid rental deposit
     require(_rentalDeposit > 0);
     // Require a valid rental fee
@@ -76,11 +81,12 @@ contract Marketplace {
     // Increment product count
     productCount ++;
     // Create the product
-    products[productCount] = Product(productCount, _name, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
+    products[productCount] = Product(productCount, _name, _description, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
     // Trigger an event
     emit ProductCreated(
       productCount,
       _name,
+      _description,
       _rentalDeposit,
       _rentalFee,
       msg.sender,
@@ -188,7 +194,7 @@ contract Marketplace {
       _product.rented);
   }
 
-  function editProduct(uint _id, string memory _name, uint _rentalDeposit, uint _rentalFee) public {
+  function editProduct(uint _id, string memory _name, string memory _description, uint _rentalDeposit, uint _rentalFee) public {
     // Fetch the product
     Product memory _product = products[_id];
     // Make sure the product has a valid id
@@ -198,10 +204,11 @@ contract Marketplace {
     // Make sure the owner is currently the custodian of the product
     require(_product.custodian == _product.owner);
     // Edit the product
-    products[_id] = Product(_id, _name, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
+    products[_id] = Product(_id, _name, _description, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
     emit ProductEdited(
       productCount,
       _name,
+      _description,
       _rentalDeposit,
       _rentalFee,
       msg.sender,

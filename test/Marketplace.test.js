@@ -31,7 +31,7 @@ describe('products', async () => {
   let result, productCount
 
   before(async () => {
-    result = await marketplace.createProduct('Table Saw', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
+    result = await marketplace.createProduct('Table Saw', 'A very fine table saw.', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
     productCount = await marketplace.productCount()
   })
 
@@ -41,6 +41,7 @@ describe('products', async () => {
     const event = result.logs[0].args
     assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
     assert.equal(event.name, 'Table Saw', 'name is correct')
+    assert.equal(event.description, 'A very fine table saw.', 'description is correct')
     assert.equal(event.rentalDeposit, '5000000000000000000', 'deposit is correct')
     assert.equal(event.rentalFee, '1000000000000000000', 'fee is correct')
     assert.equal(event.owner, owner, 'owner is correct')
@@ -171,13 +172,14 @@ describe('products', async () => {
 
   it('edits product', async () => {
     // SUCCESS: Borrower returns object
-    result = await marketplace.editProduct(productCount, 'Table Saw', web3.utils.toWei('10', 'Ether'), web3.utils.toWei('2', 'Ether'), { from: owner })
+    result = await marketplace.editProduct(productCount, 'Table Saw', 'The worst saw ever!', web3.utils.toWei('10', 'Ether'), web3.utils.toWei('2', 'Ether'), { from: owner })
 
     // Check logs
     assert.equal(productCount, 1)
     const event = result.logs[0].args
     assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
     assert.equal(event.name, 'Table Saw', 'name is correct')
+    assert.equal(event.description, 'The worst saw ever!', 'description is correct')
     assert.equal(event.rentalDeposit, '10000000000000000000', 'deposit is correct')
     assert.equal(event.rentalFee, '2000000000000000000', 'fee is correct')
     assert.equal(event.owner, owner, 'owner is correct')
@@ -198,7 +200,7 @@ describe('destroy', async () => {
   let result, productCount
 
   before(async () => {
-    result = await marketplace.createProduct('Table Saw', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
+    result = await marketplace.createProduct('Table Saw', 'The worst saw ever!', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
     productCount = await marketplace.productCount()
   })
 
