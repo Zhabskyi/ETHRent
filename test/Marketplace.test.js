@@ -169,6 +169,29 @@ describe('products', async () => {
     // await marketplace.deleteProduct(productCount, { from: owner }).should.be.rejected;
   })
 
+  it('edits product', async () => {
+    // SUCCESS: Borrower returns object
+    result = await marketplace.editProduct(productCount, 'Table Saw', web3.utils.toWei('10', 'Ether'), web3.utils.toWei('2', 'Ether'), { from: owner })
+
+    // Check logs
+    assert.equal(productCount, 1)
+    const event = result.logs[0].args
+    assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
+    assert.equal(event.name, 'Table Saw', 'name is correct')
+    assert.equal(event.rentalDeposit, '10000000000000000000', 'deposit is correct')
+    assert.equal(event.rentalFee, '2000000000000000000', 'fee is correct')
+    assert.equal(event.owner, owner, 'owner is correct')
+    assert.equal(event.rented, false, 'rented is correct')
+
+    // FAILURE: Tries to delete a product that does not exist, i.e. product must have valid id
+    await marketplace.editProduct(99, { from: owner }).should.be.rejected;
+    // FAILURE: Borrower tries to delete a product, i.e. not the owner
+    await marketplace.editProduct(productCount, { from: borrower }).should.be.rejected;
+    // FAILURE: Owner tries to delete a product that is currently rented
+    // await marketplace.rentProduct(productCount, { from: borrower });
+    // await marketplace.deleteProduct(productCount, { from: owner }).should.be.rejected;
+  })
+
 })
 
 describe('destroy', async () => {
