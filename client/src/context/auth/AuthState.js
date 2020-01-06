@@ -8,6 +8,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   REGISTER_SUCCESS,
+  REGISTER_FAIL,
   AUTH_ERROR
 } from "../actionTypes";
 
@@ -16,7 +17,8 @@ const AuthState = props => {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
-    user: null
+    user: null,
+    error: null
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -43,7 +45,6 @@ const AuthState = props => {
   const registerUser = async data => {
     try {
       const res = await axios.post("/users", data);
-
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -51,7 +52,10 @@ const AuthState = props => {
 
       loadUser();
     } catch (err) {
-      console.log("Error" + err);
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data
+      });
     }
   };
 
@@ -81,6 +85,7 @@ const AuthState = props => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
+        error: state.error,
         registerUser,
         login,
         logout,

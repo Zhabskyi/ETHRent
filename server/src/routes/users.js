@@ -27,7 +27,7 @@ module.exports = db => {
       let user = await database.getUserByEmail(db, newUser.email);
 
       if (user.length !== 0) {
-        return res.status(400).json({ msg: "User already exists" });
+        return res.status(400).send("User already exists");
       }
 
       const salt = await bcrypt.genSalt(12);
@@ -46,7 +46,7 @@ module.exports = db => {
         payload,
         config.get("jwtSecret"),
         {
-          expiresIn: 36000
+          expiresIn: 3600
         },
         (err, token) => {
           if (err) throw err;

@@ -10,21 +10,14 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 module.exports = db => {
+
   router.get("/items", (req, res) => {
     db.query(`SELECT * FROM items`).then(({ rows: items }) => {
       res.json(items);
     });
   });
 
-  // router.post("/items", async (req, res) => {
-  //   try {
-  //     await database.addItem(db, req.body);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //     res.status(500).send("Server Error");
-  //   }
-  // });
-
+  // Edit item information
   router.put("/items/:id", upload.single("file"), async (req, res) => {
     const itemId = req.params.id;
     let info = req.body;
@@ -75,6 +68,7 @@ module.exports = db => {
     }
   });
 
+  //Delete Item
   router.delete("/items/delete/:id", (req, res) => {
     const itemId = req.params.id;
     database
@@ -85,6 +79,7 @@ module.exports = db => {
       .catch(e => res.send(e));
   });
 
+  //Add item
   router.post("/items", upload.single("file"), async (req, res) => {
     let info = req.body;
 

@@ -2,14 +2,11 @@ import React, { useContext, useEffect } from "react";
 import classes from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
-import ItemContext from "../../context/Item/ItemContext";
 
 const Navbar = ({ title }) => {
   const authContext = useContext(AuthContext);
-  const itemContext = useContext(ItemContext);
 
   const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { addItem } = itemContext;
 
   useEffect(() => {
     loadUser();

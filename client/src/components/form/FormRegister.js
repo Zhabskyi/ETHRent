@@ -8,7 +8,7 @@ import FormAddress from "./FormAddress";
 
 const Form = props => {
   const authContext = useContext(AuthContext);
-  const { registerUser, isAuthenticated } = authContext;
+  const { registerUser, isAuthenticated, error } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -16,11 +16,11 @@ const Form = props => {
     }
   }, [isAuthenticated, props.history]);
 
+
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = data => {
     registerUser(data);
-    alert(JSON.stringify(data));
   };
 
   const intialValues = {
@@ -35,7 +35,7 @@ const Form = props => {
     postalCode: "",
     phoneNumber: ""
   };
-  
+
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -116,6 +116,9 @@ const Form = props => {
         )}
 
         <FormAddress errors={errors} register={register} />
+        {error && (
+          <p className={classes.error}>User EXIST! Please login!</p>
+        )}
 
         <input type='submit' />
       </form>

@@ -11,9 +11,10 @@ const FormAddItem = props => {
   const itemContex = useContext(ItemContex);
   const authContext = useContext(AuthContext);
 
+  //Local state
   const [file, setFile] = useState(null);
-  const { addItem, editItem } = itemContex;
 
+  const { addItem, editItem } = itemContex;
   const { user } = authContext;
 
   const { register, handleSubmit, errors } = useForm();
@@ -29,7 +30,6 @@ const FormAddItem = props => {
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
-      console.log("HERE", props.id)
     }
     redirectToHome();
   };
@@ -97,7 +97,7 @@ const FormAddItem = props => {
             ref={register({ required: true })}
           />
         </div>
-        {errors.file && (
+        {errors.files && (
           <p className={classes.error}>Upload picture requered</p>
         )}
 
