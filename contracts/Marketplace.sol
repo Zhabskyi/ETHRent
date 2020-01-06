@@ -141,6 +141,8 @@ contract Marketplace {
     require(_product.rented);
     // Require that the borrower is not the owner
     require(_owner != _borrower);
+    // Require that the account ending the rental is the owner
+    // require(_owner == msg.sender);
     // Determine rental period, and associated rental cost
     uint endTime;
     endTime = now;
