@@ -7,10 +7,12 @@ import Modal from "../../modal/Modal";
 import FormAddItem from "../../form/FormAddItem";
 import AuthContext from "../../../context/auth/authContext";
 import ItemContext from "../../../context/Item/ItemContext";
+import BlockchainContext from "../../../context/blockchain/blockchainContext";
 
 const Item = props => {
   const authContext = useContext(AuthContext);
   const itemContext = useContext(ItemContext);
+  const blockchainContext = useContext(BlockchainContext);
 
   const { user } = authContext;
   const { deleteItem } = itemContext;
@@ -23,6 +25,8 @@ const Item = props => {
     deposit,
     photo
   } = props.item;
+  const { rentProduct } = blockchainContext;
+
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
@@ -57,6 +61,9 @@ const Item = props => {
     <>
       <Button onClick={toggleItemDetails} details>
         Details
+      </Button>
+      <Button onClick={() => rentProduct(id)} details>
+        Rent
       </Button>
     </>
   );
@@ -93,6 +100,7 @@ const Item = props => {
       </Modal>
       <Modal show={showFormModal} onClose={toggleFormDetails}>
         <FormAddItem
+          createProduct={props.createProduct}
           toggleFormDetails={toggleFormDetails}
           id={id}
           user_id={user_id}

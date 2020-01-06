@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { useEffect, useContext, Fragment } from "react";
 //import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import MarketplaceContract from "./contracts/Marketplace.json";
-import getWeb3 from "./getWeb3";
+import Marketplace from "./contracts/Marketplace.json";
+// import getWeb3 from "./getWeb3";
+import Web3 from "web3";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 
@@ -16,74 +17,134 @@ import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
 import AddItem from "./components/form/FormAddItem";
 import About from "./pages/about/About";
+import BlockchainContext from "./context/blockchain/blockchainContext";
 
-class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+const App = () => {
+  const blockchainContext = useContext(BlockchainContext);
 
-  componentDidMount = async () => {
-    try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+  const {
+    setAccount,
+    setMarketplace,
+    setProductCount,
+    setProducts,
+    cancelLoading,
+    loading
+  } = blockchainContext;
 
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
+  useEffect(() => {
+    loadWeb3();
+  }, []);
 
-      // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = MarketplaceContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        MarketplaceContract.abi,
-        deployedNetwork && deployedNetwork.address
+  useEffect(() => {
+    loadBlockchainData();
+  },[])
+
+  const loadWeb3 = async () => {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+    } else {
+      window.alert(
+        "Non-Ethereum browser detected. You should consider trying MetaMask!"
       );
+    }
+  };
+  const loadBlockchainData = async () => {
+    const web3 = window.web3;
+    // Load account
+    const accounts = await web3.eth.getAccounts();
+    setAccount(accounts[0]);
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
+    // this.setState({ account: accounts[0] });
+    const networkId = await web3.eth.net.getId();
+    const networkData = Marketplace.networks[networkId];
+    if (networkData) {
+      const marketplace = new web3.eth.Contract(
+        Marketplace.abi,
+        networkData.address
       );
-      console.error(error);
+      setMarketplace(marketplace);
+      //this.setState({ marketplace });
+      const productCount = await marketplace.methods.productCount().call();
+      setProductCount(productCount);
+      // this.setState({ productCount });
+      // Load products
+      for (var i = 1; i <= productCount; i++) {
+        const product = await marketplace.methods.products(i).call();
+        setProducts(product);
+        //this.setState({
+        // products: [...this.state.products, product]
+        //});
+      }
+      cancelLoading();
+      //this.setState({ loading: false });
+    } else {
+      window.alert("Marketplace contract not deployed to detected network.");
     }
   };
 
-  runExample = async () => {
-    // const { accounts, contract } = this.state;
-    // // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-    // // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-    // // Update state with the result.
-    // this.setState({ storageValue: response });
-  };
+  // createProduct(name, deposit, daily_rate) {
+  //   this.setState({ loading: true });
+  //   this.state.marketplace.methods
+  //     .createProduct(name, deposit, daily_rate)
+  //     .send({ from: this.state.account })
+  //     .once("receipt", receipt => {
+  //       console.log("RECEIP recived!");
+  //       this.setState({ loading: false });
+  //       this.loadBlockchainData();
+  //     });
+  // }
 
-  render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
-    return (
-      <AuthState>
-        <ItemState>
-          <Router>
-            <Fragment>
-              <Navbar title={"ETHRent"} />
-              <div className='container'>
-                <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/add-item' component={AddItem} />
-                  <PrivateRoute exact path='/my-items' component={PrivateItems} />
-                </Switch>
-              </div>
-            </Fragment>
-          </Router>
-        </ItemState>
-      </AuthState>
-    );
-  }
-}
+  // rentProduct(id) {
+  //   this.setState({ loading: true });
+  //   console.log("ACCOUNT", this.state.account);
+  //   console.log(id);
+  //   const changedID = id - 1;
+  //   console.log(this.state.products[changedID]);
+  //   console.log("DEPOSIT", this.state.products[changedID].rentalDeposit);
+  //   const valueInEther = this.state.products[changedID].rentalDeposit;
+  //   this.state.marketplace.methods
+  //     .rentProduct(id)
+  //     .send({
+  //       from: this.state.account,
+  //       value: Web3.utils.toWei(valueInEther, 'Ether')
+  //     })
+  //     .once("receipt", receipt => {
+  //       this.setState({ loading: false });
+  //     });
+  // }
+
+  return (
+    <>
+      {loading ? (
+        <div>Loading Web3, accounts, and contract...</div>
+      ) : (
+        <AuthState>
+          <ItemState>
+            <Router>
+              <Fragment>
+                <Navbar title={"ETHRent"} />
+                <div className='container'>
+                  <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/about' component={About} />
+                    <Route exact path='/register' component={Register} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/add-item' component={AddItem} />
+                    <PrivateRoute exact path='/my-items'>
+                      <PrivateItems />
+                    </PrivateRoute>
+                  </Switch>
+                </div>
+              </Fragment>
+            </Router>
+          </ItemState>
+        </AuthState>
+      )}
+    </>
+  );
+};
 
 export default App;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import classes from "./Items.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
 import Item from "./item/Item";
@@ -15,13 +15,13 @@ const Items = () => {
     // eslint-disable-next-line
   }, []);
 
-
-
   return (
     <>
       {items !== null && !loading ? (
         <>
-        {items.map(item => <Item key={item.id} item={item} />)}
+          {items.map(item => (
+            <Item key={item.id} item={item} />
+          ))}
         </>
       ) : (
         <Spinner />
