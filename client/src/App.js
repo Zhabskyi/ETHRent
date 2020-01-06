@@ -19,46 +19,6 @@ import AddItem from "./components/form/FormAddItem";
 import About from "./pages/about/About";
 
 class App extends Component {
-  //state = { storageValue: 0, web3: null, accounts: null, contract: null };
-
-  // componentDidMount = async () => {
-  //   try {
-  //     // Get network provider and web3 instance.
-  //     const web3 = await getWeb3();
-
-  //     // Use web3 to get the user's accounts.
-  //     const accounts = await web3.eth.getAccounts();
-
-  //     // Get the contract instance.
-  //     const networkId = await web3.eth.net.getId();
-  //     const deployedNetwork = MarketplaceContract.networks[networkId];
-  //     const instance = new web3.eth.Contract(
-  //       MarketplaceContract.abi,
-  //       deployedNetwork && deployedNetwork.address
-  //     );
-
-  //     // Set web3, accounts, and contract to the state, and then proceed with an
-  //     // example of interacting with the contract's methods.
-  //     this.setState({ web3, accounts, contract: instance }, this.runExample);
-  //   } catch (error) {
-  //     // Catch any errors for any of the above operations.
-  //     alert(
-  //       `Failed to load web3, accounts, or contract. Check console for details.`
-  //     );
-  //     console.error(error);
-  //   }
-  // };
-
-  //runExample = async () => {
-  // const { accounts, contract } = this.state;
-  // // Stores a given value, 5 by default.
-  // await contract.methods.set(5).send({ from: accounts[0] });
-  // // Get the value from the contract to prove it worked.
-  // const response = await contract.methods.get().call();
-  // // Update state with the result.
-  // this.setState({ storageValue: response });
-  //};
-
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
@@ -111,27 +71,36 @@ class App extends Component {
       loading: true
     };
     this.createProduct = this.createProduct.bind(this);
-    this.purchaseProduct = this.purchaseProduct.bind(this);
+    this.rentProduct = this.rentProduct.bind(this);
   }
-  createProduct(name, deposit, daily_rate ) {
+  createProduct(name, deposit, daily_rate) {
     this.setState({ loading: true });
     this.state.marketplace.methods
       .createProduct(name, deposit, daily_rate)
       .send({ from: this.state.account })
       .once("receipt", receipt => {
-        console.log("RECEIP recived!")
+        console.log("RECEIP recived!");
         this.setState({ loading: false });
         this.loadBlockchainData();
       });
   }
-  purchaseProduct(id, price) {
+
+  rentProduct(id) {
     this.setState({ loading: true });
+    console.log("ACCOUNT", this.state.account);
+    console.log(id);
+    const changedID = id - 1;
+    console.log(this.state.products[changedID]);
+    console.log("DEPOSIT", this.state.products[changedID].rentalDeposit);
+    const valueInEther = this.state.products[changedID].rentalDeposit;
     this.state.marketplace.methods
-      .purchaseProduct(id)
-      .send({ from: this.state.account, value: price })
+      .rentProduct(id)
+      .send({
+        from: this.state.account,
+        value: Web3.utils.toWei(valueInEther, 'Ether')
+      })
       .once("receipt", receipt => {
         this.setState({ loading: false });
-        
       });
   }
 
@@ -147,22 +116,31 @@ class App extends Component {
               <Navbar title={"ETHRent"} />
               <div className='container'>
                 <Switch>
-                  <Route exact path='/' render={() => {
-                    return <Home createProduct={this.createProduct} />
-                  }} />
+                  <Route
+                    exact
+                    path='/'
+                    render={() => {
+                      return (
+                        <Home
+                          createProduct={this.createProduct}
+                          rentProduct={this.rentProduct}
+                        />
+                      );
+                    }}
+                  />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
-                  <Route exact path='/add-item' render={() => {
-                    return <AddItem createProduct={this.createProduct} />
-                  }} />
-                  {/* <PrivateRoute
+                  <Route
                     exact
-                    path='/my-items'
+                    path='/add-item'
                     render={() => {
-                      return <PrivateItems createProduct={this.state.createProduct} />
+                      return <AddItem createProduct={this.createProduct} />;
                     }}
-                  /> */}
+                  />
+                  <PrivateRoute exact path='/my-items'>
+                    <PrivateItems createProduct={this.state.createProduct} />
+                  </PrivateRoute>
                 </Switch>
               </div>
             </Fragment>

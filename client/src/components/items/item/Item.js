@@ -58,6 +58,9 @@ const Item = props => {
       <Button onClick={toggleItemDetails} details>
         Details
       </Button>
+      <Button onClick={() => props.rentProduct(id)} details>
+        Rent
+      </Button>
     </>
   );
   return (

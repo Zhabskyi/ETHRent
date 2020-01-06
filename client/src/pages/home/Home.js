@@ -19,7 +19,10 @@ const Home = props => {
         {isAuthenticated ? <Link to='/my-items'>Manage my items</Link> : null}
       </div>
       <div className={classes.container}>
-        <Items createProduct={props.createProduct}/>
+        <Items
+          createProduct={props.createProduct}
+          rentProduct={props.rentProduct}
+        />
       </div>
     </>
   );
