@@ -206,7 +206,11 @@ contract Marketplace {
     // Make sure the owner is currently the custodian of the product
     require(_product.custodian == _product.owner);
     // Edit the product
-    products[_id] = Product(_id, _name, _description, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
+    _product.name = _name;
+    _product.description = _description;
+    _product.rentalDeposit = _rentalDeposit;
+    _product.rentalFee = _rentalFee;
+    products[_id] = _product;
     emit ProductEdited(
       productCount,
       _name,

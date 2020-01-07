@@ -66,14 +66,14 @@ const BlockchainState = props => {
   };
 
   const handleRentState = (status, changedID) => {
-    const rentItem = {...state.products[changedID], rented: !status};
+    const rentItem = { ...state.products[changedID], rented: !status };
     let replacedProducts = state.products;
     replacedProducts.splice(changedID, 1, rentItem);
     dispatch({
       type: RENT_PRODUCT,
       payload: replacedProducts
     });
-  }
+  };
 
   const createProduct = (name, description, deposit, daily_rate) => {
     startLoading();
@@ -104,13 +104,14 @@ const BlockchainState = props => {
         cancelLoading();
       });
   };
-  
+
   const returnProduct = id => {
     startLoading();
     const changedID = id - 1;
     const idString = id.toString();
     const endDate = Date.now() / 1000; // JS is in milliseconds
-    const rentalDays = ((Math.trunc(endDate) - state.products[changedID].rentalStart) / 86400)
+    const rentalDays =
+      (Math.trunc(endDate) - state.products[changedID].rentalStart) / 86400;
     state.marketplace.methods
       .returnProduct(idString, Math.ceil(rentalDays))
       .send({
@@ -120,7 +121,20 @@ const BlockchainState = props => {
         handleRentState(true, changedID);
         cancelLoading();
       });
-  }
+  };
+
+  const editProduct = (id, name, description, deposit, daily_rate) => {
+    startLoading();
+    const idString = id.toString();
+    state.marketplace.methods
+      .editProduct(idString, name, description, deposit, daily_rate)
+      .send({
+        from: state.account
+      })
+      .once("receipt", receipt => {
+        cancelLoading();
+      });
+  };
 
   return (
     <BlockchainContext.Provider
@@ -138,7 +152,8 @@ const BlockchainState = props => {
         startLoading,
         createProduct,
         rentProduct,
-        returnProduct
+        returnProduct,
+        editProduct
       }}
     >
       {props.children}
