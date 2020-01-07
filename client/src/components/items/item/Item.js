@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import classes from "./Item.module.scss";
 
@@ -25,8 +25,11 @@ const Item = props => {
     deposit,
     photo
   } = props.item;
-  const { rentProduct, returnProduct, products } = blockchainContext;
-
+  const {
+    rentProduct,
+    returnProduct,
+    products
+  } = blockchainContext;
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
@@ -62,7 +65,12 @@ const Item = props => {
       <Button onClick={toggleItemDetails} details>
         Details
       </Button>
-      <Button onClick={() => rentProduct(id)} details>
+      <Button
+        onClick={() => {
+          rentProduct(id);
+        }}
+        details
+      >
         Rent
       </Button>
     </>
@@ -86,13 +94,13 @@ const Item = props => {
         <p>Daily Rate: {daily_rate}</p>
         <p>Deposit: {deposit}</p>
         <div>
-          {products[id - 1]?.rented ? rented : (
-            user !== null
+          {products[id - 1]?.rented
+            ? rented
+            : user !== null
             ? user.id === user_id
               ? registered
               : unregistered
-            : unregistered
-          )}
+            : unregistered}
         </div>
       </div>
       <Modal show={showItemModal} onClose={toggleItemDetails}>

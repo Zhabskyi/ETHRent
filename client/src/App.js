@@ -24,7 +24,7 @@ const App = () => {
     setAccount,
     setMarketplace,
     setProductCount,
-    setProducts,
+    addProduct,
     cancelLoading,
     loading
   } = blockchainContext;
@@ -68,7 +68,7 @@ const App = () => {
       // Load products
       for (var i = 1; i <= productCount; i++) {
         const product = await marketplace.methods.products(i).call();
-        setProducts(product);
+        addProduct(product);
       }
       cancelLoading();
     } else {

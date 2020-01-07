@@ -10,7 +10,8 @@ import {
   SET_MARKETPLACE,
   SET_PRODUCTCOUNT,
   ADD_PRODUCT,
-  CANCEL_LOADING
+  CANCEL_LOADING,
+  RENT_PRODUCT
 } from "../actionTypes";
 
 const BlockchainState = props => {
@@ -45,7 +46,7 @@ const BlockchainState = props => {
     });
   };
 
-  const setProducts = product => {
+  const addProduct = product => {
     dispatch({
       type: ADD_PRODUCT,
       payload: product
@@ -63,6 +64,16 @@ const BlockchainState = props => {
       type: CANCEL_LOADING
     });
   };
+
+  const handleRentState = (status, changedID) => {
+    const rentItem = {...state.products[changedID], rented: !status};
+    let replacedProducts = state.products;
+    replacedProducts.splice(changedID, 1, rentItem);
+    dispatch({
+      type: RENT_PRODUCT,
+      payload: replacedProducts
+    });
+  }
 
   const createProduct = (name, description, deposit, daily_rate) => {
     startLoading();
@@ -89,6 +100,7 @@ const BlockchainState = props => {
         value: state.products[changedID].rentalDeposit
       })
       .once("receipt", receipt => {
+        handleRentState(false, changedID);
         cancelLoading();
       });
   };
@@ -105,6 +117,7 @@ const BlockchainState = props => {
         from: state.account
       })
       .once("receipt", receipt => {
+        handleRentState(true, changedID);
         cancelLoading();
       });
   }
@@ -120,7 +133,7 @@ const BlockchainState = props => {
         setAccount,
         setMarketplace,
         setProductCount,
-        setProducts,
+        addProduct,
         cancelLoading,
         startLoading,
         createProduct,

@@ -4,8 +4,10 @@ import {
   SET_MARKETPLACE,
   SET_PRODUCTCOUNT,
   ADD_PRODUCT,
-  CANCEL_LOADING
+  CANCEL_LOADING,
+  RENT_PRODUCT
 } from "../actionTypes";
+import Items from "../../components/items/Items";
 
 export default (state, action) => {
   switch (action.type) {
@@ -35,6 +37,11 @@ export default (state, action) => {
         products: [...state.products, action.payload],
         loading: false
       };
+      case RENT_PRODUCT:
+        return {
+          ...state,
+          products: [...action.payload ]
+        };
     case SET_PRODUCTCOUNT:
       return {
         ...state,
