@@ -96,17 +96,11 @@ const BlockchainState = props => {
   const returnProduct = id => {
     startLoading();
     const changedID = id - 1;
-    console.log('id', id)
-    console.log('product[id]', state.products[changedID])
     const idString = id.toString();
     const endDate = Date.now() / 1000; // JS is in milliseconds
-    const rentalDays = ((Math.trunc(endDate) - state.products[changedID].rentalStart) % 86400) + 1
-    console.log('endDate', Math.trunc(endDate))
-    console.log('startDate', state.products[changedID].rentalStart)
-    console.log('rentalDays', rentalDays);
-    // const valueInEther = state.products[changedID].rentalDeposit;
+    const rentalDays = ((Math.trunc(endDate) - state.products[changedID].rentalStart) / 86400)
     state.marketplace.methods
-      .returnProduct(idString, 2)
+      .returnProduct(idString, Math.ceil(rentalDays))
       .send({
         from: state.account
       })
