@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import useForm from "react-hook-form";
-import Web3 from 'web3';
+import Web3 from "web3";
 
 import classes from "./Form.module.scss";
 import FormCost from "./FormCost";
@@ -24,13 +24,13 @@ const FormAddItem = props => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
-    const depositWei = Web3.utils.toWei(data.deposit, 'Ether');
-    const rateWei = Web3.utils.toWei(data.daily_rate, 'Ether');
+    const depositWei = Web3.utils.toWei(data.deposit, "Ether");
+    const rateWei = Web3.utils.toWei(data.daily_rate, "Ether");
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);
     newData.append("file", file);
-    
+
     if (!props.id) {
       createProduct(data.title, data.description, depositWei, rateWei);
       addItem(newData);
@@ -63,7 +63,11 @@ const FormAddItem = props => {
 
   return (
     <div className={classes.container}>
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form} encType="multipart/form-data">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={classes.form}
+        encType='multipart/form-data'
+      >
         <div>
           <label htmlFor='title'>Title</label>
           <input
@@ -92,6 +96,24 @@ const FormAddItem = props => {
           <p className={classes.error}>
             Title should be more then 10 characters
           </p>
+        )}
+
+        <div>
+          <label>Category</label>
+          <select
+            name='category'
+            ref={register({
+              validate: value => value !== ""
+            })}
+          >
+            <option value=''>--Please choose an option--</option>
+            <option value='tools'>Tools</option>
+            <option value='sports'>Sports Equipment</option>
+            <option value='electronics'>Electronics</option>
+          </select>
+        </div>
+        {errors.category && (
+          <p className={classes.error}>Please select the category!</p>
         )}
 
         <div>
