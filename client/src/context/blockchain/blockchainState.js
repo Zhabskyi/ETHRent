@@ -82,17 +82,38 @@ const BlockchainState = props => {
     const changedID = id - 1;
     console.log(state.products[changedID]);
     console.log("DEPOSIT", state.products[changedID].rentalDeposit);
-    const valueInEther = state.products[changedID].rentalDeposit;
     state.marketplace.methods
       .rentProduct(id)
       .send({
         from: state.account,
-        value: Web3.utils.toWei(valueInEther, "Ether")
+        value: state.products[changedID].rentalDeposit
       })
       .once("receipt", receipt => {
         cancelLoading();
       });
   };
+  
+  const returnProduct = id => {
+    startLoading();
+    const changedID = id - 1;
+    console.log('id', id)
+    console.log('product[id]', state.products[changedID])
+    const idString = id.toString();
+    const endDate = Date.now() / 1000; // JS is in milliseconds
+    const rentalDays = ((Math.trunc(endDate) - state.products[changedID].rentalStart) % 86400) + 1
+    console.log('endDate', Math.trunc(endDate))
+    console.log('startDate', state.products[changedID].rentalStart)
+    console.log('rentalDays', rentalDays);
+    // const valueInEther = state.products[changedID].rentalDeposit;
+    state.marketplace.methods
+      .returnProduct(idString, 2)
+      .send({
+        from: state.account
+      })
+      .once("receipt", receipt => {
+        cancelLoading();
+      });
+  }
 
   return (
     <BlockchainContext.Provider
@@ -101,6 +122,7 @@ const BlockchainState = props => {
         productCount: state.productCount,
         products: state.products,
         loading: state.loading,
+        marketplace: state.marketplace,
         setAccount,
         setMarketplace,
         setProductCount,
@@ -108,7 +130,8 @@ const BlockchainState = props => {
         cancelLoading,
         startLoading,
         createProduct,
-        rentProduct
+        rentProduct,
+        returnProduct
       }}
     >
       {props.children}

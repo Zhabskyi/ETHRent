@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import useForm from "react-hook-form";
+import Web3 from 'web3';
 
 import classes from "./Form.module.scss";
 import FormCost from "./FormCost";
@@ -23,7 +24,9 @@ const FormAddItem = props => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
-    createProduct(data.title, data.description, data.deposit, data.daily_rate);
+    const depositWei = Web3.utils.toWei(data.deposit, 'Ether');
+    const rateWei = Web3.utils.toWei(data.daily_rate, 'Ether');
+    createProduct(data.title, data.description, depositWei, rateWei);
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);

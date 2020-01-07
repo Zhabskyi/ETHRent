@@ -110,8 +110,8 @@ contract Marketplace {
     _product.custodian = msg.sender;
     // Set time when rental starts
     _product.rentalStart = now;
-    uint endTime;
-    endTime = _product.rentalStart + 2 days;
+    // uint endTime;
+    // endTime = _product.rentalStart + 2 days;
     // Mark as rented
     _product.rented = true;
     // Update the product
@@ -128,7 +128,7 @@ contract Marketplace {
       true);
   }
 
-  function returnProduct(uint _id) public payable {
+  function returnProduct(uint _id, uint _rentalDays) public payable {
     // Fetch the product
     Product memory _product = products[_id];
     // Fetch the owner
@@ -146,11 +146,11 @@ contract Marketplace {
     // Determine rental period, and associated rental cost
     uint endTime;
     endTime = now;
-    uint rentalDays;
-    rentalDays = ((endTime - _product.rentalStart) % 86400);
+    // uint rentalDays;
+    // rentalDays = ((endTime - _product.rentalStart) % 86400) + 2;
     // rentalDays = 2; // Hard code rentalDays for testing
     uint rentalCost;
-    rentalCost = rentalDays * _product.rentalFee;
+    rentalCost = _rentalDays * _product.rentalFee;
     // Transfer responsibility back to owner
     _product.custodian = _product.owner;
     // Mark as rented
@@ -170,7 +170,7 @@ contract Marketplace {
       _product.owner,
       _borrower,
       _product.custodian,
-      rentalDays,
+      _rentalDays,
       _product.rented);
   }
 
@@ -215,7 +215,7 @@ contract Marketplace {
       _rentalFee,
       msg.sender,
       false);
-  }
+      }
 
   function destroy() public {
     // Make sure the function is being called by the contract deployer

@@ -25,7 +25,7 @@ const Item = props => {
     deposit,
     photo
   } = props.item;
-  const { rentProduct } = blockchainContext;
+  const { rentProduct, returnProduct, products } = blockchainContext;
 
 
   const [showItemModal, setItem] = useState(false);
@@ -67,6 +67,15 @@ const Item = props => {
       </Button>
     </>
   );
+
+  const rented = (
+    <>
+      <h3>Currently Rented</h3>
+      <Button onClick={() => returnProduct(id)} details>
+        Return
+      </Button>
+    </>
+  );
   return (
     <>
       <div className={classes.container}>
@@ -75,12 +84,15 @@ const Item = props => {
           <img src={photo} alt='item' />
         </div>
         <p>Daily Rate: {daily_rate}</p>
+        <p>Deposit: {deposit}</p>
         <div>
-          {user !== null
+          {products[id - 1]?.rented ? rented : (
+            user !== null
             ? user.id === user_id
               ? registered
               : unregistered
-            : unregistered}
+            : unregistered
+          )}
         </div>
       </div>
       <Modal show={showItemModal} onClose={toggleItemDetails}>

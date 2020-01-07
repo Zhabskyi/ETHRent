@@ -109,7 +109,7 @@ describe('products', async () => {
     oldBorrowerBalance = new web3.utils.BN(oldBorrowerBalance)
 
     // SUCCESS: Owner accepts return of object
-    result = await marketplace.returnProduct(productCount, { from: owner })
+    result = await marketplace.returnProduct(productCount, 2, { from: owner })
 
     // Check logs
     const event = result.logs[0].args
