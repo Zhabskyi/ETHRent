@@ -12,7 +12,7 @@ const Items = () => {
 
   const { items, getItems, loading } = itemContext;
   const { products } = blockchainContext;
-  const [checkedCategory, setCategory] = useState(false);
+  const [checkedCategory, setCategory] = useState('all');
 
   useEffect(() => {
     getItems();
@@ -47,12 +47,25 @@ const Items = () => {
               }} />
               Electronics
           </label>
+          <label>
+            <input type='radio' value='all'
+              checked={checkedCategory === 'all'}
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }} />
+              All
+          </label>
         </div>
       </form>
       {items !== null && !loading ? (
         <>
-          {items.map(item => (
+          {checkedCategory === 'all' ? items.map(item => (
             <Item key={item.id} item={item} />
+          )) :
+          items.map(item => (
+            checkedCategory === item.category ?
+            <Item key={item.id} item={item} /> :
+            null
           ))}
         </>
       ) : (
