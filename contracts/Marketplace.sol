@@ -200,13 +200,14 @@ contract Marketplace {
     // Fetch the product
     Product memory _product = products[_id];
     // Make sure the product has a valid id
-    require(_product.id > 0 && _product.id <= productCount);
+    // require(_product.id > 0 && _product.id <= productCount);
     // Make sure only the product owner can edit a product
-    require(_product.owner == msg.sender);
+    // require(_product.owner == msg.sender);
     // Make sure the owner is currently the custodian of the product
-    require(_product.custodian == _product.owner);
+    // require(_product.custodian == _product.owner);
     // Edit the product
-    products[_id] = Product(_id, _name, _description, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
+    _product.rentalDeposit = _rentalDeposit;
+    products[_id] = _product;
     emit ProductEdited(
       productCount,
       _name,

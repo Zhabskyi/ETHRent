@@ -107,7 +107,20 @@ const BlockchainState = props => {
       .once("receipt", receipt => {
         cancelLoading();
       });
-  }
+  };
+
+  const editProduct = (id, name, description, deposit, daily_rate) => {
+    startLoading();
+    const idString = id.toString();
+    state.marketplace.methods
+      .editProduct(idString, name, description, deposit, daily_rate)
+      .send({
+        from: state.account
+      })
+      .once("receipt", receipt => {
+        cancelLoading();
+      })
+  };
 
   return (
     <BlockchainContext.Provider
@@ -125,7 +138,8 @@ const BlockchainState = props => {
         startLoading,
         createProduct,
         rentProduct,
-        returnProduct
+        returnProduct,
+        editProduct
       }}
     >
       {props.children}
