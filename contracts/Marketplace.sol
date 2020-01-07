@@ -9,6 +9,7 @@ contract Marketplace {
     uint id;
     string name;
     string description;
+    string category;
     uint rentalDeposit;
     uint rentalFee;
     address payable owner;
@@ -20,6 +21,7 @@ contract Marketplace {
     uint id,
     string name,
     string description,
+    string category,
     uint rentalDeposit,
     uint rentalFee,
     address payable owner,
@@ -58,6 +60,7 @@ contract Marketplace {
     uint id,
     string name,
     string description,
+    string category,
     uint rentalDeposit,
     uint rentalFee,
     address payable owner,
@@ -69,7 +72,7 @@ contract Marketplace {
     deployer = msg.sender;
   }
 
-  function createProduct(string memory _name, string memory _description, uint _rentalDeposit, uint _rentalFee) public {
+  function createProduct(string memory _name, string memory _description, string memory _category, uint _rentalDeposit, uint _rentalFee) public {
     // Require a valid name
     require(bytes(_name).length > 0);
     // Require a valid description
@@ -81,12 +84,13 @@ contract Marketplace {
     // Increment product count
     productCount ++;
     // Create the product
-    products[productCount] = Product(productCount, _name, _description, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
+    products[productCount] = Product(productCount, _name, _description, _category, _rentalDeposit, _rentalFee, msg.sender, msg.sender, 0, false);
     // Trigger an event
     emit ProductCreated(
       productCount,
       _name,
       _description,
+      _category,
       _rentalDeposit,
       _rentalFee,
       msg.sender,
@@ -196,7 +200,7 @@ contract Marketplace {
       _product.rented);
   }
 
-  function editProduct(uint _id, string memory _name, string memory _description, uint _rentalDeposit, uint _rentalFee) public {
+  function editProduct(uint _id, string memory _name, string memory _description, string memory _category, uint _rentalDeposit, uint _rentalFee) public {
     // Fetch the product
     Product memory _product = products[_id];
     // Make sure the product has a valid id
@@ -208,6 +212,7 @@ contract Marketplace {
     // Edit the product
     _product.name = _name;
     _product.description = _description;
+    _product.category = _category;
     _product.rentalDeposit = _rentalDeposit;
     _product.rentalFee = _rentalFee;
     products[_id] = _product;
@@ -215,6 +220,7 @@ contract Marketplace {
       productCount,
       _name,
       _description,
+      _category,
       _rentalDeposit,
       _rentalFee,
       msg.sender,

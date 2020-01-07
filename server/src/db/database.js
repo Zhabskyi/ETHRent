@@ -55,13 +55,14 @@ const addItem = function(db, item) {
     .query(
       `
     INSERT INTO items (
-     title, description, daily_rate, deposit, user_id, photo)
-    VALUES ($1, $2, $3, $4, $5, $6)
+     title, description, category, daily_rate, deposit, user_id, photo)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
   `,
       [
         item.title,
         item.description,
+        item.category,
         item.daily_rate,
         item.deposit,
         item.user_id,
@@ -79,9 +80,10 @@ const updateItem = function(db, item, id) {
     UPDATE items
     SET title = $2,
         description = $3,
-        daily_rate = $4,
-        deposit = $5,
-        photo = $6
+        category = $4
+        daily_rate = $5,
+        deposit = $6,
+        photo = $7
     WHERE id = $1
     RETURNING *;
   `,
@@ -89,6 +91,7 @@ const updateItem = function(db, item, id) {
         id,
         item.title,
         item.description,
+        item.category,
         item.daily_rate,
         item.deposit,
         item.photo

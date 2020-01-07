@@ -21,6 +21,7 @@ const Item = props => {
     user_id,
     title,
     description,
+    category,
     daily_rate,
     deposit,
     photo
@@ -75,7 +76,7 @@ const Item = props => {
   const rented = (
     <>
       <h3>Currently Rented</h3>
-      {account === products[id - 1].owner ? (
+      {account === products[id - 1]?.owner ? (
         <Button onClick={() => returnProduct(id)} details>
           Return
         </Button>
@@ -91,6 +92,7 @@ const Item = props => {
         </div>
         <p>Daily Rate: {daily_rate}</p>
         <p>Deposit: {deposit}</p>
+        <p>Category: {category}</p>
         <div>
           {products[id - 1]?.rented
             ? rented

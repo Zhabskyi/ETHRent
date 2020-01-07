@@ -23,6 +23,7 @@ CREATE TABLE items (
   created_on DATE NOT NULL DEFAULT CURRENT_DATE,
   title VARCHAR(255) NOT NULL,
   description TEXT,
+  category VARCHAR(255),
   daily_rate DECIMAL DEFAULT 0,
   deposit DECIMAL DEFAULT 0,
   photo VARCHAR(255) NOT NULL

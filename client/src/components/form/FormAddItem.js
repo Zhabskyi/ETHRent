@@ -32,13 +32,13 @@ const FormAddItem = props => {
     newData.append("file", file);
 
     if (!props.id) {
-      createProduct(data.title, data.description, depositWei, rateWei);
+      createProduct(data.title, data.description, data.category, depositWei, rateWei);
       addItem(newData);
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
       const changedID = props.id - 1;
-      editProduct(props.id, data.title, data.description, depositWei, rateWei);
+      editProduct(props.id, data.title, data.description, data.category, depositWei, rateWei);
     }
     redirectToHome();
   };
