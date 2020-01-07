@@ -25,11 +25,7 @@ const Item = props => {
     deposit,
     photo
   } = props.item;
-  const {
-    rentProduct,
-    returnProduct,
-    products
-  } = blockchainContext;
+  const { rentProduct, returnProduct, products, account } = blockchainContext;
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
@@ -79,9 +75,11 @@ const Item = props => {
   const rented = (
     <>
       <h3>Currently Rented</h3>
-      <Button onClick={() => returnProduct(id)} details>
-        Return
-      </Button>
+      {account === products[id - 1].owner ? (
+        <Button onClick={() => returnProduct(id)} details>
+          Return
+        </Button>
+      ) : null}
     </>
   );
   return (
