@@ -19,24 +19,26 @@ const FormAddItem = props => {
 
   const { addItem, editItem } = itemContex;
   const { user } = authContext;
-  const { createProduct } = blockchainContext;
+  const { createProduct, editProduct } = blockchainContext;
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
     const depositWei = Web3.utils.toWei(data.deposit, 'Ether');
     const rateWei = Web3.utils.toWei(data.daily_rate, 'Ether');
-    createProduct(data.title, data.description, depositWei, rateWei);
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);
     newData.append("file", file);
-
+    
     if (!props.id) {
+      createProduct(data.title, data.description, depositWei, rateWei);
       addItem(newData);
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
+      const changedID = props.id - 1;
+      editProduct(props.id, data.title, data.description, depositWei, rateWei);
     }
     redirectToHome();
   };
