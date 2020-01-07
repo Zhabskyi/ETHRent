@@ -1,7 +1,5 @@
 import React, { useEffect, useContext, Fragment } from "react";
-//import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import Marketplace from "./contracts/Marketplace.json";
-// import getWeb3 from "./getWeb3";
 import Web3 from "web3";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
@@ -57,7 +55,6 @@ const App = () => {
     const accounts = await web3.eth.getAccounts();
     setAccount(accounts[0]);
 
-    // this.setState({ account: accounts[0] });
     const networkId = await web3.eth.net.getId();
     const networkData = Marketplace.networks[networkId];
     if (networkData) {
@@ -66,55 +63,18 @@ const App = () => {
         networkData.address
       );
       setMarketplace(marketplace);
-      //this.setState({ marketplace });
       const productCount = await marketplace.methods.productCount().call();
       setProductCount(productCount);
-      // this.setState({ productCount });
       // Load products
       for (var i = 1; i <= productCount; i++) {
         const product = await marketplace.methods.products(i).call();
         setProducts(product);
-        //this.setState({
-        // products: [...this.state.products, product]
-        //});
       }
       cancelLoading();
-      //this.setState({ loading: false });
     } else {
       window.alert("Marketplace contract not deployed to detected network.");
     }
   };
-
-  // createProduct(name, deposit, daily_rate) {
-  //   this.setState({ loading: true });
-  //   this.state.marketplace.methods
-  //     .createProduct(name, deposit, daily_rate)
-  //     .send({ from: this.state.account })
-  //     .once("receipt", receipt => {
-  //       console.log("RECEIP recived!");
-  //       this.setState({ loading: false });
-  //       this.loadBlockchainData();
-  //     });
-  // }
-
-  // rentProduct(id) {
-  //   this.setState({ loading: true });
-  //   console.log("ACCOUNT", this.state.account);
-  //   console.log(id);
-  //   const changedID = id - 1;
-  //   console.log(this.state.products[changedID]);
-  //   console.log("DEPOSIT", this.state.products[changedID].rentalDeposit);
-  //   const valueInEther = this.state.products[changedID].rentalDeposit;
-  //   this.state.marketplace.methods
-  //     .rentProduct(id)
-  //     .send({
-  //       from: this.state.account,
-  //       value: Web3.utils.toWei(valueInEther, 'Ether')
-  //     })
-  //     .once("receipt", receipt => {
-  //       this.setState({ loading: false });
-  //     });
-  // }
 
   return (
     <>

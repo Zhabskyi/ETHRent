@@ -23,7 +23,7 @@ const FormAddItem = props => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = data => {
-    createProduct(data.title, data.deposit, data.daily_rate);
+    createProduct(data.title, data.description, data.deposit, data.daily_rate);
     let newData = new FormData();
     Object.keys(data).forEach(key => newData.append(key, data[key]));
     newData.append("user_id", user.id);

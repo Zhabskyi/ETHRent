@@ -64,7 +64,7 @@ const BlockchainState = props => {
     });
   };
 
-  const createProduct = (name, deposit, daily_rate) => {
+  const createProduct = (name, description, deposit, daily_rate) => {
     startLoading();
     state.marketplace.methods
       .createProduct(name, description, deposit, daily_rate)
@@ -77,7 +77,7 @@ const BlockchainState = props => {
 
   const rentProduct = id => {
     startLoading();
-    console.log("ACCOUNT", this.state.account);
+    console.log("ACCOUNT", state.account);
     console.log(id);
     const changedID = id - 1;
     console.log(state.products[changedID]);
