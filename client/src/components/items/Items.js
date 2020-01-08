@@ -21,42 +21,6 @@ const Items = () => {
 
   return (
     <>
-      <form>
-        <div className={classes.radios}>
-          <input type='radio' value='tools' id='radio-1'
-            checked={checkedCategory === 'tools'}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }} />
-          <label for='radio-1'>
-            Tools
-          </label>
-          <input type='radio' value='sports' id='radio-2'
-            checked={checkedCategory === 'sports'}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }} />
-          <label for='radio-2'>
-            Sports Equipment
-          </label>
-          <input type='radio' value='electronics' id='radio-3'
-            checked={checkedCategory === 'electronics'}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }} />
-          <label for='radio-3'>
-            Electronics
-          </label>
-          <input type='radio' value='all' id='radio-4'
-            checked={checkedCategory === 'all'}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }} />
-          <label for='radio-4'>
-            All
-          </label>
-        </div>
-      </form>
       {items !== null && !loading ? (
         <>
           {checkedCategory === 'all' ? items.map(item => (

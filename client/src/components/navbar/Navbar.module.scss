@@ -12,7 +12,7 @@
     margin: 0 20px;
   }
   &__list {
-    max-width: 500px;
+    max-width: 600px;
     color: $color-tertiary-dark;
     display: flex;
 		justify-content: flex-end; 
@@ -26,6 +26,7 @@
     &_myItems {
       margin-right: 10px;
       text-align: center;
+      // width: 150px;
     }
   }
   & h3{

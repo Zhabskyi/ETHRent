@@ -1,0 +1,74 @@
+@import '../../styles/core.scss';
+
+.filter {
+  display: flex;
+  width: 100%;
+}
+
+.radios {
+  margin: 10px auto 0;
+  width: 230px;
+  margin: 50px;
+  background: $color-primary-light;
+
+  input {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    color: $color-primary-dark;
+    text-align: left;
+    padding-right: 5px;
+    position: relative;
+    display: block;
+    font-size: 18px;
+    padding: 0px 0;
+    margin: 0px;
+  }
+
+  input[type="radio"] {
+    position: absolute; 
+    visibility: hidden !important;
+  }
+
+  input[type="radio"] + label {
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      margin-top: -7.5px;
+      box-sizing: border-box;
+    }
+
+    &:before {
+
+      width: 30px;
+      height: 15px;
+      right: 0px;
+      background: #fff;
+      border: 1px solid #e4e3e1;
+      border-radius: 15px;
+    }
+
+    &:after {
+      width: 15px;
+      height: 15px;
+      right: 15px;
+      background: #BDBDBD;
+      border-radius: 50%;
+      transition: all 200ms ease-out;
+    }
+  }
+
+  input[type="radio"]:checked + label {
+
+    &:after {
+      right: 0px;
+      background: #FF9800;
+    }
+  }
+}
