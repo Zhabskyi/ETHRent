@@ -21,6 +21,11 @@
     }
     &_add {
       margin-right: 60px;
+      text-align: center;
+    }
+    &_myItems {
+      margin-right: 10px;
+      text-align: center;
     }
   }
   & h3{
@@ -29,6 +34,6 @@
 }
 
 .name {
-  margin: 0 5px;
+  margin: 0 2px;
   color: $base-font-color;
 }

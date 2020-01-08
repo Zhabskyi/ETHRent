@@ -37,9 +37,6 @@ const Home = () => {
           <li><FontAwesomeIcon icon={faCheckDouble} size='5x' /></li>
         </ul>
       </div>
-      <div className={classes.manage}>
-        {isAuthenticated ? <Link to='/my-items'>Manage my items</Link> : null}
-      </div>
       <div className={classes.container}>
         <Items />
       </div>
