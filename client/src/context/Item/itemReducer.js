@@ -4,7 +4,8 @@ import {
   EDIT_ITEM,
   ITEM_ERROR,
   GET_ITEMS,
-  GET_MY_ITEMS
+  GET_MY_ITEMS,
+  GET_USER_CONTACTS
 } from "../actionTypes";
 
 export default (state, action) => {
@@ -21,6 +22,12 @@ export default (state, action) => {
         myItems: action.payload,
         loading: false
       };
+      case GET_USER_CONTACTS:
+        return {
+          ...state,
+          contacts: action.payload,
+          loading: false
+        };
     case ADD_ITEM:
       return {
         ...state,

@@ -112,11 +112,23 @@ const deleteItemById = function(db, itemId) {
     .catch(err => console.log(err));
 };
 
+const getUserInfoForItem = function(db, userId) {
+  return db.query(
+    `SELECT users.map, users.phone_number, users.email
+    FROM users
+    JOIN items ON users.id = items.user_id
+    WHERE items.user_id = $1;`,
+    [userId]
+  ).then(res => res.rows[0])
+  .catch(err => console.log(err));
+}
+
 module.exports = {
   addUser,
   getUserByEmail,
   getUserById,
   addItem,
   updateItem,
-  deleteItemById
+  deleteItemById,
+  getUserInfoForItem
 };

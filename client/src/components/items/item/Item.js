@@ -15,7 +15,7 @@ const Item = props => {
   const blockchainContext = useContext(BlockchainContext);
 
   const { user } = authContext;
-  const { deleteItem, getItemDetails } = itemContext;
+  const { deleteItem, getUserItemDetails, contacts } = itemContext;
   const {
     id,
     user_id,
@@ -37,7 +37,7 @@ const Item = props => {
   };
 
   const toggleItemDetails = () => {
-    getItemDetails(id);
+    getUserItemDetails(user_id);
     setItem(!showItemModal);
   };
 
@@ -111,21 +111,21 @@ const Item = props => {
           <p>Daily Rate: {daily_rate}</p>
           <p>Deposit: {deposit}</p>
           <div>
-            <img src={user?.map} alt='map' />
+            <img src={contacts?.map} alt='map' />
           </div>
           <div className={classes.actions}>
             {showContact && user?.id !== user_id ? (
               <>
-                <div>Phone number: {user?.phone_number}</div>
-                <div>Email: {user?.email}</div>
+                <div>Phone number: {contacts?.phone_number}</div>
+                <div>Email: {contacts?.email}</div>
                 <Button onClick={() => rentProduct(id)} details>
                   Rent
                 </Button>
               </>
             ) : showContact ? (
               <>
-                <div>Phone number: {user.phone_number}</div>
-                <div>Email: {user.email}</div>
+                <div>Phone number: {contacts.phone_number}</div>
+                <div>Email: {contacts.email}</div>
               </>
             ) : (
               <Button onClick={showContacts} details_lg>

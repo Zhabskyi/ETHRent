@@ -10,7 +10,8 @@ import {
   EDIT_ITEM,
   DELETE_ITEM,
   ITEM_ERROR,
-  GET_MY_ITEMS
+  GET_MY_ITEMS,
+  GET_USER_CONTACTS
 } from "../actionTypes";
 
 const ItemState = props => {
@@ -18,7 +19,8 @@ const ItemState = props => {
     items: null,
     myItems: null,
     loading: true,
-    showModal: false
+    showModal: false,
+    contacts: null
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
@@ -49,14 +51,23 @@ const ItemState = props => {
     });
   };
 
-  //Add Item
-  const addItem =  async (item) => {
-
+  const getUserItemDetails = async id => {
     try {
-      const res =  await axios.post("http://localhost:8001/api/items", item);
-      // const userID = Number(res.data.user_id);
-      // const data = {...res.data, user_id: userID}
+      const res = await axios.get(`http://localhost:8001/api/items/${id}`);
+      dispatch({
+        type: GET_USER_CONTACTS,
+        payload: res.data
+      });
       console.log(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //Add Item
+  const addItem = async item => {
+    try {
+      const res = await axios.post("http://localhost:8001/api/items", item);
 
       dispatch({
         type: ADD_ITEM,
@@ -74,8 +85,10 @@ const ItemState = props => {
   //Edit Item
   const editItem = async (id, item) => {
     try {
-      const res = await axios.put(`http://localhost:8001/api/items/${id}`, item);
-      console.log(res)
+      const res = await axios.put(
+        `http://localhost:8001/api/items/${id}`,
+        item
+      );
 
       dispatch({
         type: EDIT_ITEM,
@@ -92,7 +105,9 @@ const ItemState = props => {
   //Delete Item
   const deleteItem = async (id, user_id) => {
     try {
-      const res = await axios.delete(`http://localhost:8001/api/items/delete/${id}`);
+      const res = await axios.delete(
+        `http://localhost:8001/api/items/delete/${id}`
+      );
 
       dispatch({
         type: DELETE_ITEM,
@@ -116,11 +131,13 @@ const ItemState = props => {
         items: state.items,
         myItems: state.myItems,
         loading: state.loading,
+        contacts: state.contacts,
         getItems,
         getMyItems,
         addItem,
         editItem,
-        deleteItem
+        deleteItem,
+        getUserItemDetails
       }}
     >
       {props.children}

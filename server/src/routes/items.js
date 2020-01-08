@@ -17,6 +17,17 @@ module.exports = db => {
     });
   });
 
+  router.get("/items/:id", async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const userInfo = await database.getUserInfoForItem(db, userId);
+      res.json(userInfo);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  });
+
   // Edit item information
   router.put("/items/:id", upload.single("file"), async (req, res) => {
     const itemId = req.params.id;
