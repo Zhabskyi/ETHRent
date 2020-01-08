@@ -2,7 +2,7 @@
 
 .radios {
   margin: 10px auto 0;
-  width: 280px;
+  width: 230px;
   padding: 10px;
   background: $color-primary-light;
 
@@ -12,7 +12,9 @@
 
   label {
     cursor: pointer;
-    padding-right: 35px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    padding-right: 5px;
     position: relative;
     display: block;
     font-size: 18px;
