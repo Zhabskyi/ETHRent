@@ -22,38 +22,38 @@ const Items = () => {
   return (
     <>
       <form>
-        <div classname={classes.radio}>
-          <label>
-            <input type='radio' value='tools'
-              checked={checkedCategory === 'tools'}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }} />
-              Tools
+        <div className={classes.radios}>
+          <input type='radio' value='tools' id='radio-1'
+            checked={checkedCategory === 'tools'}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }} />
+          <label for='radio-1'>
+            Tools
           </label>
-          <label>
-            <input type='radio' value='sports'
-              checked={checkedCategory === 'sports'}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }} />
-              Sports Equipment
+          <input type='radio' value='sports' id='radio-2'
+            checked={checkedCategory === 'sports'}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }} />
+          <label for='radio-2'>
+            Sports Equipment
           </label>
-          <label>
-            <input type='radio' value='electronics'
-              checked={checkedCategory === 'electronics'}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }} />
-              Electronics
+          <input type='radio' value='electronics' id='radio-3'
+            checked={checkedCategory === 'electronics'}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }} />
+          <label for='radio-3'>
+            Electronics
           </label>
-          <label>
-            <input type='radio' value='all'
-              checked={checkedCategory === 'all'}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }} />
-              All
+          <input type='radio' value='all' id='radio-4'
+            checked={checkedCategory === 'all'}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }} />
+          <label for='radio-4'>
+            All
           </label>
         </div>
       </form>
