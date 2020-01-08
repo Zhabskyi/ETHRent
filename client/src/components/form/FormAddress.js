@@ -50,7 +50,7 @@ export default function FormAddress({ register, errors }) {
           ref={register({ required: true, maxLength: 6, minLength: 6 })}
         />
       </div>
-      {errors.postalcode && (
+      {errors.postal_code && (
         <p className={classes.error}>Postal code should be 6 characters</p>
       )}
 

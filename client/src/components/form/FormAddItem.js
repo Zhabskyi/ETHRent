@@ -32,13 +32,26 @@ const FormAddItem = props => {
     newData.append("file", file);
 
     if (!props.id) {
-      createProduct(data.title, data.description, data.category, depositWei, rateWei);
+      createProduct(
+        data.title,
+        data.description,
+        data.category,
+        depositWei,
+        rateWei
+      );
       addItem(newData);
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
       const changedID = props.id - 1;
-      editProduct(props.id, data.title, data.description, data.category, depositWei, rateWei);
+      editProduct(
+        props.id,
+        data.title,
+        data.description,
+        data.category,
+        depositWei,
+        rateWei
+      );
     }
     redirectToHome();
   };
@@ -116,9 +129,10 @@ const FormAddItem = props => {
           <p className={classes.error}>Please select the category!</p>
         )}
 
-        <div>
-          <label htmlFor='file'>Upload file</label>
+        <div className={classes.file_container}>
+        <span className={classes.file_container_name}>{file?.name}</span>
           <input
+            id='file'
             type='file'
             accept='image/png, image/jpeg'
             defaultValue={intialValues.file}
@@ -127,6 +141,9 @@ const FormAddItem = props => {
             placeholder=''
             ref={register({ required: true })}
           />
+          <label htmlFor='file' className={classes.btn_3}>
+            Upload Image
+          </label>
         </div>
         {errors.files && (
           <p className={classes.error}>Upload picture required</p>

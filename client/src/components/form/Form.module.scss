@@ -55,6 +55,7 @@ label {
 
 button[type="submit"],
 input[type="submit"] {
+  height: 60px;
   background: $confirm-color;
   color: $color-primary-light;
   text-transform: uppercase;
@@ -97,4 +98,89 @@ button[type="button"] {
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px;
+}
+
+
+
+//////////////Download file styles
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+[type="file"] + label {
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 10px 25px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+	font-size: inherit;
+  outline: none;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.3s;
+
+  
+  &:hover {
+    background-color: darken(#f15d22, 10%);
+  }
+  
+  &.btn_3 {
+    text-align: center;
+    width: 70%;
+    background-color: $color-tertiary-light;
+    overflow: hidden;
+    
+    span {
+      display: inline-block;
+      height: 100%;
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    &::before {
+      color: #fff;
+      content: "\f255";
+      font-family: "Ionicons";
+      font-size: 130%;
+      height: 100%;
+      left: 0;
+      line-height: 2;
+      position: absolute;
+      top: -180%;
+      transition: all 0.3s;
+      padding-left: 20px;
+      //width: 100%;
+    }
+
+    &:hover {
+      background-color: darken(#ee6d9e, 30%);
+      
+      span {
+        transform: translateY(300%);
+      }
+        
+      &::before {
+        top: 0;
+      }
+    }
+  }
+}
+
+.file_container {
+  text-align: center;
+  &_name{
+    padding-top: 10px;
+    padding-left: 60px;
+    display: block;
+    height: 30px;
+    text-align: start;
+    color: $white;
+  }
 }
