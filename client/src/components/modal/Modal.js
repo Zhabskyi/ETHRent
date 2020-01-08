@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Modal.module.scss";
 import classNames from "classnames";
+import Button from "../button/Button";
 
 import Backdrop from "../backdrop/Backdrop";
 
@@ -14,10 +15,10 @@ const Modal = props => {
       <Backdrop show={props.show} onClick={props.onClose} />
       <div className={classes.modal}>
         <div className={classes.content}>{props.children}</div>
-        <div className={classes.action}>
-          <button className={classes.toggle_button} onClick={props.onClose}>
+        <div className={classes.actions}>
+          <Button onClick={props.onClose} details>
             Close
-          </button>
+          </Button>
         </div>
       </div>
     </>
