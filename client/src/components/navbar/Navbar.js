@@ -40,9 +40,9 @@ const Navbar = ({ title }) => {
 
   return (
     <div className={classes.nav}>
-      <h1>
+      <h3>
         <Link to='/'>{title}</Link>
-      </h1>
+      </h3>
       <ul className={classes.nav__list}>
         {isAuthenticated ? linksUser : linksUnregistered}
         <li>

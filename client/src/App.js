@@ -85,7 +85,7 @@ const App = () => {
           <ItemState>
             <Router>
               <Fragment>
-                <Navbar title={"ETHRent"} />
+                <Navbar title={"ethRent"} />
                 <div className='container'>
                   <Switch>
                     <Route exact path='/' component={Home} />

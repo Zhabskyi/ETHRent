@@ -32,6 +32,7 @@ input, select {
   padding: 10px 15px;
   margin: 0 auto 10px auto;
   font-size: 14px;
+  background-color: $color-primary-light;
 }
 
 label {
@@ -40,7 +41,7 @@ label {
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-  color: $color-primary-light;
+  color: $base-font-color;
   font-size: $font-size-large;
   font-weight: 300;
 }
