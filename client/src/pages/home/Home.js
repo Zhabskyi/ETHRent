@@ -39,7 +39,6 @@ const Home = () => {
         </ul>
       </div>
       <div className={classes.container}>
-        <Filter />
         <Items />
       </div>
     </>

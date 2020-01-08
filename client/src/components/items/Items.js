@@ -5,6 +5,7 @@ import ItemContext from "../../context/Item/ItemContext";
 import BlockchainContext from "../../context/blockchain/blockchainContext";
 import Item from "./item/Item";
 import Spinner from "../spinner/Spinner";
+import Filter from "../filter/Filter";
 
 const Items = () => {
   const itemContext = useContext(ItemContext);
@@ -19,8 +20,13 @@ const Items = () => {
     // eslint-disable-next-line
   }, [products]);
 
+  const onFilter = (e) => {
+    setCategory(e)
+  }
+
   return (
     <>
+      <Filter onFilter={onFilter} checkedCategory={checkedCategory}/>
       {items !== null && !loading ? (
         <>
           {checkedCategory === 'all' ? items.map(item => (

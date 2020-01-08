@@ -5,7 +5,7 @@ import ItemContext from "../../context/Item/ItemContext";
 import BlockchainContext from "../../context/blockchain/blockchainContext";
 import Spinner from "../spinner/Spinner";
 
-const Filter = () => {
+const Filter = (props) => {
   const itemContext = useContext(ItemContext);
   const blockchainContext = useContext(BlockchainContext);
 
@@ -23,33 +23,33 @@ const Filter = () => {
       <form>
         <div className={classes.radios}>
           <input type='radio' value='tools' id='radio-1'
-            checked={checkedCategory === 'tools'}
-            onChange={(e) => {
-              setCategory(e.target.value);
+            checked={props.checkedCategory === 'tools'}
+            onChange={e => {
+              props.onFilter(e.target.value)
             }} />
           <label for='radio-1'>
             Tools
           </label>
           <input type='radio' value='sports' id='radio-2'
-            checked={checkedCategory === 'sports'}
+            checked={props.checkedCategory === 'sports'}
             onChange={(e) => {
-              setCategory(e.target.value);
+              props.onFilter(e.target.value);
             }} />
           <label for='radio-2'>
             Sports Equipment
           </label>
           <input type='radio' value='electronics' id='radio-3'
-            checked={checkedCategory === 'electronics'}
+            checked={props.checkedCategory === 'electronics'}
             onChange={(e) => {
-              setCategory(e.target.value);
+              props.onFilter(e.target.value);
             }} />
           <label for='radio-3'>
             Electronics
           </label>
           <input type='radio' value='all' id='radio-4'
-            checked={checkedCategory === 'all'}
+            checked={props.checkedCategory === 'all'}
             onChange={(e) => {
-              setCategory(e.target.value);
+              props.onFilter(e.target.value);
             }} />
           <label for='radio-4'>
             All
