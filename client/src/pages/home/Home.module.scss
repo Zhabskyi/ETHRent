@@ -18,8 +18,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 60vh;
-  background-color: $color-primary-dark;
+  height: 75vh;
+  background-color: $color-primary;
 
   .banner {
     margin-top: 50px;
@@ -27,13 +27,12 @@
   }
 
   .benefits {
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 70px;
     color: $color-primary-light;
     font-size: $font-size-large;
-  }
-
-  ul {
-    list-style-type: circle;
+    list-style-type: none;
+    text-align: center;
   }
 
   .directions {
@@ -41,11 +40,24 @@
     flex-direction: row;
     justify-content: space-between;
     color: $color-primary-light;
-    font-size: $font-size-large;
+    font-size: $font-size-base;
     width: 80%;
 
     li {
-      width: 150px;
+      width: 175px;
+    }
+  }
+
+  .icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: $color-primary-light;
+    text-align: center;
+    width: 80%;
+
+    li {
+      width: 175px;
     }
   }
 
