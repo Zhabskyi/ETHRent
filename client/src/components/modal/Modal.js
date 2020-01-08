@@ -16,8 +16,11 @@ const Modal = props => {
       <div className={classes.modal}>
         <div className={classes.content}>{props.children}</div>
         <div className={classes.actions}>
-          <Button onClick={props.onClose} details>
-            Close
+        <Button className={classes.close_button} onClick={props.onClose} >
+          <span></span>
+          </Button>
+          <Button details_lg>
+            Contact info
           </Button>
         </div>
       </div>

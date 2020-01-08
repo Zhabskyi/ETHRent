@@ -28,7 +28,7 @@ const Items = () => {
             onChange={(e) => {
               setCategory(e.target.value);
             }} />
-          <label for='radio-1'>
+          <label htmlFor='radio-1'>
             Tools
           </label>
           <input type='radio' value='sports' id='radio-2'
@@ -36,7 +36,7 @@ const Items = () => {
             onChange={(e) => {
               setCategory(e.target.value);
             }} />
-          <label for='radio-2'>
+          <label htmlFor='radio-2'>
             Sports Equipment
           </label>
           <input type='radio' value='electronics' id='radio-3'
@@ -44,7 +44,7 @@ const Items = () => {
             onChange={(e) => {
               setCategory(e.target.value);
             }} />
-          <label for='radio-3'>
+          <label htmlFor='radio-3'>
             Electronics
           </label>
           <input type='radio' value='all' id='radio-4'

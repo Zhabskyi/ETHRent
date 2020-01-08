@@ -10,6 +10,7 @@ const Button = props => {
     props.danger ? classes.danger :
     props.confirm ? classes.confirm :
     props.error ? classes.error :
+    props.details_lg ? classes.details_lg :
     props.details ? classes.details : null
   );
 

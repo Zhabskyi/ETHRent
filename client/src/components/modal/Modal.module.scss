@@ -1,9 +1,9 @@
-@import '../../styles/core.scss';
+@import "../../styles/core.scss";
 
 .modal {
   top: 50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   position: absolute;
   z-index: 200;
   min-width: 350px;
@@ -17,6 +17,42 @@
   }
   .actions {
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
+  }
+}
+
+.close {
+  &_button {
+    border: none;
+    height: 30px;
+    width: 30px;
+    display: inherit;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    transform: translateY(-50%);
+    z-index: 6;
+    &:before {
+      content: "";
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: rgba(21, 72, 76, 0.6);
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+    &:after {
+      content: "";
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: rgba(21, 72, 76, 0.6);
+      display: block;
+      position: absolute;
+      bottom: 50%;
+      transform: translateY(50%) rotate(45deg);
+    }
   }
 }

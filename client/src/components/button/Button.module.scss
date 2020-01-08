@@ -11,6 +11,7 @@
   border-style: solid;
   border-radius: 5px;
   border-color: $white;
+  letter-spacing: 2px;
   color: $white;
   background-color: transparent;
 }
@@ -39,6 +40,18 @@
   color: $base-font-color;
   border-color: $details-color;
   background-color: transparent;
+  &_lg:hover {
+    color: $color-tertiary-dark;
+    background-color: $details-color;
+    border-color: $details-color;
+    width: 8rem;
+  }
+  &_lg {
+    color: $base-font-color;
+    border-color: $details-color;
+    background-color: transparent;
+    width: 8rem;
+  }
 }
 
 .details:hover {
