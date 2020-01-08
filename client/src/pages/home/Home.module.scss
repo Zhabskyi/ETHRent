@@ -12,3 +12,41 @@
   justify-content: center;
   margin: 20px auto;
 }
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60vh;
+  background-color: $color-primary-dark;
+
+  .banner {
+    margin-top: 50px;
+    color: $color-primary-light;
+  }
+
+  .benefits {
+    margin-top: 50px;
+    color: $color-primary-light;
+    font-size: $font-size-large;
+  }
+
+  ul {
+    list-style-type: circle;
+  }
+
+  .directions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: $color-primary-light;
+    font-size: $font-size-large;
+    width: 80%;
+
+    li {
+      width: 150px;
+    }
+  }
+
+}
