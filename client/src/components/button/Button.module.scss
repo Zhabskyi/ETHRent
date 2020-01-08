@@ -2,14 +2,14 @@
 @import "../../styles/variables.scss";
 
 .button {
-  border-radius: 0.5rem;
   border: 0;
   font-size: 1rem;
-  height: 1.5rem;
+  height: 2rem;
   margin-right: 1rem;
-  width: 4rem;
+  width: 6rem;
   border-width: 1px;
   border-style: solid;
+  border-radius: 5px;
   border-color: $white;
   color: $white;
   background-color: transparent;
@@ -17,8 +17,6 @@
 
 .button:hover {
   @include button-active;
-
-  color: $black;
   background-color: $white;
   border: 2px solid transparent;
 }
@@ -30,13 +28,21 @@
 }
 
 .confirm {
-  color: $confirm-color;
-  border-color: $confirm-color;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: $base-font-color;
+  border-color: $color-primary-dark;
   background-color: transparent;
 }
+
 .details {
+  color: $base-font-color;
+  border-color: $details-color;
+  background-color: transparent;
+}
+
+.details:hover {
   color: $color-tertiary-dark;
-  border-color: $color-tertiary-dark;
   background-color: $details-color;
 }
 

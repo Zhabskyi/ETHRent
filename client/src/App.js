@@ -14,7 +14,6 @@ import PrivateItems from "./components/items/PrivateItems";
 import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
 import AddItem from "./components/form/FormAddItem";
-import About from "./pages/about/About";
 import BlockchainContext from "./context/blockchain/blockchainContext";
 
 const App = () => {
@@ -89,7 +88,6 @@ const App = () => {
                 <div className='container'>
                   <Switch>
                     <Route exact path='/' component={Home} />
-                    <Route exact path='/about' component={About} />
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/add-item' component={AddItem} />

@@ -1,19 +1,34 @@
 @import '../../styles/core.scss';
 .nav {
-  background-color: $color-primary-light;
-	display: flex;
-	justify-content: space-around;
-  width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  background-color: $color-primary-light;
+  font-size: $font-size-lage;
+	display: flex;
+	justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
   padding-top: 25px;
+  & li {
+    margin: 0 20px;
+  }
   &__list {
-    min-width: 400px;
+    max-width: 500px;
     color: $color-tertiary-dark;
-		display: flex;
-		justify-content: space-around; 
+    display: flex;
+		justify-content: flex-end; 
 		@include sm {
 			display: none;
-		}
-	}
+    }
+    &_add {
+      margin-right: 60px;
+    }
+  }
+  & h3{
+    padding-left: 100px;
+  }
+}
+
+.name {
+  margin: 0 5px;
+  color: $base-font-color;
 }

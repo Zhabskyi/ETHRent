@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import classes from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import Button from "../button/Button";
 
 const Navbar = ({ title }) => {
   const authContext = useContext(AuthContext);
@@ -15,14 +16,17 @@ const Navbar = ({ title }) => {
 
   const linksUser = (
     <>
-      <li>
-        {user && user.first_name} {user && user.last_name}
+      <li className={classes.nav__list_add}>
+        <Link to='/add-item'>ADD ITEM</Link>
       </li>
       <li>
-        <Link to='/add-item'>Add Item</Link>
+        <span className={classes.name}>{user && user.first_name}</span>
+        <span className={classes.name}>{user && user.last_name}</span>
       </li>
       <li>
-        <button onClick={logout}>Logout</button>
+        <Button onClick={logout} confirm>
+          Logout
+        </Button>
       </li>
     </>
   );
@@ -30,10 +34,14 @@ const Navbar = ({ title }) => {
   const linksUnregistered = (
     <>
       <li>
-        <Link to='/register'>Register</Link>
+        <Link to='/register'>
+          <Button confirm>Register</Button>
+        </Link>
       </li>
       <li>
-        <Link to='/login'>Login</Link>
+        <Link to='/login'>
+          <Button confirm>Login</Button>
+        </Link>
       </li>
     </>
   );
@@ -45,9 +53,6 @@ const Navbar = ({ title }) => {
       </h3>
       <ul className={classes.nav__list}>
         {isAuthenticated ? linksUser : linksUnregistered}
-        <li>
-          <Link to='/about'>About</Link>
-        </li>
       </ul>
     </div>
   );
