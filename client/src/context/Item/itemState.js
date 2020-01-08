@@ -58,7 +58,6 @@ const ItemState = props => {
         type: GET_USER_CONTACTS,
         payload: res.data
       });
-      console.log(res.data)
     } catch (error) {
       console.log(error);
     }
