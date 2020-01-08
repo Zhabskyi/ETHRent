@@ -12,7 +12,7 @@
     margin: 0 20px;
   }
   &__list {
-    max-width: 500px;
+    max-width: 600px;
     color: $color-tertiary-dark;
     display: flex;
 		justify-content: flex-end; 
@@ -21,6 +21,12 @@
     }
     &_add {
       margin-right: 60px;
+      text-align: center;
+    }
+    &_myItems {
+      margin-right: 10px;
+      text-align: center;
+      // width: 150px;
     }
   }
   & h3{
@@ -29,6 +35,6 @@
 }
 
 .name {
-  margin: 0 5px;
+  margin: 0 2px;
   color: $base-font-color;
 }

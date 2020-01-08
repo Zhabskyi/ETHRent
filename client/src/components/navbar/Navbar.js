@@ -16,6 +16,9 @@ const Navbar = ({ title }) => {
 
   const linksUser = (
     <>
+      <div className={classes.nav__list_myItems}>
+        <Link to='/my-items'>MY ITEMS</Link>
+      </div>
       <li className={classes.nav__list_add}>
         <Link to='/add-item'>ADD ITEM</Link>
       </li>
