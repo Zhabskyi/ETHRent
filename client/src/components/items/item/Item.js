@@ -15,7 +15,7 @@ const Item = props => {
   const blockchainContext = useContext(BlockchainContext);
 
   const { user } = authContext;
-  const { deleteItem } = itemContext;
+  const { deleteItem, getItemDetails } = itemContext;
   const {
     id,
     user_id,
@@ -30,17 +30,23 @@ const Item = props => {
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
+  const [showContact, setContacts] = useState(false);
 
   const deleteHandler = () => {
     deleteItem(id, user_id);
   };
 
   const toggleItemDetails = () => {
+    getItemDetails(id);
     setItem(!showItemModal);
   };
 
   const toggleFormDetails = () => {
     setForm(!showFormModal);
+  };
+
+  const showContacts = () => {
+    setContacts(!showContact);
   };
 
   const registered = (
@@ -61,14 +67,6 @@ const Item = props => {
     <>
       <Button onClick={toggleItemDetails} details>
         Details
-      </Button>
-      <Button
-        onClick={() => {
-          rentProduct(id);
-        }}
-        details
-      >
-        Rent
       </Button>
     </>
   );
@@ -113,8 +111,27 @@ const Item = props => {
           <p>Daily Rate: {daily_rate}</p>
           <p>Deposit: {deposit}</p>
           <div>
-            {/* new 2020 feature with ?. operator */}
             <img src={user?.map} alt='map' />
+          </div>
+          <div className={classes.actions}>
+            {showContact && user?.id !== user_id ? (
+              <>
+                <div>Phone number: {user?.phone_number}</div>
+                <div>Email: {user?.email}</div>
+                <Button onClick={() => rentProduct(id)} details>
+                  Rent
+                </Button>
+              </>
+            ) : showContact ? (
+              <>
+                <div>Phone number: {user.phone_number}</div>
+                <div>Email: {user.email}</div>
+              </>
+            ) : (
+              <Button onClick={showContacts} details_lg>
+                Contact info
+              </Button>
+            )}
           </div>
         </div>
       </Modal>
