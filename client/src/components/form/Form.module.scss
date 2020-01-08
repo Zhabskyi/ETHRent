@@ -11,6 +11,7 @@
   min-width: 300px;
   margin: 0 auto;
   padding-bottom: 30px;
+  border-radius: 5px;
 }
 
 .error {
@@ -27,22 +28,28 @@ input, select {
   display: block;
   box-sizing: border-box;
   width: 70%;
+  height: 40px;
   border-radius: 4px;
   border: 1px solid $white;
   padding: 10px 15px;
   margin: 0 auto 10px auto;
   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  color: $base-font-color;
   background-color: $color-primary-light;
 }
 
 label {
-  line-height: 2;
-  text-align: center;
+  line-height: 1.5;
+  text-align: left;
+  padding-left: 65px;
   display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-  color: $base-font-color;
-  font-size: $font-size-large;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  padding-top: 20px;
+  color: $color-primary-light;
+  font-family: 'Montserrat', sans-serif;
+  font-size: $font-size-small;
   font-weight: 300;
 }
 

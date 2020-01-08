@@ -129,7 +129,7 @@ const FormAddItem = props => {
           />
         </div>
         {errors.files && (
-          <p className={classes.error}>Upload picture requered</p>
+          <p className={classes.error}>Upload picture required</p>
         )}
 
         <FormCost
