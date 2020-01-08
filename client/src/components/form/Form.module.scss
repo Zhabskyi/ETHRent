@@ -28,7 +28,7 @@ input, select {
   box-sizing: border-box;
   width: 70%;
   border-radius: 4px;
-  border: 1px solid white;
+  border: 1px solid $white;
   padding: 10px 15px;
   margin: 0 auto 10px auto;
   font-size: 14px;
@@ -48,7 +48,7 @@ label {
 
 button[type="submit"],
 input[type="submit"] {
-  background: #ec5990;
+  background: $confirm-color;
   color: $color-primary-light;
   text-transform: uppercase;
   border: none;
@@ -61,7 +61,7 @@ input[type="submit"] {
 
 button[type="submit"]:hover,
 input[type="submit"]:hover {
-  background: #bf1650;
+  background: $color-tertiary-light;
 }
 
 button[type="submit"]:active,
@@ -84,22 +84,10 @@ input[type="button"]:hover {
 button[type="button"] {
   display: block;
   appearance: none;
-  background: #333;
-  color: white;
+  background: $color-grey-dark-3;
+  color: $white;
   border: none;
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px;
 }
-
-
-// button {
-//   display: block;
-//   appearance: none;
-//   margin-top: 40px;
-//   border: 1px solid #333;
-//   margin-bottom: 20px;
-//   text-transform: uppercase;
-//   padding: 10px 20px;
-//   border-radius: 4px;
-// }
