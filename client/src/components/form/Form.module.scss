@@ -40,7 +40,7 @@ label {
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-  color: white;
+  color: $color-primary-light;
   font-size: $font-size-large;
   font-weight: 300;
 }
@@ -48,7 +48,7 @@ label {
 button[type="submit"],
 input[type="submit"] {
   background: #ec5990;
-  color: white;
+  color: $color-primary-light;
   text-transform: uppercase;
   border: none;
   margin-top: 40px;
