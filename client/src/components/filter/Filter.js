@@ -56,6 +56,17 @@ const Filter = (props) => {
           </label>
         </div>
       </form>
+      <form>
+        <div>
+          <label htmlFor='postal_code'>Postal Code</label>
+          <input
+            className={classes.postalFilter}
+            name='postal_code'
+            placeholder='Postal Code'
+          />
+        </div>
+      </form>
+      
     </div>
   );
 };
