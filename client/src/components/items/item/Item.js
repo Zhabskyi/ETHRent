@@ -71,11 +71,11 @@ const Item = props => {
   );
 
   const unregistered = (
-    <>
+    <div className={classes.controls}>
       <Button onClick={toggleItemDetails} details>
-        <FontAwesomeIcon icon={faInfoCircle} size='2x' />
+        <FontAwesomeIcon icon={faInfoCircle} />
       </Button>
-    </>
+    </div>
   );
 
   const rented = (
