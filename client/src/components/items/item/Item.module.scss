@@ -6,9 +6,10 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid $color-tertiary-light;
+  border: 0px solid $color-tertiary-light;
   border-radius: 6px;
-  background-color: $color-primary-light;
+  background-color: $color-secondary-light;
+  box-shadow: 8px 10px 4px -5px rgba(168,168,168,0.6);
   margin: 20px;
   padding: 5px;
   &_info {
@@ -29,6 +30,7 @@
 
 .title {
   font-size: $font-size-large;
+  color: $color-primary-dark;
   font-weight: 600;
 }
 

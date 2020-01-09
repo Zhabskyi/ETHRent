@@ -24,10 +24,10 @@
 
 .danger {
   border: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   height: 2rem;
   width: 2rem;
-  color: $color-tertiary-light;
+  color: $color-secondary-dark;
   border-color: $danger-color;
   background-color: transparent;
 }
@@ -41,15 +41,12 @@
 }
 
 .details {
-
   border: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   height: 2rem;
   width: 2rem;
-  
   border-radius: 50%;;
-
-  color: $base-font-color;
+  color: $color-secondary-dark;
   border-color: $details-color;
   background-color: transparent;
   &_lg:hover {
@@ -67,14 +64,12 @@
 }
 
 .edit {
-
   border: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   height: 2rem;
   width: 2rem;
   border-radius: 50%;;
-
-  color: $base-font-color;
+  color: $color-secondary-dark;
   border-color: $details-color;
   background-color: transparent;
 }
