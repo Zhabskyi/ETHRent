@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import classes from "./Filter.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
 import BlockchainContext from "../../context/blockchain/blockchainContext";
-import Spinner from "../spinner/Spinner";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Filter = (props) => {
   const itemContext = useContext(ItemContext);
@@ -18,6 +19,8 @@ const Filter = (props) => {
     // eslint-disable-next-line
   }, [products]);
 
+
+
   return (
     <div className={classes.filter}>
       <form>
@@ -27,7 +30,7 @@ const Filter = (props) => {
             onChange={e => {
               props.onFilter(e.target.value)
             }} />
-          <label for='radio-1'>
+          <label htmlFor='radio-1'>
             Tools
           </label>
           <input type='radio' value='sports' id='radio-2'
@@ -35,7 +38,7 @@ const Filter = (props) => {
             onChange={(e) => {
               props.onFilter(e.target.value);
             }} />
-          <label for='radio-2'>
+          <label htmlFor='radio-2'>
             Sports Equipment
           </label>
           <input type='radio' value='electronics' id='radio-3'
@@ -43,7 +46,7 @@ const Filter = (props) => {
             onChange={(e) => {
               props.onFilter(e.target.value);
             }} />
-          <label for='radio-3'>
+          <label htmlFor='radio-3'>
             Electronics
           </label>
           <input type='radio' value='all' id='radio-4'
@@ -51,19 +54,22 @@ const Filter = (props) => {
             onChange={(e) => {
               props.onFilter(e.target.value);
             }} />
-          <label for='radio-4'>
+          <label htmlFor='radio-4'>
             All
           </label>
         </div>
       </form>
-      <form>
+      <form className={classes.postal}>
         <div>
-          <label htmlFor='postal_code'>Postal Code</label>
+          <label className={classes.postalLabel} htmlFor='postal_code'>Postal Code</label>
           <input
-            className={classes.postalFilter}
+            className={classes.postalBox}
             name='postal_code'
             placeholder='Postal Code'
           />
+        </div>
+        <div className={classes.postalSearch}>
+          <FontAwesomeIcon icon={faSearch} size='2x' />
         </div>
       </form>
       

@@ -124,8 +124,8 @@ const Item = props => {
               </>
             ) : showContact ? (
               <>
-                <div>Phone number: {contacts.phone_number}</div>
-                <div>Email: {contacts.email}</div>
+                <div>Phone number: {contacts?.phone_number}</div>
+                <div>Email: {contacts?.email}</div>
               </>
             ) : (
               <Button onClick={showContacts} details_lg>
