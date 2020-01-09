@@ -132,7 +132,9 @@ const getUsersByPostal = function(db, postalCode) {
     FROM users
     WHERE users.postal_code LIKE $1;`,
     [queryString]
-  ).then(res => res.rows[0])
+  ).then(res => {
+    return res.rows
+  })
   .catch(err => console.log(err));
 }
 

@@ -131,9 +131,10 @@ const ItemState = props => {
       const res = await axios.get(
         `http://localhost:8001/api/users/postal/${postalCode}`
       );
-      console.log('res.data', res.data) //user ids
-      console.log('state.items', state.items) // all items
-      const result = null
+      const ownerIds = res.data.map(object => object.id)
+      const result = state.items.filter(item => {
+        return ownerIds.includes(item.user_id)
+      })
       dispatch({
         type: GET_POSTAL_ITEMS,
         payload: result
@@ -154,6 +155,7 @@ const ItemState = props => {
         myItems: state.myItems,
         loading: state.loading,
         contacts: state.contacts,
+        itemsByPostal: state.itemsByPostal,
         getItems,
         getMyItems,
         addItem,

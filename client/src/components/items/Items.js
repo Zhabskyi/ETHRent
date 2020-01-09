@@ -11,33 +11,48 @@ const Items = () => {
   const itemContext = useContext(ItemContext);
   const blockchainContext = useContext(BlockchainContext);
 
-  const { items, getItems, loading } = itemContext;
+  const { items, getItems, loading, itemsByPostal } = itemContext;
   const { products } = blockchainContext;
-  const [checkedCategory, setCategory] = useState('all');
+  const [checkedCategory, setCategory] = useState("all");
 
   useEffect(() => {
     getItems();
     // eslint-disable-next-line
-  }, [products]);
+  }, [products, itemsByPostal]);
 
-  const onFilter = (e) => {
-    setCategory(e)
-  }
+  const onFilter = e => {
+    setCategory(e);
+  };
+
+  const postalItems = (
+    <>
+      {checkedCategory === "all"
+        ? itemsByPostal?.map(item => <Item key={item.id} item={item} />)
+        : itemsByPostal?.map(item =>
+            checkedCategory === item.category ? (
+              <Item key={item.id} item={item} />
+            ) : null
+          )}
+    </>
+  );
 
   return (
     <>
-      <Filter onFilter={onFilter} checkedCategory={checkedCategory}/>
+      <Filter onFilter={onFilter} checkedCategory={checkedCategory} />
       {items !== null && !loading ? (
-        <>
-          {checkedCategory === 'all' ? items.map(item => (
-            <Item key={item.id} item={item} />
-          )) :
-          items.map(item => (
-            checkedCategory === item.category ?
-            <Item key={item.id} item={item} /> :
-            null
-          ))}
-        </>
+        itemsByPostal !== null ? (
+          postalItems
+        ) : (
+          <>
+            {checkedCategory === "all"
+              ? items.map(item => <Item key={item.id} item={item} />)
+              : items.map(item =>
+                  checkedCategory === item.category ? (
+                    <Item key={item.id} item={item} />
+                  ) : null
+                )}
+          </>
+        )
       ) : (
         <Spinner />
       )}
