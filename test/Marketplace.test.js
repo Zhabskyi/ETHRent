@@ -31,7 +31,7 @@ describe('products', async () => {
   let result, productCount
 
   before(async () => {
-    result = await marketplace.createProduct('Table Saw', 'A very fine table saw.', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
+    result = await marketplace.createProduct('Table Saw', 'A very fine table saw.', 'tools', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
     productCount = await marketplace.productCount()
   })
 
@@ -175,7 +175,7 @@ describe('products', async () => {
 
   it('edits product', async () => {
     // SUCCESS: Borrower returns object
-    result = await marketplace.editProduct(productCount, 'Table Saw', 'The worst saw ever!', web3.utils.toWei('10', 'Ether'), web3.utils.toWei('2', 'Ether'), { from: owner })
+    result = await marketplace.editProduct(productCount, 'Table Saw', 'The worst saw ever!', 'tools', web3.utils.toWei('10', 'Ether'), web3.utils.toWei('2', 'Ether'), { from: owner })
 
     // Check logs
     assert.equal(productCount, 1)
@@ -203,7 +203,7 @@ describe('destroy', async () => {
   let result, productCount
 
   before(async () => {
-    result = await marketplace.createProduct('Table Saw', 'The worst saw ever!', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
+    result = await marketplace.createProduct('Table Saw', 'The worst saw ever!', 'tools', web3.utils.toWei('5', 'Ether'), web3.utils.toWei('1', 'Ether'), { from: owner })
     productCount = await marketplace.productCount()
   })
 
