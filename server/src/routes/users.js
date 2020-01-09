@@ -59,5 +59,16 @@ module.exports = db => {
     }
   });
 
+  router.get("/users/postal/:postalCode", async (req, res) => {
+    const postalCode = req.params.postalCode;
+    try {
+      const postalUsers = await database.getUsersByPostal(db, postalCode);
+      res.json(postalUsers);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  });
+
   return router;
 };

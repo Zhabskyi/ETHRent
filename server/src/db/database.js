@@ -123,6 +123,19 @@ const getUserInfoForItem = function(db, userId) {
   .catch(err => console.log(err));
 }
 
+const getUsersByPostal = function(db, postalCode) {
+  const queryString = postalCode + '%'
+  
+  return db.query(
+    `
+    SELECT users.id
+    FROM users
+    WHERE users.postal_code LIKE $1;`,
+    [queryString]
+  ).then(res => res.rows[0])
+  .catch(err => console.log(err));
+}
+
 module.exports = {
   addUser,
   getUserByEmail,
@@ -130,5 +143,6 @@ module.exports = {
   addItem,
   updateItem,
   deleteItemById,
-  getUserInfoForItem
+  getUserInfoForItem,
+  getUsersByPostal
 };

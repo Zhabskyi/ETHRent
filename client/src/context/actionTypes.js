@@ -18,4 +18,5 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const CANCEL_LOADING = 'CANCEL_LOADING';
 export const RENT_PRODUCT = 'RENT_PRODUCT';
 export const GET_USER_CONTACTS = 'GET_USER_CONTACTS';
+export const GET_POSTAL_ITEMS = 'GET_POSTAL_ITEMS';
 

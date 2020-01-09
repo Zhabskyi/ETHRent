@@ -10,7 +10,7 @@ const Filter = (props) => {
   const itemContext = useContext(ItemContext);
   const blockchainContext = useContext(BlockchainContext);
 
-  const { items, getItems, loading } = itemContext;
+  const { items, getItems, loading, getUserByPostal } = itemContext;
   const { products } = blockchainContext;
   const [checkedCategory, setCategory] = useState('all');
   const [postalInput, setPostalInput] = useState('');
@@ -20,8 +20,13 @@ const Filter = (props) => {
     // eslint-disable-next-line
   }, [products]);
 
-  const handleChange = (event) => {
-    setPostalInput({value: event.target.value});
+  useEffect(() => {
+    console.log('postalInput', postalInput)
+    getUserByPostal(postalInput) 
+  }, [postalInput])
+
+  const handleChange = async (event) => {
+    setPostalInput(event.target.value);
   }
   
 
@@ -70,7 +75,6 @@ const Filter = (props) => {
             className={classes.postalBox}
             name='postal_code'
             placeholder='Postal Code'
-            // value={postalInput}
             onChange={handleChange}
           />
         </div>

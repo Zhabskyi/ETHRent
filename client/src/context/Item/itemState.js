@@ -11,7 +11,8 @@ import {
   DELETE_ITEM,
   ITEM_ERROR,
   GET_MY_ITEMS,
-  GET_USER_CONTACTS
+  GET_USER_CONTACTS,
+  GET_POSTAL_ITEMS
 } from "../actionTypes";
 
 const ItemState = props => {
@@ -20,7 +21,8 @@ const ItemState = props => {
     myItems: null,
     loading: true,
     showModal: false,
-    contacts: null
+    contacts: null,
+    itemsByPostal: null
   };
 
   const [state, dispatch] = useReducer(itemReducer, initialState);
@@ -124,6 +126,27 @@ const ItemState = props => {
     }
   };
 
+  const getUserByPostal = async (postalCode) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8001/api/users/postal/${postalCode}`
+      );
+      console.log('res.data', res.data) //user ids
+      console.log('state.items', state.items) // all items
+      const result = null
+      dispatch({
+        type: GET_POSTAL_ITEMS,
+        payload: result
+      })
+
+    } catch (err) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: err.response
+      });
+    }
+  };
+
   return (
     <ItemContext.Provider
       value={{
@@ -136,7 +159,8 @@ const ItemState = props => {
         addItem,
         editItem,
         deleteItem,
-        getUserItemDetails
+        getUserItemDetails,
+        getUserByPostal
       }}
     >
       {props.children}

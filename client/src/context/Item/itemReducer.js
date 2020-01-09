@@ -5,7 +5,8 @@ import {
   ITEM_ERROR,
   GET_ITEMS,
   GET_MY_ITEMS,
-  GET_USER_CONTACTS
+  GET_USER_CONTACTS,
+  GET_POSTAL_ITEMS
 } from "../actionTypes";
 
 export default (state, action) => {
@@ -52,6 +53,11 @@ export default (state, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case GET_POSTAL_ITEMS:
+      return {
+        ...state,
+        itemsByPostal: action.payload
       };
     default:
       return state;
