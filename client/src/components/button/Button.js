@@ -7,11 +7,11 @@ const Button = props => {
   const buttonClass = classNames(
     classes.button,
     props.className, 
-    props.danger ? classes.danger :
     props.confirm ? classes.confirm :
-    props.error ? classes.error :
-    props.details_lg ? classes.details_lg :
-    props.details ? classes.details : null
+    props.danger ? classes.danger :
+    props.edit ? classes.edit :
+    props.details ? classes.details :
+    props.details_lg ? classes.details_lg : null
   );
 
   return (

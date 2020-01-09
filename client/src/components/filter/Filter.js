@@ -1,24 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, {useState, useContext, useEffect} from "react";
 import classes from "./Filter.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
-import BlockchainContext from "../../context/blockchain/blockchainContext";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Filter = (props) => {
   const itemContext = useContext(ItemContext);
-  const blockchainContext = useContext(BlockchainContext);
 
-  const { items, getItems, loading, getUserByPostal } = itemContext;
-  const { products } = blockchainContext;
-  const [checkedCategory, setCategory] = useState('all');
+  const {  getUserByPostal } = itemContext;
+
   const [postalInput, setPostalInput] = useState('');
-
-  useEffect(() => {
-    getItems();
-    // eslint-disable-next-line
-  }, [products]);
 
   useEffect(() => {
     console.log('postalInput', postalInput)
@@ -87,4 +79,4 @@ const Filter = (props) => {
   );
 };
 
-export default withRouter(Filter);
+export default Filter;

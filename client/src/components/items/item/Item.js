@@ -1,5 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrash,
+  faInfoCircle,
+  faEdit
+} from "@fortawesome/free-solid-svg-icons";
+
 import classes from "./Item.module.scss";
 
 import Button from "../../button/Button";
@@ -50,25 +57,25 @@ const Item = props => {
   };
 
   const registered = (
-    <>
+    <div className={classes.controls}>
       <Button onClick={toggleItemDetails} details>
-        Details
+        <FontAwesomeIcon icon={faInfoCircle} />
       </Button>
       <Button onClick={deleteHandler} danger>
-        Delete
+        <FontAwesomeIcon icon={faTrash} />
       </Button>
-      <Button onClick={toggleFormDetails} confirm>
-        Edit
+      <Button onClick={toggleFormDetails} edit>
+        <FontAwesomeIcon icon={faEdit} />
       </Button>
-    </>
+    </div>
   );
 
   const unregistered = (
-    <>
+    <div className={classes.controls}>
       <Button onClick={toggleItemDetails} details>
-        Details
+        <FontAwesomeIcon icon={faInfoCircle} />
       </Button>
-    </>
+    </div>
   );
 
   const rented = (
@@ -88,10 +95,18 @@ const Item = props => {
         <div className={classes.photo}>
           <img src={photo} alt='item' />
         </div>
-        <p>Daily Rate: {daily_rate}</p>
-        <p>Deposit: {deposit}</p>
-        <p>Category: {category}</p>
-        <div>
+        <div className={classes.container_info}>
+          <div>
+            <p>
+              Daily Rate: <span>{daily_rate}{" "}ETH</span>
+            </p>
+            <p>
+              Deposit: <span>{deposit} {" "}ETH</span>
+            </p>
+            <p>
+              Category: <span>{category}</span>
+            </p>
+          </div>
           {products[id - 1]?.rented
             ? rented
             : user !== null
@@ -104,14 +119,18 @@ const Item = props => {
       <Modal show={showItemModal} onClose={toggleItemDetails}>
         <div>
           <p className={classes.title}>{title}</p>
-          <div className={classes.photo}>
-            <img src={photo} alt='item' />
-          </div>
-          <p>Description: {description}</p>
-          <p>Daily Rate: {daily_rate}</p>
-          <p>Deposit: {deposit}</p>
-          <div>
-            <img src={contacts?.map} alt='map' />
+          <div className={classes.datail_container}>
+            <div className={classes.photo_modal}>
+              <img src={photo} alt='item' />
+            </div>
+            <div>
+              <p>Description: {description}</p>
+              <p>Daily Rate: {daily_rate}</p>
+              <p>Deposit: {deposit}</p>
+              <div>
+                <img src={contacts?.map} alt='map' />
+              </div>
+            </div>
           </div>
           <div className={classes.actions}>
             {showContact && user?.id !== user_id ? (

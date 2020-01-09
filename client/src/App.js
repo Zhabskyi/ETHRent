@@ -15,6 +15,7 @@ import Register from "./components/form/FormRegister";
 import Login from "./components/form/FormLogin";
 import AddItem from "./components/form/FormAddItem";
 import BlockchainContext from "./context/blockchain/blockchainContext";
+import CopyRight from "./components/copyRight/CopyRight";
 
 const App = () => {
   const blockchainContext = useContext(BlockchainContext);
@@ -34,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     loadBlockchainData();
-  },[])
+  }, []);
 
   const loadWeb3 = async () => {
     if (window.ethereum) {
@@ -96,6 +97,7 @@ const App = () => {
                     </PrivateRoute>
                   </Switch>
                 </div>
+                <CopyRight>All Rights Reserved</CopyRight>
               </Fragment>
             </Router>
           </ItemState>
