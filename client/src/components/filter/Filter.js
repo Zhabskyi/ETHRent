@@ -13,13 +13,17 @@ const Filter = (props) => {
   const { items, getItems, loading } = itemContext;
   const { products } = blockchainContext;
   const [checkedCategory, setCategory] = useState('all');
+  const [postalInput, setPostalInput] = useState('');
 
   useEffect(() => {
     getItems();
     // eslint-disable-next-line
   }, [products]);
 
-
+  const handleChange = (event) => {
+    setPostalInput({value: event.target.value});
+  }
+  
 
   return (
     <div className={classes.filter}>
@@ -66,13 +70,15 @@ const Filter = (props) => {
             className={classes.postalBox}
             name='postal_code'
             placeholder='Postal Code'
+            // value={postalInput}
+            onChange={handleChange}
           />
         </div>
         <div className={classes.postalSearch}>
           <FontAwesomeIcon icon={faSearch} size='2x' />
         </div>
       </form>
-      
+      {/* <p>Current State: {postalInput}</p> */}
     </div>
   );
 };
