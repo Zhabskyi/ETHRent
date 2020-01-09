@@ -1,22 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
 import classes from "./Filter.module.scss";
-import ItemContext from "../../context/Item/ItemContext";
-import BlockchainContext from "../../context/blockchain/blockchainContext";
-import Spinner from "../spinner/Spinner";
 
 const Filter = (props) => {
-  const itemContext = useContext(ItemContext);
-  const blockchainContext = useContext(BlockchainContext);
-
-  const { items, getItems, loading } = itemContext;
-  const { products } = blockchainContext;
-  const [checkedCategory, setCategory] = useState('all');
-
-  useEffect(() => {
-    getItems();
-    // eslint-disable-next-line
-  }, [products]);
 
   return (
     <div className={classes.filter}>
@@ -71,4 +56,4 @@ const Filter = (props) => {
   );
 };
 
-export default withRouter(Filter);
+export default Filter;

@@ -34,7 +34,7 @@ const App = () => {
 
   useEffect(() => {
     loadBlockchainData();
-  },[])
+  }, []);
 
   const loadWeb3 = async () => {
     if (window.ethereum) {

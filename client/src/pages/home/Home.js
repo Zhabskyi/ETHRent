@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import classes from "./Home.module.scss";
 import Items from "../../components/items/Items";
-import Filter from "../../components/filter/Filter";
 import AuthContext from "../../context/auth/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTools, faHandshake, faCheckDouble } from '@fortawesome/free-solid-svg-icons'

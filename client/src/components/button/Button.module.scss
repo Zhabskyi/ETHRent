@@ -23,7 +23,11 @@
 }
 
 .danger {
-  color: $danger-color;
+  border: 0;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  color: $color-tertiary-light;
   border-color: $danger-color;
   background-color: transparent;
 }
@@ -37,6 +41,14 @@
 }
 
 .details {
+
+  border: 0;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  
+  border-radius: 50%;;
+
   color: $base-font-color;
   border-color: $details-color;
   background-color: transparent;
@@ -54,14 +66,33 @@
   }
 }
 
+.edit {
+
+  border: 0;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;;
+
+  color: $base-font-color;
+  border-color: $details-color;
+  background-color: transparent;
+}
+
 .details:hover {
   color: $color-tertiary-dark;
-  background-color: $details-color;
+  background-color: $white;
+  border:none;
 }
 
 .danger:hover {
-  color: $white;
-  background-color: $danger-color;
+  color: $danger-color;
+  border:none;
+}
+
+.edit:hover {
+  color: $color-tertiary-dark;
+  border:none;
 }
 
 .confirm:hover {
