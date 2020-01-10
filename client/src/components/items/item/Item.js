@@ -115,7 +115,7 @@ const Item = props => {
           {products[id - 1]?.rented
             ? rented
             : user !== null
-            ? user.id === user_id
+            ? ((user.id === user_id) && (account === products[id - 1]?.owner))
               ? registered
               : unregistered
             : unregistered}

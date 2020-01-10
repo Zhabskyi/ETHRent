@@ -80,7 +80,7 @@ const updateItem = function(db, item, id) {
     UPDATE items
     SET title = $2,
         description = $3,
-        category = $4
+        category = $4,
         daily_rate = $5,
         deposit = $6,
         photo = $7
