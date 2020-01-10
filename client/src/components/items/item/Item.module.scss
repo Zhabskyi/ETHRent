@@ -39,8 +39,9 @@
   max-height: 300px;
   margin: auto;
   &_modal {
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 420px;
+    max-height: 420px;
+    margin-right: 10px;
   }
   & img {
     width: 100%;
@@ -63,4 +64,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.details {
+  border-radius: 6px;
+  background-color: $color-secondary-light;
+  color: $color-primary-dark;
+  box-shadow: 8px 10px 4px -5px rgba(168,168,168,0.6);
+  margin: 20px;
+  padding: 5px;
+  
 }

@@ -93,7 +93,7 @@ const Item = props => {
       <div className={classes.container}>
         <p className={classes.title}>{title}</p>
         <div className={classes.photo}>
-          <img src={photo} alt='item' />
+          <img src={photo} alt='item' className={classes.photo}/>
         </div>
         <div className={classes.container_info}>
           <div>
@@ -117,16 +117,16 @@ const Item = props => {
         </div>
       </div>
       <Modal show={showItemModal} onClose={toggleItemDetails}>
-        <div>
+        <div className={classes.details}>
           <p className={classes.title}>{title}</p>
           <div className={classes.datail_container}>
             <div className={classes.photo_modal}>
-              <img src={photo} alt='item' />
+              <img src={photo} alt='item' className={classes.photo_modal} />
             </div>
             <div>
               <p>Description: {description}</p>
-              <p>Daily Rate: {daily_rate}</p>
-              <p>Deposit: {deposit}</p>
+              <p>Daily Rate: {daily_rate} ETH</p>
+              <p>Deposit: {deposit} ETH</p>
               <div>
                 <img src={contacts?.map} alt='map' />
               </div>
