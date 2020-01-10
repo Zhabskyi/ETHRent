@@ -118,18 +118,21 @@ const Item = props => {
       </div>
       <Modal show={showItemModal} onClose={toggleItemDetails}>
         <div className={classes.details}>
-          <p className={classes.title}>{title}</p>
-          <div className={classes.datail_container}>
+          <div className={classes.details_container}>
+            <h4 className={classes.details_container_title}>{title}</h4>
+            <h5 className={classes.details_container_heading}>Description</h5>
+            <p>{description}</p>
+            <h5 className={classes.details_container_heading}>Daily Rate</h5>
+            <p>{daily_rate} ETH</p>
+            <h5 className={classes.details_container_heading}>Deposit</h5>
+            <p>{deposit} ETH</p>
+          </div>
+          <div className={classes.details_images}>
             <div className={classes.photo_modal}>
               <img src={photo} alt='item' className={classes.photo_modal} />
             </div>
             <div>
-              <p>Description: {description}</p>
-              <p>Daily Rate: {daily_rate} ETH</p>
-              <p>Deposit: {deposit} ETH</p>
-              <div>
-                <img src={contacts?.map} alt='map' />
-              </div>
+              <img src={contacts?.map} alt='map' className={classes.details_images_map}/>
             </div>
           </div>
           <div className={classes.actions}>

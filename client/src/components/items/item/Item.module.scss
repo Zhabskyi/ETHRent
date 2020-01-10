@@ -42,6 +42,7 @@
     max-width: 420px;
     max-height: 420px;
     margin-right: 10px;
+    border-radius: 20px;
   }
   & img {
     width: 100%;
@@ -67,11 +68,46 @@
 }
 
 .details {
+  display: flex;
+  flex-direction: column;
   border-radius: 6px;
   background-color: $color-secondary-light;
   color: $color-primary-dark;
   box-shadow: 8px 10px 4px -5px rgba(168,168,168,0.6);
   margin: 20px;
   padding: 5px;
+  // height: 600px;
+
+  &_container {
+    color: $color-primary-dark;
+
+    &_title {
+      margin: 5px;
+    }
+    &_heading {
+      color: $base-font-color;
+      margin-top: 5px;
+      margin-bottom: 0px;
+    }
+
+    & p {
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &_images {
+    display: flex;
+    flex-direction: row;
+
+    &_map {
+      border-radius: 20px;
+      border: 1px;
+      border-style: solid;
+      border-color: $color-primary-dark;
+      max-width: 420px;
+      max-height: 420px;
+    }
+  }
   
 }
