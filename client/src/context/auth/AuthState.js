@@ -31,11 +31,12 @@ const AuthState = props => {
     try {
       const res = await axios.get("http://localhost:8001/api/auth");
 
-
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data
-      });
+      if (res.data === "Authorization denied!") {
+        dispatch({
+          type: USER_LOADED,
+          payload: res.data
+        });
+      }
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
     }

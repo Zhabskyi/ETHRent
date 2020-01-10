@@ -16,9 +16,7 @@
     color: $color-tertiary-dark;
     display: flex;
 		justify-content: flex-end; 
-		@include sm {
-			display: none;
-    }
+
     &_add {
       margin-right: 60px;
       text-align: center;
@@ -37,4 +35,9 @@
 .name {
   margin: 0 2px;
   color: $color-primary;
+}
+
+.nav_side {
+  display: flex;
+  flex-direction: column;
 }
