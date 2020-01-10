@@ -24,15 +24,15 @@ const Home = () => {
       <div className={classes.info}>
         <h4 className={classes.banner}>Easy Peer-to-Peer Renting</h4>
         <ul className={classes.benefits}>
-          <li>Find the gear you need for a short amount of time</li>
+          <li>Rent the gear you need for a short amount of time</li>
           <li>Earn ether for your stuff while it's not in use</li>
         </ul>
         <ol className={classes.directions}>
           <li>Transfer the required deposit to the Ethereum Blockchain</li>
           <li>Use the item for as long as you need</li>
-          <li>Once the item is returned, the owner ends the Rental</li>
+          <li>Once the item is returned the owner ends the Rental</li>
           <li>
-            Fees are transferred to the owner and remaining deposit returned to
+            Fees are transferred to the owner and the remaining deposit is returned to
             the borrower!
           </li>
         </ol>
