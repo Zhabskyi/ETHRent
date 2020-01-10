@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import classes from "./Navbar.module.scss";
 import AuthContext from "../../context/auth/authContext";
 import NavbarItems from "./navbarItems/NavbarItems";
 
-const Navbar = ({ title }) => {
+const Navbar = ( props ) => {
 
   const authContext = useContext(AuthContext);
 
@@ -18,7 +19,7 @@ const Navbar = ({ title }) => {
   return (
     <nav className={classes.nav}>
       <NavbarItems
-        title={title}
+        title={props.title}
         user={user}
         isAuthenticated={isAuthenticated}
         logout={logout}
@@ -27,4 +28,4 @@ const Navbar = ({ title }) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

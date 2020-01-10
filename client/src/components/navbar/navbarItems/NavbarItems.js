@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import classes from "../Navbar.module.scss";
 import { Link } from "react-router-dom";
 import Button from "../../button/Button";
 
 const NavbarItems = props => {
   const { title, user, isAuthenticated, logout } = props;
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [isAuthenticated]);
 
   const linksUser = (
     <>
@@ -53,4 +60,4 @@ const NavbarItems = props => {
   );
 };
 
-export default NavbarItems;
+export default withRouter(NavbarItems);
