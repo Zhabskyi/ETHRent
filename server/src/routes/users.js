@@ -10,20 +10,29 @@ module.exports = db => {
       `
       SELECT * from users;
     `
-    ).then(({ rows: users }) => {
-      res.json(users);
-    })
-    .catch (err => {
-      res.status(500).send("Server Error");
-    }
+    )
+      .then(({ rows: users }) => {
+        res.json(users);
+      })
+      .catch(err => {
+        res.status(500).send("Server Error");
+      });
   });
 
   //User registration
   router.post("/users", async (req, res) => {
-    
-    
     try {
-      let newUser =  await {...req.body, map: `https://maps.googleapis.com/maps/api/staticmap?fillcolor:black&center=${req.body.city},+${req.body.province}+${req.body.postal_code.substring(0,3)}+${req.body.postal_code.substring(3)}&zoom=16&size=400x400&key=${process.env.REACT_APP_API_GOOGLE_API}`}
+      let newUser = await {
+        ...req.body,
+        map: `https://maps.googleapis.com/maps/api/staticmap?fillcolor:black&center=${
+          req.body.city
+        },+${req.body.province}+${req.body.postal_code.substring(
+          0,
+          3
+        )}+${req.body.postal_code.substring(3)}&zoom=16&size=400x400&key=${
+          process.env.REACT_APP_API_GOOGLE_API
+        }`
+      };
 
       delete newUser.password2;
 
@@ -36,9 +45,9 @@ module.exports = db => {
       const salt = await bcrypt.genSalt(12);
 
       newUser.password = await bcrypt.hash(newUser.password, salt);
-      
+
       user = await database.addUser(db, newUser);
-      
+
       const payload = {
         user: {
           id: user[0].id
