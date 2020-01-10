@@ -79,14 +79,14 @@ const Item = props => {
   );
 
   const rented = (
-    <>
-      <h3>Currently Rented</h3>
+    <div className={classes.container_rented}>
+      <h6 className={classes.container_rented_heading}>Currently Rented</h6>
       {account === products[id - 1]?.owner ? (
-        <Button onClick={() => returnProduct(id)} details>
+        <Button onClick={() => returnProduct(id)} details_lg>
           Return
         </Button>
       ) : null}
-    </>
+    </div>
   );
   return (
     <>
