@@ -12,7 +12,10 @@ module.exports = db => {
     `
     ).then(({ rows: users }) => {
       res.json(users);
-    });
+    })
+    .catch (err => {
+      res.status(500).send("Server Error");
+    }
   });
 
   //User registration
