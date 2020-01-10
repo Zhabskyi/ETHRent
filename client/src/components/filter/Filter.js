@@ -20,7 +20,7 @@ const Filter = (props) => {
   }, [postalInput])
 
   const handleChange = async (event) => {
-    setPostalInput(event.target.value);
+    setPostalInput(event.target.value.toUpperCase());
   }
   
 
