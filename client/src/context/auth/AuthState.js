@@ -31,7 +31,7 @@ const AuthState = props => {
     try {
       const res = await axios.get("http://localhost:8001/api/auth");
 
-      if (res.data === "Authorization denied!") {
+      if (res.data.msg !== "Authorization denied!") {
         dispatch({
           type: USER_LOADED,
           payload: res.data
