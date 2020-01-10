@@ -93,7 +93,7 @@ const Item = props => {
       <div className={classes.container}>
         <p className={classes.title}>{title}</p>
         <div className={classes.photo}>
-          <img src={photo} alt="item" className={classes.photo} />
+          <img src={photo} alt='item' className={classes.photo} />
         </div>
 
         <div className={classes.container_info}>
@@ -134,12 +134,12 @@ const Item = props => {
           </div>
           <div className={classes.details_images}>
             <div className={classes.photo_modal}>
-              <img src={photo} alt="item" className={classes.photo_modal} />
+              <img src={photo} alt='item' className={classes.photo_modal} />
             </div>
             <div>
               <img
                 src={contacts?.map}
-                alt="map"
+                alt='map'
                 className={classes.details_images_map}
               />
             </div>
@@ -149,9 +149,11 @@ const Item = props => {
               <>
                 <div>Phone number: {contacts?.phone_number}</div>
                 <div>Email: {contacts?.email}</div>
-                <Button onClick={() => rentProduct(id)} details_lg>
-                  Rent
-                </Button>
+                {account !== products[id - 1]?.owner ? (
+                  <Button onClick={() => rentProduct(id)} details_lg>
+                    Rent
+                  </Button>
+                ) : null}
               </>
             ) : showContact ? (
               <>

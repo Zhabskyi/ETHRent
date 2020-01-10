@@ -75,6 +75,10 @@
     max-height: 420px;
     margin-right: 10px;
     border-radius: 20px;
+    @include md {
+      max-width: 200px;
+      max-height: 200px;
+    }
   }
   & img {
     width: 100%;
@@ -133,6 +137,7 @@
 
   &_images {
     display: flex;
+    justify-content: space-around;
     flex-direction: row;
 
     &_map {
@@ -142,6 +147,10 @@
       border-color: $color-primary-dark;
       max-width: 420px;
       max-height: 420px;
+      @include md {
+        max-width: 200px;
+        max-height: 200px;
+      }
     }
   }
   
