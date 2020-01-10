@@ -101,16 +101,19 @@
 
     &_title {
       margin: 5px;
+      margin-left: 10px;
     }
     &_heading {
       color: $base-font-color;
       margin-top: 5px;
       margin-bottom: 0px;
+      margin-left: 10px;
     }
 
     & p {
       margin-top: 0px;
       margin-bottom: 10px;
+      margin-left: 10px;
     }
   }
 
