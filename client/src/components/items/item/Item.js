@@ -93,20 +93,25 @@ const Item = props => {
       <div className={classes.container}>
         <p className={classes.title}>{title}</p>
         <div className={classes.photo}>
-          <img src={photo} alt='item' className={classes.photo}/>
+          <img src={photo} alt="item" className={classes.photo} />
         </div>
+
         <div className={classes.container_info}>
           <div>
-            <p>
-              Daily Rate: <span>{daily_rate}{" "}ETH</span>
-            </p>
-            <p>
-              Deposit: <span>{deposit} {" "}ETH</span>
-            </p>
-            <p>
-              Category: <span>{category}</span>
-            </p>
+            <div className={classes.container_info_row}>
+              <h6 className={classes.container_info_row_heading}>Daily Rate</h6>
+              <p>{daily_rate} ETH</p>
+            </div>
+            <div className={classes.container_info_row}>
+              <h6 className={classes.container_info_row_heading}>Deposit</h6>
+              <p>{deposit} ETH</p>
+            </div>
+            <div className={classes.container_info_row}>
+              <h6 className={classes.container_info_row_heading}>Category</h6>
+              <p>{category}</p>
+            </div>
           </div>
+
           {products[id - 1]?.rented
             ? rented
             : user !== null
@@ -115,7 +120,8 @@ const Item = props => {
               : unregistered
             : unregistered}
         </div>
-        <Modal show={showItemModal} onClose={toggleItemDetails}>
+      </div>
+      <Modal show={showItemModal} onClose={toggleItemDetails}>
         <div className={classes.details}>
           <div className={classes.details_container}>
             <h4 className={classes.details_container_title}>{title}</h4>
@@ -128,10 +134,14 @@ const Item = props => {
           </div>
           <div className={classes.details_images}>
             <div className={classes.photo_modal}>
-              <img src={photo} alt='item' className={classes.photo_modal} />
+              <img src={photo} alt="item" className={classes.photo_modal} />
             </div>
             <div>
-              <img src={contacts?.map} alt='map' className={classes.details_images_map}/>
+              <img
+                src={contacts?.map}
+                alt="map"
+                className={classes.details_images_map}
+              />
             </div>
           </div>
           <div className={classes.actions}>
@@ -156,8 +166,7 @@ const Item = props => {
           </div>
         </div>
       </Modal>
-      </div>
-      
+
       <Modal show={showFormModal} onClose={toggleFormDetails} editClose>
         <FormAddItem
           toggleFormDetails={toggleFormDetails}
