@@ -34,6 +34,7 @@ const App = () => {
 
   useEffect(() => {
     loadBlockchainData();
+    // eslint-disable-next-line
   }, []);
 
   const loadWeb3 = async () => {

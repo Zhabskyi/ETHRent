@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 
 import BlockchainContext from "./blockchainContext";
 import blockchainReducer from "./blockchainReducer";
-import Web3 from "web3";
 
 import {
   SET_LOADING,

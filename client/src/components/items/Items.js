@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import classes from "./Items.module.scss";
 import ItemContext from "../../context/Item/ItemContext";
 import BlockchainContext from "../../context/blockchain/blockchainContext";
 import Item from "./item/Item";

@@ -13,7 +13,6 @@ import CopyRight from "../../components/copyRight/CopyRight";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated } = authContext;
 
   useEffect(() => {
     authContext.loadUser();

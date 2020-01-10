@@ -7,7 +7,6 @@ import {
   CANCEL_LOADING,
   RENT_PRODUCT
 } from "../actionTypes";
-import Items from "../../components/items/Items";
 
 export default (state, action) => {
   switch (action.type) {

@@ -43,7 +43,6 @@ const FormAddItem = props => {
     } else {
       editItem(props.id, newData);
       props.toggleFormDetails();
-      const changedID = props.id - 1;
       editProduct(
         props.id,
         data.title,

@@ -16,6 +16,7 @@ const Filter = (props) => {
     if(postalInput) {
       getUserByPostal(postalInput);
     }
+    // eslint-disable-next-line
   }, [postalInput])
 
   const handleChange = async (event) => {
