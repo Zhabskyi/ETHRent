@@ -139,7 +139,7 @@ const Item = props => {
               <>
                 <div>Phone number: {contacts?.phone_number}</div>
                 <div>Email: {contacts?.email}</div>
-                <Button onClick={() => rentProduct(id)} details>
+                <Button onClick={() => rentProduct(id)} details_lg>
                   Rent
                 </Button>
               </>

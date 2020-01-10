@@ -50,14 +50,14 @@
   border-color: $details-color;
   background-color: transparent;
   &_lg:hover {
-    color: $color-tertiary-dark;
-    background-color: $details-color;
-    border-color: $details-color;
+    color: $white;
+    background-color: $confirm-color;
+    border-color: $confirm-color;
     width: 8rem;
   }
   &_lg {
     color: $base-font-color;
-    border-color: $details-color;
+    border-color: $color-primary-dark;
     background-color: transparent;
     width: 8rem;
   }
