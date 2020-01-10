@@ -158,7 +158,7 @@ const Item = props => {
       </Modal>
       </div>
       
-      <Modal show={showFormModal} onClose={toggleFormDetails}>
+      <Modal show={showFormModal} onClose={toggleFormDetails} editClose>
         <FormAddItem
           toggleFormDetails={toggleFormDetails}
           id={id}

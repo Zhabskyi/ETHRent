@@ -35,7 +35,7 @@
       left: 0;
       height: 2px;
       width: 100%;
-      background-color: rgba(21, 72, 76, 0.6);
+      background-color: $confirm-color;
       display: block;
       position: absolute;
       top: 50%;
@@ -46,11 +46,16 @@
       left: 0;
       height: 2px;
       width: 100%;
-      background-color: rgba(21, 72, 76, 0.6);
+      background-color: $confirm-color;
       display: block;
       position: absolute;
       bottom: 50%;
       transform: translateY(50%) rotate(45deg);
     }
   }
+}
+
+.editClose {
+  top: 40px;
+  right: 25px;
 }
