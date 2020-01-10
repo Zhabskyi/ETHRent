@@ -81,18 +81,16 @@ const BlockchainState = props => {
       .createProduct(name, description, category, deposit, daily_rate)
       .send({ from: state.account })
       .once("receipt", receipt => {
-        console.log("RECEIPT received!");
+        cancelLoading();
+      })
+      .on("error", err => {
         cancelLoading();
       });
   };
 
   const rentProduct = id => {
     startLoading();
-    console.log("ACCOUNT", state.account);
-    console.log(id);
     const changedID = id - 1;
-    console.log(state.products[changedID]);
-    console.log("DEPOSIT", state.products[changedID].rentalDeposit);
     state.marketplace.methods
       .rentProduct(id)
       .send({
@@ -101,6 +99,9 @@ const BlockchainState = props => {
       })
       .once("receipt", receipt => {
         handleRentState(false, changedID);
+        cancelLoading();
+      })
+      .on("error", err => {
         cancelLoading();
       });
   };
@@ -121,24 +122,30 @@ const BlockchainState = props => {
         handleRentState(true, changedID);
         cancelLoading();
       });
+    cancelLoading();
   };
 
-  const editProduct = (id, name, description, category, deposit, daily_rate) => {
-    try {
-      startLoading();
-      const idString = id.toString();
-      state.marketplace.methods
-        .editProduct(idString, name, description, category, deposit, daily_rate)
-        .send({
-          from: state.account
-        })
-        .once("receipt", receipt => {
-          cancelLoading();
-        });
-    } catch (err) {
-      dispatch({ type: AUTH_ERROR });
-    }
-    
+  const editProduct = (
+    id,
+    name,
+    description,
+    category,
+    deposit,
+    daily_rate
+  ) => {
+    startLoading();
+    const idString = id.toString();
+    state.marketplace.methods
+      .editProduct(idString, name, description, category, deposit, daily_rate)
+      .send({
+        from: state.account
+      })
+      .once("receipt", receipt => {
+        cancelLoading();
+      })
+      .on("error", err => {
+        cancelLoading();
+      });
   };
 
   return (
@@ -149,6 +156,7 @@ const BlockchainState = props => {
         products: state.products,
         loading: state.loading,
         marketplace: state.marketplace,
+        error: state.error,
         setAccount,
         setMarketplace,
         setProductCount,

@@ -36,11 +36,11 @@ export default (state, action) => {
         products: [...state.products, action.payload],
         loading: false
       };
-      case RENT_PRODUCT:
-        return {
-          ...state,
-          products: [...action.payload ]
-        };
+    case RENT_PRODUCT:
+      return {
+        ...state,
+        products: [...action.payload]
+      };
     case SET_PRODUCTCOUNT:
       return {
         ...state,

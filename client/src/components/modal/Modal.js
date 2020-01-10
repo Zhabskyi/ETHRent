@@ -10,17 +10,15 @@ const Modal = props => {
     return null;
   }
 
-  const buttonClass = classNames (
+  const buttonClass = classNames(
     classes.close_button,
-    props.editClose ? classes.editClose : null,
-  )
+    props.editClose ? classes.editClose : null
+  );
 
-  const modalClass = classNames (
+  const modalClass = classNames(
     classes.modal,
     props.edit ? classes.edit : null
-  )
-
-  console.log('modal props', props)
+  );
 
   return (
     <>
