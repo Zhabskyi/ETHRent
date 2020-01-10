@@ -25,7 +25,7 @@ const PrivateItems = () => {
 
 
   return (
-    <>
+    <div className={classes.container}>
       {myItems !== null && !loading ? (
         <>
           {myItems.map(item => (
@@ -35,7 +35,7 @@ const PrivateItems = () => {
       ) : (
         <Spinner />
       )}
-    </>
+    </div>
   );
 };
 

@@ -115,8 +115,7 @@ const Item = props => {
               : unregistered
             : unregistered}
         </div>
-      </div>
-      <Modal show={showItemModal} onClose={toggleItemDetails}>
+        <Modal show={showItemModal} onClose={toggleItemDetails}>
         <div className={classes.details}>
           <div className={classes.details_container}>
             <h4 className={classes.details_container_title}>{title}</h4>
@@ -157,6 +156,8 @@ const Item = props => {
           </div>
         </div>
       </Modal>
+      </div>
+      
       <Modal show={showFormModal} onClose={toggleFormDetails}>
         <FormAddItem
           toggleFormDetails={toggleFormDetails}
