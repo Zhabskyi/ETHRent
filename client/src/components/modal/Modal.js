@@ -10,18 +10,25 @@ const Modal = props => {
     return null;
   }
 
-  const modalClass = classNames (
+  const buttonClass = classNames (
     classes.close_button,
     props.editClose ? classes.editClose : null,
   )
 
+  const modalClass = classNames (
+    classes.modal,
+    props.edit ? classes.edit : null
+  )
+
+  console.log('modal props', props)
+
   return (
     <>
       <Backdrop show={props.show} onClick={props.onClose} />
-      <div className={classes.modal}>
+      <div className={modalClass}>
         <div className={classes.content}>{props.children}</div>
         <div className={classes.actions}>
-          <Button className={modalClass} onClick={props.onClose}>
+          <Button className={buttonClass} onClick={props.onClose}>
             <span></span>
           </Button>
         </div>

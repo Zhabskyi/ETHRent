@@ -4,7 +4,7 @@ const FormConst = ({ props, register, errors, intialValues, classes }) => {
   return (
     <>
       <div>
-        <label htmlFor='daily_rate'>Day Rate</label>
+        <label htmlFor='daily_rate'>Day Rate (ETH)</label>
         <input
           defaultValue={props.daily_rate || intialValues.daily_rate}
           name='daily_rate'
@@ -14,7 +14,7 @@ const FormConst = ({ props, register, errors, intialValues, classes }) => {
       </div>
 
       <div>
-        <label htmlFor='deposit'>Deposit</label>
+        <label htmlFor='deposit'>Deposit (ETH)</label>
         <input
           defaultValue={props.deposit || intialValues.deposit}
           name='deposit'

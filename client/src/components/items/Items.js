@@ -35,18 +35,6 @@ const Items = () => {
     </>
   );
 
-  // const availableItems = (
-  //   <>
-  //     {products.id.rented !== true
-  //       ? items.map(item => <Item key={item.id} item={item} />)
-  //       : items.map(item =>
-  //           checkedCategory === item.category ? (
-  //             <Item key={item.id} item={item} />
-  //           ) : null
-  //         )}
-  //   </>
-  // );
-
   return (
     <>
       <Filter onFilter={onFilter} checkedCategory={checkedCategory} />
