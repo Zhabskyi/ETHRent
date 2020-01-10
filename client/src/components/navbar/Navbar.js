@@ -1,10 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import Button from "../button/Button";
+import SideDrawer from "../sideDrawer/SideDrawer";
+import MenuToggle from "../menuToggle/MenuToggle";
 
 const Navbar = ({ title }) => {
+
+  const [showSideDrawer, setState] = useState(false);
+
+  const sideDrawerClosedHandler = () => {
+    setState(false);
+  };
+
+  const sideDrawerToggleHandler = () => {
+    setState(!showSideDrawer);
+  };
+
   const authContext = useContext(AuthContext);
 
   const { isAuthenticated, logout, user, loadUser } = authContext;
@@ -57,6 +70,12 @@ const Navbar = ({ title }) => {
       <ul className={classes.nav__list}>
         {isAuthenticated ? linksUser : linksUnregistered}
       </ul>
+      <MenuToggle onClick={sideDrawerToggleHandler} />
+      <SideDrawer
+        open={showSideDrawer}
+        closed={sideDrawerClosedHandler}
+        onClick={sideDrawerClosedHandler}
+      />
     </div>
   );
 };

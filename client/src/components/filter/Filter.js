@@ -13,8 +13,9 @@ const Filter = (props) => {
   const [postalInput, setPostalInput] = useState('');
 
   useEffect(() => {
-    console.log('postalInput', postalInput)
-    getUserByPostal(postalInput) 
+    if(postalInput) {
+      getUserByPostal(postalInput);
+    }
   }, [postalInput])
 
   const handleChange = async (event) => {
