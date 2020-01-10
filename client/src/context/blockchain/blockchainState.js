@@ -10,7 +10,8 @@ import {
   SET_PRODUCTCOUNT,
   ADD_PRODUCT,
   CANCEL_LOADING,
-  RENT_PRODUCT
+  RENT_PRODUCT,
+  AUTH_ERROR
 } from "../actionTypes";
 
 const BlockchainState = props => {
@@ -80,7 +81,7 @@ const BlockchainState = props => {
       .createProduct(name, description, category, deposit, daily_rate)
       .send({ from: state.account })
       .once("receipt", receipt => {
-        console.log("RECEIP recived!");
+        console.log("RECEIPT received!");
         cancelLoading();
       });
   };
@@ -123,16 +124,21 @@ const BlockchainState = props => {
   };
 
   const editProduct = (id, name, description, category, deposit, daily_rate) => {
-    startLoading();
-    const idString = id.toString();
-    state.marketplace.methods
-      .editProduct(idString, name, description, category, deposit, daily_rate)
-      .send({
-        from: state.account
-      })
-      .once("receipt", receipt => {
-        cancelLoading();
-      });
+    try {
+      startLoading();
+      const idString = id.toString();
+      state.marketplace.methods
+        .editProduct(idString, name, description, category, deposit, daily_rate)
+        .send({
+          from: state.account
+        })
+        .once("receipt", receipt => {
+          cancelLoading();
+        });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
+    }
+    
   };
 
   return (
