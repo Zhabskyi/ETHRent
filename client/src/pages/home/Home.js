@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./Home.module.scss";
 import Items from "../../components/items/Items";
+import Receipt from "../../components/receipt/Receipt";
 import AuthContext from "../../context/auth/authContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -54,6 +55,7 @@ const Home = () => {
       <div className={classes.container}>
         <Items />
       </div>
+      <Receipt />
       <CopyRight>All Rights Reserved</CopyRight>
     </>
   );

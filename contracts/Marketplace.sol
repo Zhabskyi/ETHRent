@@ -42,6 +42,7 @@ contract Marketplace {
     string name,
     uint rentalDeposit,
     uint rentalCost,
+    uint returnedDeposit,
     address payable owner,
     address payable borrower,
     address custodian,
@@ -165,13 +166,16 @@ contract Marketplace {
     // Pay the owner by sending them Ether
     address(_owner).transfer(rentalCost);
     // Return remaining deposit to the borrower
-    address(_borrower).transfer(_product.rentalDeposit - rentalCost);
+    uint returnedDeposit;
+    returnedDeposit = _product.rentalDeposit - rentalCost;
+    address(_borrower).transfer(returnedDeposit);
     // Trigger an event
     emit ProductReturned(
       productCount,
       _product.name,
       _product.rentalDeposit,
       rentalCost,
+      returnedDeposit,
       _product.owner,
       _borrower,
       _product.custodian,
