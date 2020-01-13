@@ -155,6 +155,7 @@ contract Marketplace {
     // rentalDays = 2; // Hard code rentalDays for testing
     uint rentalCost;
     rentalCost = _rentalDays * _product.rentalFee;
+    rentalCost = _product.rentalDeposit <= rentalCost ? _product.rentalDeposit : rentalCost; // x <= y ? x : y
     // Transfer responsibility back to owner
     _product.custodian = _product.owner;
     // Mark as rented

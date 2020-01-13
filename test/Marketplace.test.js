@@ -109,16 +109,21 @@ describe('products', async () => {
     oldBorrowerBalance = new web3.utils.BN(oldBorrowerBalance)
 
     // SUCCESS: Owner accepts return of object
-    result = await marketplace.returnProduct(productCount, 2, { from: owner })
+    result = await marketplace.returnProduct(productCount, 8, { from: owner })
+    // result2 = await marketplace.returnProduct(productCount, 8, { from: owner })
 
     // Check logs
     const event = result.logs[0].args
+    // const event2 = result2.logs[0].args
     console.log('rentalCost', event.rentalCost)
     console.log('rentalDays', event.rentalDays)
     assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
     assert.equal(event.name, 'Table Saw', 'name is correct')
     assert.equal(event.custodian, owner, 'custodian is correct')
     assert.equal(event.rented, false, 'rented is correct')
+    assert.equal(event.rentalCost, web3.utils.toWei('5', 'Ether'), "rentalCost is correct")
+    // assert.equal(event2.rentalCost, '5', 'min deposit is correct')
+
 
     // Track the owner balance after return
     let newOwnerBalance
