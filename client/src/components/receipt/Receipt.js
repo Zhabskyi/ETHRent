@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useContext } from "react";
+import Web3 from "web3";
 
 import classes from "./Receipt.module.scss";
 
@@ -12,26 +12,28 @@ const Receipt = props => {
   const blockchainContext = useContext(BlockchainContext);
 
   const {
-    rentProduct,
-    returnProduct,
-    products,
-    account,
     showReceiptModal,
     toggleReceiptDetails,
     receipt,
   } = blockchainContext;
 
+  console.log('receipt', receipt)
+
   return (
     <>
       {receipt !== null ? 
       <Modal show={showReceiptModal} onClose={toggleReceiptDetails}>
-        <div className={classes.details}>
-          <div className={classes.details_container}>
-            <h4 className={classes.details_container_title}>{receipt.name}</h4>
-            <h5 className={classes.details_container_heading}>Total Rental Fees</h5>
-            <p>{receipt.rentalCost} ETH</p>
-            <h5 className={classes.details_container_heading}>Returned Deposit</h5>
-            <p>{receipt.returnedDeposit} ETH</p>
+        <div className={classes.container}>
+          <div className={classes.receipt}>
+            <h4 className={classes.receipt_title}>{receipt.name}</h4>
+            <p>Congratulations on your renting your item!</p>
+            <p>The final transaction details are below:</p>
+            <h5 className={classes.receipt_heading}>Days Rented</h5>
+            <p>{receipt.rentalDays}</p>
+            <h5 className={classes.receipt_heading}>Total Rental Fees</h5>
+            <p>{Web3.utils.fromWei(receipt.rentalCost, "Ether")} ETH</p>
+            <h5 className={classes.receipt_heading}>Returned Deposit</h5>
+            <p>{Web3.utils.fromWei(receipt.returnedDeposit, "Ether")} ETH</p>
           </div>
           <Button onClick={toggleReceiptDetails} details_lg>
             Close
