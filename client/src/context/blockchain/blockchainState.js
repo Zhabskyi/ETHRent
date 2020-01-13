@@ -128,6 +128,7 @@ const BlockchainState = props => {
         from: state.account
       })
       .once("receipt", receipt => {
+        console.log("receipt", receipt);
         handleRentState(true, changedID);
         cancelLoading();
       });

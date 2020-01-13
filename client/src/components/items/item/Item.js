@@ -1,17 +1,10 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faInfoCircle,
-  faEdit
-} from "@fortawesome/free-solid-svg-icons";
-
 import classes from "./Item.module.scss";
-
-import Button from "../../button/Button";
 import Modal from "../../modal/Modal";
 import FormAddItem from "../../form/FormAddItem";
+import ItemDetails from "../itemDetails/ItemDetails";
+import ItemActionControls from "../itemActionControls/ItemActionControls";
 import AuthContext from "../../../context/auth/authContext";
 import ItemContext from "../../../context/Item/ItemContext";
 import BlockchainContext from "../../../context/blockchain/blockchainContext";
@@ -37,11 +30,6 @@ const Item = props => {
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
-  const [showContact, setContacts] = useState(false);
-
-  const deleteHandler = () => {
-    deleteItem(id, user_id);
-  };
 
   const toggleItemDetails = () => {
     getUserItemDetails(user_id);
@@ -51,43 +39,6 @@ const Item = props => {
   const toggleFormDetails = () => {
     setForm(!showFormModal);
   };
-
-  const showContacts = () => {
-    setContacts(!showContact);
-  };
-
-  const registered = (
-    <div className={classes.controls}>
-      <Button onClick={toggleItemDetails} details>
-        <FontAwesomeIcon icon={faInfoCircle} />
-      </Button>
-      <Button onClick={deleteHandler} danger>
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>
-      <Button onClick={toggleFormDetails} edit>
-        <FontAwesomeIcon icon={faEdit} />
-      </Button>
-    </div>
-  );
-
-  const unregistered = (
-    <div className={classes.controls}>
-      <Button onClick={toggleItemDetails} details>
-        <FontAwesomeIcon icon={faInfoCircle} />
-      </Button>
-    </div>
-  );
-
-  const rented = (
-    <div className={classes.container_rented}>
-      <h6 className={classes.container_rented_heading}>Currently Rented</h6>
-      {account === products[id - 1]?.owner ? (
-        <Button onClick={() => returnProduct(id)} details_lg>
-          Return
-        </Button>
-      ) : null}
-    </div>
-  );
   return (
     <>
       <div className={classes.container}>
@@ -111,64 +62,29 @@ const Item = props => {
               <p>{category}</p>
             </div>
           </div>
-
-          {products[id - 1]?.rented
-            ? rented
-            : user !== null
-            ? ((user.id === user_id) && (account === products[id - 1]?.owner))
-              ? registered
-              : unregistered
-            : unregistered}
+          <ItemActionControls
+            id={id}
+            user_id={user_id}
+            user={user}
+            toggleItemDetails={toggleItemDetails}
+            toggleFormDetails={toggleFormDetails}
+            deleteItem={deleteItem}
+            account={account}
+            products={products}
+            returnProduct={returnProduct}
+          />
         </div>
       </div>
       <Modal show={showItemModal} onClose={toggleItemDetails}>
-        <div className={classes.details}>
-          <div className={classes.details_container}>
-            <h4 className={classes.details_container_title}>{title}</h4>
-            <h5 className={classes.details_container_heading}>Description</h5>
-            <p>{description}</p>
-            <h5 className={classes.details_container_heading}>Daily Rate</h5>
-            <p>{daily_rate} ETH</p>
-            <h5 className={classes.details_container_heading}>Deposit</h5>
-            <p>{deposit} ETH</p>
-          </div>
-          <div className={classes.details_images}>
-            <div className={classes.photo_modal}>
-              <img src={photo} alt='item' className={classes.photo_modal} />
-            </div>
-            <div>
-              <img
-                src={contacts?.map}
-                alt='map'
-                className={classes.details_images_map}
-              />
-            </div>
-          </div>
-          <div className={classes.actions}>
-            {showContact && user?.id !== user_id ? (
-              <>
-                <div>Phone number: {contacts?.phone_number}</div>
-                <div>Email: {contacts?.email}</div>
-                {account !== products[id - 1]?.owner ? (
-                  <Button onClick={() => rentProduct(id)} details_lg>
-                    Rent
-                  </Button>
-                ) : null}
-              </>
-            ) : showContact ? (
-              <>
-                <div>Phone number: {contacts?.phone_number}</div>
-                <div>Email: {contacts?.email}</div>
-              </>
-            ) : (
-              <Button onClick={showContacts} details_lg>
-                Contact info
-              </Button>
-            )}
-          </div>
-        </div>
+        <ItemDetails
+          item={props.item}
+          user={user}
+          contacts={contacts}
+          account={account}
+          products={products}
+          rentProduct={rentProduct}
+        />
       </Modal>
-
       <Modal show={showFormModal} onClose={toggleFormDetails} editClose edit>
         <FormAddItem
           toggleFormDetails={toggleFormDetails}
