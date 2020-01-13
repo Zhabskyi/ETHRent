@@ -5,7 +5,9 @@ import {
   SET_PRODUCTCOUNT,
   ADD_PRODUCT,
   CANCEL_LOADING,
-  RENT_PRODUCT
+  RENT_PRODUCT,
+  TOGGLE_RECEIPT,
+  SET_RECEIPT
 } from "../actionTypes";
 
 export default (state, action) => {
@@ -45,6 +47,16 @@ export default (state, action) => {
       return {
         ...state,
         productCount: action.payload
+      };
+    case TOGGLE_RECEIPT:
+      return {
+        ...state,
+        showReceiptModal: !state.showReceiptModal
+      };
+    case SET_RECEIPT:
+      return {
+        ...state,
+        receipt: action.payload
       };
     default:
       return state;

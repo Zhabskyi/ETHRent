@@ -11,7 +11,8 @@ import {
   ADD_PRODUCT,
   CANCEL_LOADING,
   RENT_PRODUCT,
-  AUTH_ERROR
+  TOGGLE_RECEIPT,
+  SET_RECEIPT
 } from "../actionTypes";
 
 const BlockchainState = props => {
@@ -20,7 +21,9 @@ const BlockchainState = props => {
     productCount: 0,
     products: [],
     loading: true,
-    marketplace: null
+    marketplace: null,
+    showReceiptModal: false,
+    receipt: null,
   };
 
   const [state, dispatch] = useReducer(blockchainReducer, initialState);
@@ -64,6 +67,19 @@ const BlockchainState = props => {
       type: CANCEL_LOADING
     });
   };
+
+  const toggleReceiptDetails = () => {
+    dispatch({
+      type: TOGGLE_RECEIPT
+    });
+  };
+
+  const setReceiptDetails = (receipt) => {
+    dispatch({
+      type: SET_RECEIPT,
+      payload: receipt
+    })
+  }
 
   const handleRentState = (status, changedID) => {
     const rentItem = { ...state.products[changedID], rented: !status };
@@ -128,9 +144,14 @@ const BlockchainState = props => {
         from: state.account
       })
       .once("receipt", receipt => {
+        console.log('rentalCost', receipt.events.ProductReturned.returnValues.rentalCost)
+        setReceiptDetails(receipt.events.ProductReturned.returnValues)
         handleRentState(true, changedID);
         cancelLoading();
-      });
+      })
+      .then(() => {
+        toggleReceiptDetails();
+      })
     cancelLoading();
   };
 
@@ -166,6 +187,8 @@ const BlockchainState = props => {
         loading: state.loading,
         marketplace: state.marketplace,
         error: state.error,
+        showReceiptModal: state.showReceiptModal,
+        receipt: state.receipt,
         setAccount,
         setMarketplace,
         setProductCount,
@@ -175,7 +198,8 @@ const BlockchainState = props => {
         createProduct,
         rentProduct,
         returnProduct,
-        editProduct
+        editProduct,
+        toggleReceiptDetails
       }}
     >
       {props.children}
