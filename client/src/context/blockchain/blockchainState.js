@@ -81,6 +81,15 @@ const BlockchainState = props => {
       .createProduct(name, description, category, deposit, daily_rate)
       .send({ from: state.account })
       .once("receipt", receipt => {
+        const newProduct = {
+          name,
+          description,
+          category,
+          deposit,
+          daily_rate,
+          owner: state.account
+        };
+        addProduct(newProduct);
         cancelLoading();
       })
       .on("error", err => {
