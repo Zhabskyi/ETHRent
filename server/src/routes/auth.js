@@ -5,9 +5,7 @@ const config = require("config");
 const auth = require("../middleware/auth");
 const database = require("../db/database.js");
 
-// @route     GET api/auth
-// @desc      Get logged in user
-// @access    Private
+//Get logged in user
 
 module.exports = db => {
   router.get("/auth", auth, async (req, res) => {
@@ -20,9 +18,7 @@ module.exports = db => {
     }
   });
 
-  // @route     POST api/auth
-  // @desc      Auth user & get token
-  // @access    Public
+  // Authorize user and get token
   router.post("/auth", async (req, res) => {
     try {
       let user = await database.getUserByEmail(db, req.body.email);

@@ -25,7 +25,7 @@ const Form = props => {
     email: "",
     password: ""
   };
-  
+
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -60,7 +60,6 @@ const Form = props => {
             Password should be more then 5 characters
           </p>
         )}
-
         <input type='submit' />
       </form>
     </div>

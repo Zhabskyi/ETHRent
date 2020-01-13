@@ -1,4 +1,4 @@
-@import '../../styles/core.scss';
+@import "../../styles/core.scss";
 
 .container {
   max-width: 400px;
@@ -24,7 +24,8 @@
   content: "⚠ ";
 }
 
-input, select {
+input,
+select {
   display: block;
   box-sizing: border-box;
   width: 70%;
@@ -34,7 +35,7 @@ input, select {
   padding: 10px 15px;
   margin: 0 auto 10px auto;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: $base-font-color;
   background-color: $color-primary-light;
 }
@@ -48,7 +49,7 @@ label {
   margin-top: 0px;
   padding-top: 20px;
   color: $color-primary-light;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: $font-size-small;
   font-weight: 300;
 }
@@ -100,8 +101,6 @@ button[type="button"] {
   border-radius: 4px;
 }
 
-
-
 //////////////Download file styles
 [type="file"] {
   height: 0;
@@ -120,30 +119,29 @@ button[type="button"] {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-	font-size: inherit;
+  font-size: inherit;
   outline: none;
   letter-spacing: 2px;
   position: relative;
   transition: all 0.3s;
 
-  
   &:hover {
     background-color: darken(#f15d22, 10%);
   }
-  
+
   &.btn_3 {
     text-align: center;
     width: 70%;
     background-color: $color-tertiary-light;
     overflow: hidden;
-    
+
     span {
       display: inline-block;
       height: 100%;
       transition: all 0.3s;
       width: 100%;
     }
-    
+
     &::before {
       color: #fff;
       content: "\f255";
@@ -156,16 +154,15 @@ button[type="button"] {
       top: -180%;
       transition: all 0.3s;
       padding-left: 20px;
-      //width: 100%;
     }
 
     &:hover {
       background-color: darken(#ee6d9e, 30%);
-      
+
       span {
         transform: translateY(300%);
       }
-        
+
       &::before {
         top: 0;
       }
@@ -175,7 +172,7 @@ button[type="button"] {
 
 .file_container {
   text-align: center;
-  &_name{
+  &_name {
     padding-top: 10px;
     padding-left: 60px;
     display: block;

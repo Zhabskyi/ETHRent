@@ -1,4 +1,3 @@
-// import axios from '../utils/axios-instance';
 import axios from 'axios';
 
 const setAuthToken = token => {

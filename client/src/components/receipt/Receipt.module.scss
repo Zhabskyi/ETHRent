@@ -7,32 +7,27 @@
 
   .receipt {
     margin: 30px 70px;
-  
-      &_title {
-        color: $color-primary-dark;
-        margin-bottom: 25px;
-      }
-  
-      &_heading {
-        // display: inline-block;
-        font-size: 18px;
-        color: $base-font-color;
-        margin-top: 5px;
-        margin-bottom: 0px;
-        margin-right: 10px;
-        text-align: center;
-      }
-      & > p {
-        // display: inline-block;
-        font-family: "Montserrat", sans-serif;
-        color: $color-primary-dark;
-        font-size: 16px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        text-align: center;
-      }
-    
+
+    &_title {
+      color: $color-primary-dark;
+      margin-bottom: 25px;
+    }
+
+    &_heading {
+      font-size: 18px;
+      color: $base-font-color;
+      margin-top: 5px;
+      margin-bottom: 0px;
+      margin-right: 10px;
+      text-align: center;
+    }
+    & > p {
+      font-family: "Montserrat", sans-serif;
+      color: $color-primary-dark;
+      font-size: 16px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      text-align: center;
+    }
   }
-
 }
-

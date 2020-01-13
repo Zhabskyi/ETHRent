@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-
 import BlockchainContext from "./blockchainContext";
 import blockchainReducer from "./blockchainReducer";
 
@@ -23,7 +22,7 @@ const BlockchainState = props => {
     loading: true,
     marketplace: null,
     showReceiptModal: false,
-    receipt: null,
+    receipt: null
   };
 
   const [state, dispatch] = useReducer(blockchainReducer, initialState);
@@ -74,12 +73,12 @@ const BlockchainState = props => {
     });
   };
 
-  const setReceiptDetails = (receipt) => {
+  const setReceiptDetails = receipt => {
     dispatch({
       type: SET_RECEIPT,
       payload: receipt
-    })
-  }
+    });
+  };
 
   const handleRentState = (status, changedID) => {
     const rentItem = { ...state.products[changedID], rented: !status };
@@ -144,14 +143,13 @@ const BlockchainState = props => {
         from: state.account
       })
       .once("receipt", receipt => {
-        console.log('rentalCost', receipt.events.ProductReturned.returnValues.rentalCost)
-        setReceiptDetails(receipt.events.ProductReturned.returnValues)
+        setReceiptDetails(receipt.events.ProductReturned.returnValues);
         handleRentState(true, changedID);
         cancelLoading();
       })
       .then(() => {
         toggleReceiptDetails();
-      })
+      });
     cancelLoading();
   };
 

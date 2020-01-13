@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-// import axios from "../../utils/axios-instance";
 import axios from "axios";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
@@ -50,7 +49,6 @@ const AuthState = props => {
         type: REGISTER_SUCCESS,
         payload: res.data
       });
-
       loadUser();
     } catch (err) {
       dispatch({
