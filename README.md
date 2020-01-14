@@ -27,7 +27,7 @@ Admin page showing the results:
 
 **_BEWARE:_ This project was published for learning purposes. It is _not_ intended for use in production-grade software.**
 
-This project was created and published by !!!!!! as part of our learnings at Lighthouse Labs. 
+This project was created and published by [Zhabskyi](https://github.com/Zhabskyi) and myself as part of our learnings at Lighthouse Labs. 
 
 ## Key Features
 
