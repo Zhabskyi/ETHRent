@@ -25,7 +25,7 @@ const Navbar = props => {
     delete axios.defaults.headers.common['x-auth-token'];
     axios
       .get(
-        "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=TXW4MT24GNRDX87EI79VGZKDQIEYTBK8N6",
+        `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${process.env.ETHER_KEY}`,
       )
       .then(res => {
         setEthPrice(res.data.result.ethusd)
