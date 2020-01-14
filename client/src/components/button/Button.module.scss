@@ -40,6 +40,18 @@
   background-color: transparent;
 }
 
+.cancel {
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: $base-font-color;
+  border-color: $color-primary;
+  background-color: transparent;
+  &:hover {
+    color: $white;
+    background-color: $color-primary;
+  }
+}
+
 .details {
   border: 0;
   font-size: 1.2rem;

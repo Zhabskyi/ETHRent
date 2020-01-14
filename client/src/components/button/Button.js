@@ -9,6 +9,7 @@ const Button = props => {
     props.className, 
     props.confirm ? classes.confirm :
     props.danger ? classes.danger :
+    props.cancel ? classes.cancel :
     props.edit ? classes.edit :
     props.details ? classes.details :
     props.details_lg ? classes.details_lg : null
