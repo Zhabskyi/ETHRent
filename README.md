@@ -6,7 +6,7 @@ The overall intent of this application is to have a collection of items which ar
 
 Instead of purchasing a new item when it is only needed for a short amount of time, or avoiding the hassle of dealing with distant rental stores, users will have the ability to rent what they need from within their own community. They will be able to do this in a trust-less environment where are transaction information, including the deposit, is stored on the Ethereurm blockchain.
 
-For the owners of various items, this applicaiton will allow them to earn Ether for things which would otherwise be sitting idle.
+For the owners of various items, this application will allow them to earn Ether for things which would otherwise be sitting idle.
 
 ## Final Product
 
@@ -53,7 +53,7 @@ Over time, the following additional features would improve the ethRent app:
 * Add web sockets so that state can be updated for all users when it is changed for one user
 * Have the location search based on distance, rather than a progressively defined postal code
 * Allow the owner to add "damages" to the rental fees they collect if the item is returned in the same state as when it was rented
-* If the user does not have a browser which supports an ethereum client (i.e. Meta-Mask), show a screen outlining the instructions to install one and obtain their initial Ether
+* If the user does not have a browser which supports an Ethereum client (i.e. Meta-Mask), show a screen outlining the instructions to install one and obtain their initial Ether
 * Link to an Ether provider (i.e. Shake Pay) in order for a user to get more Ether when needed
 
 
