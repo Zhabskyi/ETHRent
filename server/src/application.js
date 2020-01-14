@@ -40,16 +40,15 @@ module.exports = function application(ENV) {
   app.use("/api", items(db));
   app.use("/api", transactions(db));
 
-  if (ENV === "development" || ENV === "production") {
+  if (ENV === "development" || ENV === "test") {
     Promise.all([
       read(path.resolve(__dirname, `db/schema/create.sql`)),
-      //Don't need to seed
-      // read(path.resolve(__dirname, `db/schema/${ENV}.sql`))
+      read(path.resolve(__dirname, `db/schema/${ENV}.sql`))
     ])
       .then(([create, seed]) => {
         app.get("/api/debug/reset", (request, response) => {
           db.query(create)
-            // .then(() => db.query(seed))
+            .then(() => db.query(seed))
             .then(() => {
               console.log("Database Reset");
               response.status(200).send("Database Reset");

@@ -1,0 +1,7 @@
+{
+  "PGDATABASE": "final",
+  "PGHOST": "localhost",
+  "PGUSER": "ethrent",
+  "PGPASSWORD": "ethrent",
+  "jwtSecret": "secret"
+}
