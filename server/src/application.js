@@ -13,7 +13,6 @@ const db = require("./db");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const items = require("./routes/items");
-const transactions = require("./routes/transactions");
 
 function read(file) {
   return new Promise((resolve, reject) => {
@@ -38,7 +37,6 @@ module.exports = function application(ENV) {
   app.use("/api", auth(db));
   app.use("/api", users(db));
   app.use("/api", items(db));
-  app.use("/api", transactions(db));
 
   if (ENV === "development" || ENV === "test") {
     Promise.all([

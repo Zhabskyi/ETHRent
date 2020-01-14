@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import classes from "../item/Item.module.scss";
-
 import Button from "../../button/Button";
 
 const ItemDetails = props => {

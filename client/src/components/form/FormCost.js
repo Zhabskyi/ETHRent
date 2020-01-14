@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./Form.module.scss";
 
 const FormConst = ({ props, register, errors, intialValues, classes }) => {
   return (

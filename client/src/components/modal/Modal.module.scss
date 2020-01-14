@@ -5,13 +5,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // position: absolute;
   z-index: 200;
   min-width: 350px;
   background: white;
   border: 1px solid #ccc;
   transition: 2s ease-out;
-  box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
+  box-shadow: 2rem 2rem 2rem rgba(black, 0.2);
   @include md {
     max-width: 600px;
     max-height: 600px;

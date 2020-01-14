@@ -5,9 +5,7 @@ const config = require("config");
 const auth = require("../middleware/auth");
 const database = require("../db/database.js");
 
-// @route     GET api/auth
-// @desc      Get logged in user
-// @access    Private
+// get user api/auth, private
 
 module.exports = db => {
   router.get("/auth", auth, async (req, res) => {
@@ -15,14 +13,11 @@ module.exports = db => {
       const user = await database.getUserById(db, req.user.id);
       res.json(user);
     } catch (err) {
-      //console.error(err.message);
       res.status(500).send("Server Error");
     }
   });
 
-  // @route     POST api/auth
-  // @desc      Auth user & get token
-  // @access    Public
+  // add user post api/auth, public
   router.post("/auth", async (req, res) => {
     try {
       let user = await database.getUserByEmail(db, req.body.email);
@@ -62,7 +57,6 @@ module.exports = db => {
         }
       );
     } catch (err) {
-      console.error(err.message);
       res.status(500).send("Server Error");
     }
   });
