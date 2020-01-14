@@ -5,6 +5,7 @@ import ItemContext from "../../context/Item/ItemContext";
 import AuthContext from "../../context/auth/authContext";
 import Item from "./item/Item";
 import Spinner from "../spinner/Spinner";
+import Receipt from "../receipt/Receipt";
 
 const PrivateItems = () => {
   const itemContext = useContext(ItemContext);
@@ -35,6 +36,7 @@ const PrivateItems = () => {
       ) : (
         <Spinner />
       )}
+      <Receipt />
     </div>
   );
 };
