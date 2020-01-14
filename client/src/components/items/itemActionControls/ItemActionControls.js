@@ -22,6 +22,19 @@ const ItemActionControls = props => {
     toggleConfirmDelete
   } = props;
 
+  const daysRented = function(id) {
+    const endDate = Date.now() / 1000; // JS is in milliseconds
+    let rentalDays =
+      (Math.trunc(endDate) - props.products[id - 1].rentalStart) / 86400;
+    if (rentalDays < 1) {
+      rentalDays = 'less than 1 day'
+    } else if (Math.floor(rentalDays) === 1) {
+      rentalDays = '1 day'
+    } else {
+      rentalDays = `${Math.floor(rentalDays)} days`
+    }
+    return rentalDays
+  }
 
   const registered = (
     <div className={classes.controls}>
@@ -49,9 +62,12 @@ const ItemActionControls = props => {
     <div className={classes.container_rented}>
       <h6 className={classes.container_rented_heading}>Currently Rented</h6>
       {account === products[id - 1]?.owner ? (
-        <Button onClick={() => returnProduct(id)} details_lg>
-          Return
-        </Button>
+        <>
+          <span className={classes.container_rented_heading_days}>for {daysRented(id)}</span>
+          <Button onClick={() => returnProduct(id)} details_lg>
+            Return
+          </Button>
+        </>
       ) : null}
     </div>
   );
