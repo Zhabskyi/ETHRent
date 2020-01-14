@@ -9,7 +9,7 @@ describe("Users", () => {
   });
 
   afterEach(async () => {
-    await request(app).post("/api/debug/reset");
+    await request(app).post("/debug/reset");
   });
 
   afterAll(async () => {
@@ -48,4 +48,16 @@ describe("Users", () => {
         }
       ]);
   });
+
+  test("GET /api/users/postal/:postalCode", async () => {
+    const postal = 'T3H5X5';
+    await request(app)
+      .get(`/api/users/postal/${postal}`)
+      .expect(200, [
+        {
+         "id": 1
+        }
+      ]);
+  });
+
 });
