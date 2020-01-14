@@ -157,3 +157,17 @@
   }
   
 }
+
+.delete_confirm {
+  margin: 70px 100px 40px 100px;
+  &_text {
+    font-size: $font-size-lage;
+    color: $color-primary-dark;
+    text-align: center;
+  }
+  &_actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly ;
+  }
+}

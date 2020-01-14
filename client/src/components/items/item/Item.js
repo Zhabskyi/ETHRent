@@ -109,14 +109,16 @@ const Item = props => {
         />
       </Modal>
       <Modal show={showDeleteConfirm} onClose={toggleConfirmDelete}>
-        <div>
-          <div>Are you sure that want to delete the item?</div>
-          <Button onClick={toggleConfirmDelete} cancel>
-            Cancel
-          </Button>
-          <Button onClick={deleteHandler} confirm>
-            Confirm
-          </Button>
+        <div className={classes.delete_confirm}>
+          <div className={classes.delete_confirm_text}>Are you sure that you want to delete this item?</div>
+          <div className={classes.delete_confirm_actions}>
+            <Button onClick={toggleConfirmDelete} cancel>
+              Cancel
+            </Button>
+            <Button onClick={deleteHandler} confirm>
+              Confirm
+            </Button>
+          </div>
         </div>
       </Modal>
     </>

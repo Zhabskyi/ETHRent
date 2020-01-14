@@ -30,6 +30,11 @@
   color: $color-secondary-dark;
   border-color: $danger-color;
   background-color: transparent;
+  &:hover {
+    color: $danger-color;
+    border:none;
+    background-color: transparent;
+  }
 }
 
 .confirm {
@@ -38,6 +43,11 @@
   color: $base-font-color;
   border-color: $color-primary-dark;
   background-color: transparent;
+  &:hover {
+    color: $white;
+    background-color: $confirm-color;
+  }
+  
 }
 
 .cancel {
@@ -61,6 +71,11 @@
   color: $color-secondary-dark;
   border-color: $details-color;
   background-color: transparent;
+  &:hover {
+    color: $color-tertiary-dark;
+    background-color: transparent;
+    border:none;
+  }
   &_lg:hover {
     color: $white;
     background-color: $confirm-color;
@@ -84,27 +99,11 @@
   color: $color-secondary-dark;
   border-color: $details-color;
   background-color: transparent;
-}
-
-.details:hover {
-  color: $color-tertiary-dark;
-  background-color: $white;
-  border:none;
-}
-
-.danger:hover {
-  color: $danger-color;
-  border:none;
-}
-
-.edit:hover {
-  color: $color-tertiary-dark;
-  border:none;
-}
-
-.confirm:hover {
-  color: $white;
-  background-color: $confirm-color;
+  &:hover {
+    color: $color-tertiary-dark;
+    background-color: transparent;
+    border:none;
+  }
 }
 
 .button:last-of-type {
