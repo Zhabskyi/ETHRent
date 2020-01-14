@@ -1,8 +1,9 @@
 @import '../../styles/core.scss';
 .nav {
   margin: 0 auto;
+  position: relative;
   background-color: $color-primary-light;
-  font-size: $font-size-lage;
+  font-size: $font-size-large;
 	display: flex;
 	justify-content: space-between;
   width: 100%;
@@ -40,4 +41,12 @@
 .nav_side {
   display: flex;
   flex-direction: column;
+}
+
+.eth {
+  position: absolute;
+  right: 18px;
+  top: 5px;
+  color: $color-primary-dark;
+  font-size: 15px;
 }

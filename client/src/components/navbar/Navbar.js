@@ -45,8 +45,8 @@ const Navbar = props => {
         user={user}
         isAuthenticated={isAuthenticated}
         logout={logout}
+        ethPrice={ethPrice}
       />
-      <span>ETH Price : {ethPrice}</span>
     </nav>
   );
 };

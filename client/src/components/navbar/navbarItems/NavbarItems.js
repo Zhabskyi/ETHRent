@@ -56,6 +56,9 @@ const NavbarItems = props => {
       <ul className={classes.nav__list}>
         {isAuthenticated ? linksUser : linksUnregistered}
       </ul>
+      <span className={classes.eth}>
+        ETH: ${props.ethPrice} USD
+      </span>
     </>
   );
 };
