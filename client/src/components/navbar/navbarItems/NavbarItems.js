@@ -11,7 +11,7 @@ const NavbarItems = props => {
     if (!isAuthenticated) {
       props.history.push("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, props.history]);
 
   const linksUser = (
     <>
