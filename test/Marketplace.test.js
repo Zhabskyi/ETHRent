@@ -80,12 +80,7 @@ describe('products', async () => {
     let deposit 
     deposit = web3.utils.toWei('5', 'Ether')
     deposit = new web3.utils.BN(deposit)
-
-    const expectedBalance = oldBorrowerBalance - deposit
-    // console.log('newBB', web3.utils.fromWei(newBorrowerBalance.toString(), 'ether'))
-    // console.log('expected', web3.utils.fromWei(expectedBalance.toString(), 'ether'))
     assert.notEqual(newBorrowerBalance.toString(), oldBorrowerBalance.toString())
-    // assert.equal(newBorrowerBalance.toString(), expectedBalance.toString())
 
     // FAILURE: Tries to rent a product that does not exist, i.e. product must have valid id
     await marketplace.rentProduct(99, { from: borrower, value: web3.utils.toWei('5', 'Ether')}).should.be.rejected;
@@ -110,20 +105,14 @@ describe('products', async () => {
 
     // SUCCESS: Owner accepts return of object
     result = await marketplace.returnProduct(productCount, 8, { from: owner })
-    // result2 = await marketplace.returnProduct(productCount, 8, { from: owner })
 
     // Check logs
     const event = result.logs[0].args
-    // const event2 = result2.logs[0].args
-    console.log('rentalCost', event.rentalCost)
-    console.log('rentalDays', event.rentalDays)
     assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct')
     assert.equal(event.name, 'Table Saw', 'name is correct')
     assert.equal(event.custodian, owner, 'custodian is correct')
     assert.equal(event.rented, false, 'rented is correct')
     assert.equal(event.rentalCost, web3.utils.toWei('5', 'Ether'), "rentalCost is correct")
-    // assert.equal(event2.rentalCost, '5', 'min deposit is correct')
-
 
     // Track the owner balance after return
     let newOwnerBalance
@@ -135,27 +124,12 @@ describe('products', async () => {
     newBorrowerBalance = await web3.eth.getBalance(borrower)
     newBorrowerBalance = new web3.utils.BN(newBorrowerBalance)
 
-    // Check Borrower balance has inceased to ensure receipt of remaining Deposit
-    const returnedDeposit = event.rentalDeposit - event.rentalCost;
-    // const expectedBorrowerBalance = oldBorrowerBalance.add(returnedDeposit)
-    // assert.equal(newBorrowerBalance.toString(), expectedBorrowerBalance.toString())
-
-    // Check Borrower balance to ensure receipt of remaining Deposit
-    // let returnedDeposit 
-    // returnedDeposit = web3.utils.toWei('3', 'Ether')
-    // returnedDeposit = new web3.utils.BN(returnedDeposit)
-    // const expectedBorrowerBalance = oldBorrowerBalance.add(returnedDeposit)
-    // assert.equal(newBorrowerBalance.toString(), expectedBorrowerBalance.toString())
-
     // FAILURE: Tries to return a product that does not exist, i.e. product must have valid id
     await marketplace.returnProduct(99, { from: borrower }).should.be.rejected;
     // FAILURE: Deployer tries to return the product, i.e., product can't be returned twice
     await marketplace.returnProduct(productCount, { from: deployer }).should.be.rejected;
     // FAILURE: Borrower tries to return again, i.e., borrower can't be the owner
     await marketplace.returnProduct(productCount, { from: borrower }).should.be.rejected;
-    // FAILURE: Borrower tries to return the product
-    // await marketplace.returnProduct(productCount, { from: borrower })
-
   })
 
   it('deletes product', async () => {
@@ -173,9 +147,6 @@ describe('products', async () => {
     await marketplace.deleteProduct(99, { from: owner }).should.be.rejected;
     // FAILURE: Borrower tries to delete a product, i.e. not the owner
     await marketplace.deleteProduct(productCount, { from: borrower }).should.be.rejected;
-    // FAILURE: Owner tries to delete a product that is currently rented
-    // await marketplace.rentProduct(productCount, { from: borrower });
-    // await marketplace.deleteProduct(productCount, { from: owner }).should.be.rejected;
   })
 
   it('edits product', async () => {
@@ -197,9 +168,6 @@ describe('products', async () => {
     await marketplace.editProduct(99, { from: owner }).should.be.rejected;
     // FAILURE: Borrower tries to delete a product, i.e. not the owner
     await marketplace.editProduct(productCount, { from: borrower }).should.be.rejected;
-    // FAILURE: Owner tries to delete a product that is currently rented
-    // await marketplace.rentProduct(productCount, { from: borrower });
-    // await marketplace.deleteProduct(productCount, { from: owner }).should.be.rejected;
   })
 
 })

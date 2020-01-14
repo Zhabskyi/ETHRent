@@ -27,7 +27,7 @@ Admin page showing the results:
 
 **_BEWARE:_ This project was published for learning purposes. It is _not_ intended for use in production-grade software.**
 
-This project was created and published by [Zhabskyi](https://github.com/Zhabskyi) and myself as part of our learnings at Lighthouse Labs. 
+This project was created and published by [Zhabskyi](https://github.com/Zhabskyi) and [cmastel](https://github.com/cmastel) as part of our learnings at Lighthouse Labs. 
 
 ## Key Features
 
@@ -54,7 +54,7 @@ Over time, the following additional features would improve the ethRent app:
 * Have the location search based on distance, rather than a progressively defined postal code
 * Allow the owner to add "damages" to the rental fees they collect if the item is returned in the same state as when it was rented
 * If the user does not have a browser which supports an Ethereum client (i.e. Meta-Mask), show a screen outlining the instructions to install one and obtain their initial Ether
-* Link to an Ether provider (i.e. Shake Pay) in order for a user to get more Ether when needed
+* Link to an Ether provider (i.e. [Shakepay](https://shakepay.co) in order for a user to get more Ether when needed
 
 
 ## Getting Started

@@ -115,8 +115,6 @@ contract Marketplace {
     _product.custodian = msg.sender;
     // Set time when rental starts
     _product.rentalStart = now;
-    // uint endTime;
-    // endTime = _product.rentalStart + 2 days;
     // Mark as rented
     _product.rented = true;
     // Update the product
@@ -146,14 +144,9 @@ contract Marketplace {
     require(_product.rented);
     // Require that the borrower is not the owner
     require(_owner != _borrower);
-    // Require that the account ending the rental is the owner
-    // require(_owner == msg.sender);
     // Determine rental period, and associated rental cost
     uint endTime;
     endTime = now;
-    // uint rentalDays;
-    // rentalDays = ((endTime - _product.rentalStart) % 86400) + 2;
-    // rentalDays = 2; // Hard code rentalDays for testing
     uint rentalCost;
     rentalCost = _rentalDays * _product.rentalFee;
     rentalCost = _product.rentalDeposit <= rentalCost ? _product.rentalDeposit : rentalCost; // x <= y ? x : y
