@@ -3,6 +3,17 @@
 .container {
   max-width: 400px;
   margin: 0 auto;
+
+  &_deposit {
+    margin-bottom: 0px;
+  }
+
+  & p {
+    color: $color-primary-light;
+    font-size: 10px;
+    margin-top: 0px;
+    padding-left: 65px;
+  }
 }
 
 .form {

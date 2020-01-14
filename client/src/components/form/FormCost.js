@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Form.module.scss";
 
 const FormConst = ({ props, register, errors, intialValues, classes }) => {
   return (
@@ -14,7 +15,8 @@ const FormConst = ({ props, register, errors, intialValues, classes }) => {
       </div>
 
       <div>
-        <label htmlFor='deposit'>Deposit (ETH)</label>
+        <label htmlFor='deposit' className={classes.container_deposit}>Deposit (ETH)</label>
+        <p>* Please ensure this is an adequate replacement cost of the item</p>
         <input
           defaultValue={props.deposit || intialValues.deposit}
           name='deposit'
