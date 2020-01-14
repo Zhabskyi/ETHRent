@@ -5,6 +5,7 @@ import Modal from "../../modal/Modal";
 import FormAddItem from "../../form/FormAddItem";
 import ItemDetails from "../itemDetails/ItemDetails";
 import ItemActionControls from "../itemActionControls/ItemActionControls";
+import Button from "../../button/Button";
 import AuthContext from "../../../context/auth/authContext";
 import ItemContext from "../../../context/Item/ItemContext";
 import BlockchainContext from "../../../context/blockchain/blockchainContext";
@@ -30,6 +31,11 @@ const Item = props => {
 
   const [showItemModal, setItem] = useState(false);
   const [showFormModal, setForm] = useState(false);
+  const [showDeleteConfirm, setConfirm] = useState(false);
+
+  const deleteHandler = () => {
+    deleteItem(id, user_id);
+  };
 
   const toggleItemDetails = () => {
     getUserItemDetails(user_id);
@@ -39,6 +45,11 @@ const Item = props => {
   const toggleFormDetails = () => {
     setForm(!showFormModal);
   };
+
+  const toggleConfirmDelete = () => {
+    setConfirm(!showDeleteConfirm);
+  };
+
   return (
     <>
       <div className={classes.container}>
@@ -72,6 +83,7 @@ const Item = props => {
             account={account}
             products={products}
             returnProduct={returnProduct}
+            toggleConfirmDelete={toggleConfirmDelete}
           />
         </div>
       </div>
@@ -95,6 +107,19 @@ const Item = props => {
           daily_rate={daily_rate}
           deposit={deposit}
         />
+      </Modal>
+      <Modal show={showDeleteConfirm} onClose={toggleConfirmDelete}>
+        <div className={classes.delete_confirm}>
+          <div className={classes.delete_confirm_text}>Are you sure that you want to delete this item?</div>
+          <div className={classes.delete_confirm_actions}>
+            <Button onClick={toggleConfirmDelete} cancel>
+              Cancel
+            </Button>
+            <Button onClick={deleteHandler} confirm>
+              Confirm
+            </Button>
+          </div>
+        </div>
       </Modal>
     </>
   );

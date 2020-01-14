@@ -16,22 +16,19 @@ const ItemActionControls = props => {
     user,
     toggleItemDetails,
     toggleFormDetails,
-    deleteItem,
     account,
     products,
-    returnProduct
+    returnProduct,
+    toggleConfirmDelete
   } = props;
 
-  const deleteHandler = () => {
-    deleteItem(id, user_id);
-  };
 
   const registered = (
     <div className={classes.controls}>
       <Button onClick={toggleItemDetails} details>
         <FontAwesomeIcon icon={faInfoCircle} />
       </Button>
-      <Button onClick={deleteHandler} danger>
+      <Button onClick={toggleConfirmDelete} danger>
         <FontAwesomeIcon icon={faTrash} />
       </Button>
       <Button onClick={toggleFormDetails} edit>

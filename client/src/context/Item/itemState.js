@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-// import axios from "../../utils/axios-instance";
 import axios from "axios";
 import ItemContext from "./ItemContext";
 import itemReducer from "./itemReducer";
@@ -74,7 +73,7 @@ const ItemState = props => {
         type: ADD_ITEM,
         payload: res.data
       });
-      getMyItems(res.data.user_id);
+     getMyItems(res.data.user_id);
     } catch (err) {
       dispatch({
         type: ITEM_ERROR,
