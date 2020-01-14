@@ -13,6 +13,7 @@ const Navbar = props => {
 
   useEffect(() => {
     loadUser();
+    getEthPrice();
     // eslint-disable-next-line
   }, []);
 
@@ -21,17 +22,13 @@ const Navbar = props => {
   }, [ethPrice])
 
   const getEthPrice = () => {
-    const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-
+    delete axios.defaults.headers.common['x-auth-token'];
     axios
       .get(
         "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=TXW4MT24GNRDX87EI79VGZKDQIEYTBK8N6",
-        headers
       )
       .then(res => {
-        console.log("Respobnse", res);
         setEthPrice(res.data.result.ethusd)
-        console.log('EthPrice', ethPrice)
       })
       .catch(error => {
         console.log(error);
