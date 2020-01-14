@@ -27,7 +27,7 @@
     "ws": "^7.0.0"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "supertest": "^4.0.2"
   },
   "jest": {
