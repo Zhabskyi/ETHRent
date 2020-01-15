@@ -79,7 +79,11 @@ const App = () => {
   return (
     <>
       {loading ? (
-        <div>Loading Web3, accounts, and contract...</div>
+        <AuthState>
+          <ItemState>
+            <div>Loading Web3, accounts, and contract...</div>
+          </ItemState>
+        </AuthState>
       ) : (
         <AuthState>
           <ItemState>
