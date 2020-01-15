@@ -91,6 +91,7 @@ const Form = props => {
           <input
             defaultValue={intialValues.password}
             name='password'
+            type='password'
             placeholder='password'
             ref={register({ required: true, minLength: 5 })}
           />
@@ -105,6 +106,7 @@ const Form = props => {
           <label htmlFor='password2'>Confirm password</label>
           <input
             name='password2'
+            type='password'
             placeholder='Confirm password'
             ref={register({
               validate: value => value === watch("password")

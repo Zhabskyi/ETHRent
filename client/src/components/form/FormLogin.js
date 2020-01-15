@@ -52,6 +52,7 @@ const Form = props => {
             defaultValue={intialValues.password}
             name='password'
             placeholder='password'
+            type='password'
             ref={register({ required: true, minLength: 5 })}
           />
         </div>

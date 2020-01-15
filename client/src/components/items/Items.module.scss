@@ -2,7 +2,8 @@
 
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding: 0 50px;
   flex-wrap: wrap;
   position: relative;
 }

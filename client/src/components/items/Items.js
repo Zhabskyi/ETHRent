@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import classes from "./Items.module.scss";
 import { withRouter } from "react-router-dom";
 import ItemContext from "../../context/Item/ItemContext";
 import BlockchainContext from "../../context/blockchain/blockchainContext";
@@ -42,15 +43,15 @@ const Items = () => {
         itemsByPostal !== null ? (
           postalItems
         ) : (
-          <>
+          <div className={classes.container}>
             {checkedCategory === "all"
-              ? items.map(item => <Item key={item.id} item={item} />)
-              : items.map(item =>
+              ? items.reverse().map(item => <Item key={item.id} item={item} />)
+              : items.reverse().map(item =>
                   checkedCategory === item.category ? (
                     <Item key={item.id} item={item} />
                   ) : null
                 )}
-          </>
+          </div>
         )
       ) : (
         <Spinner />
