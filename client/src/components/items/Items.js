@@ -46,16 +46,12 @@ const Items = () => {
           ) : (
             <>
               {checkedCategory === "all"
-                ? items
-                    .reverse()
-                    .map(item => <Item key={item.id} item={item} />)
-                : items
-                    .reverse()
-                    .map(item =>
-                      checkedCategory === item.category ? (
-                        <Item key={item.id} item={item} />
-                      ) : null
-                    )}
+                ? items.map(item => <Item key={item.id} item={item} />)
+                : items.map(item =>
+                    checkedCategory === item.category ? (
+                      <Item key={item.id} item={item} />
+                    ) : null
+                  )}
             </>
           )
         ) : (

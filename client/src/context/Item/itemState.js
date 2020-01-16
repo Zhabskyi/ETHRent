@@ -30,10 +30,10 @@ const ItemState = props => {
   const getItems = async () => {
     try {
       const res = await axios.get("http://localhost:8001/api/items");
-
+      const revItems = Object.values(res.data).reverse()
       dispatch({
         type: GET_ITEMS,
-        payload: Object.values(res.data)
+        payload: revItems
       });
     } catch (err) {
       dispatch({
