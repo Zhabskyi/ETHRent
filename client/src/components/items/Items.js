@@ -39,23 +39,29 @@ const Items = () => {
   return (
     <>
       <Filter onFilter={onFilter} checkedCategory={checkedCategory} />
-      {items !== null && !loading ? (
-        itemsByPostal !== null ? (
-          postalItems
+      <div className={classes.container}>
+        {items !== null && !loading ? (
+          itemsByPostal !== null ? (
+            postalItems
+          ) : (
+            <>
+              {checkedCategory === "all"
+                ? items
+                    .reverse()
+                    .map(item => <Item key={item.id} item={item} />)
+                : items
+                    .reverse()
+                    .map(item =>
+                      checkedCategory === item.category ? (
+                        <Item key={item.id} item={item} />
+                      ) : null
+                    )}
+            </>
+          )
         ) : (
-          <div className={classes.container}>
-            {checkedCategory === "all"
-              ? items.reverse().map(item => <Item key={item.id} item={item} />)
-              : items.reverse().map(item =>
-                  checkedCategory === item.category ? (
-                    <Item key={item.id} item={item} />
-                  ) : null
-                )}
-          </div>
-        )
-      ) : (
-        <Spinner />
-      )}
+          <Spinner />
+        )}
+      </div>
     </>
   );
 };

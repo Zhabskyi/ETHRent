@@ -25,7 +25,7 @@ const ItemActionControls = props => {
   const daysRented = function(id) {
     const endDate = Date.now() / 1000; // JS is in milliseconds
     let rentalDays =
-      (Math.trunc(endDate) - props.products[id - 1].rentalStart) / 86400;
+      (Math.trunc(endDate) - props.products[id - 1]?.rentalStart) / 86400;
     if (rentalDays < 1) {
       rentalDays = 'less than 1 day'
     } else if (Math.floor(rentalDays) === 1) {

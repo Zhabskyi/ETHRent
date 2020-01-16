@@ -1,6 +1,6 @@
 # ethRent Project
 
-ethRent is a Peer-to-Peer Item Rental Distributed-Application based on the Ethereum blockchain. 
+ethRent is a Peer-to-Peer Item Rental decentralized application based on the Ethereum blockchain. 
 
 The overall intent of this application is to have a collection of items which are available for rent across a community. 
 
@@ -10,17 +10,17 @@ For the owners of various items, this application will allow them to earn Ether 
 
 ## Final Product
 
-Primary My Polls page:
-!["my-pollls"](public/static/images/my_polls.png)
+Home page:
+!["home"](client/public/images/screen-home.png)
 
-My Polls page expanded to show poll details:
-!["my-polls-expanded"](public/static/images/my_polls_expand.png)
+My Items page:
+!["my-items"](client/public/images/screen-my-items.png)
 
-Guest page to make choices on:
-![guest_page](public/static/images/guest_page.png)
+Item Detail:
+!["item-detail"](client/public/images/screen-item.png)
 
-Admin page showing the results:
-![admin_page](public/static/images/admin_page.png)
+Return Receipt:
+!["return-receipt](client/public/images/screen-receipt.png)
 
 
 ## Purpose
